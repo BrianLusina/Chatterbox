@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -20,6 +21,9 @@ import com.google.android.gms.common.api.GoogleApiClient;
 public class SignInActivity extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener{
 
     private SignInButton mSignInButton;
+    private static final String SIGNINACTIVITY_TAG = SplashScreen.class.getSimpleName();
+    private GoogleApiClient mGoogleApiClient;
+    private static final int RC_SIGN_IN = 9001;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -27,6 +31,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.signin_layout);
 
         initUICtrls();
+        configureGoogleSignIn();
     }
 
     /*initialize the user controls and set evnts*/
@@ -35,6 +40,17 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         mSignInButton.setOnClickListener(this);
     }
 
+    /*configures Google Sign in*/
+    public void configureGoogleSignIn(){
+        GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this,this)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, googleSignInOptions)
+                .build();
+    }
     @Override
     public void onClick(View v) {
 
