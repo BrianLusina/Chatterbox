@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">ChatterBox</string>
     <string name="sign_in">Sign In</string>
+    <string name="app_tag">Chatter, chatter, chatter...</string>
 </resources>

@@ -19,9 +19,8 @@ import android.widget.TextView;
  */
 public class SplashScreen extends AppCompatActivity{
     private final String SPLASHSCREEN_TAG = SplashScreen.class.getSimpleName();
-    private TextView appName;
+    private TextView appName, appTag;
     private ImageView appIcon;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +50,9 @@ public class SplashScreen extends AppCompatActivity{
     }
     /**initialized the UI controls for this splash screen*/
     public void initUICtrls(){
-
+        appIcon = (ImageView)findViewById(R.id.appicon_splash);
+        appName = (TextView)findViewById(R.id.appname_splash);
+        appTag = (TextView)findViewById(R.id.apptag_splash);
         //set the fonts
         String fontPath = "fonts/RobotoCondensed-Bold.ttf";
         Typeface typeface = Typeface.createFromAsset(getAssets(), fontPath);
