@@ -2,6 +2,9 @@ package com.chatterbox.chatterbox;
 
 import android.support.v7.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 /**
  * Project: ChatterBox
  * Package: com.chatterbox.chatterbox
@@ -10,4 +13,10 @@ import android.support.v7.app.AppCompatActivity;
  * Description:
  */
 public class MainActivity extends AppCompatActivity{
+    // Firebase instance variables
+    private FirebaseAuth mFirebaseAuth;
+    private FirebaseUser mFirebaseUser;
+
+
+/*CLASS END*/
 }
