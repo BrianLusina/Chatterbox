@@ -16,11 +16,14 @@
             </intent-filter>
         </activity>
 
+        <!--sign in activity-->
+        <activity android:name=".SignInActivity" />
+
+        <!--main activity-->
         <activity android:name=".MainActivity">
             <intent-filter>
-                <action>
-
-                </action>
+                <action android:name="com.chatterbox.chatterbox.MAINACTIVITY"/>
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
 
