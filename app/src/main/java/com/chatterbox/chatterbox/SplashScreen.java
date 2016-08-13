@@ -31,7 +31,8 @@ public class SplashScreen extends AppCompatActivity{
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.splashscreen_layout);
-        /**/
+        initUICtrls();
+        /*Sets the timer*/
         Thread timer = new Thread(){
             @Override
             public void run(){
@@ -47,6 +48,15 @@ public class SplashScreen extends AppCompatActivity{
         };
         timer.start();
     }
+    /**initialized the UI controls for this splash screen*/
+    public void initUICtrls(){
 
+    }
+    /*kill this splash screen to save memory*/
+    @Override
+    protected void onPause(){
+        super.onPause();
+        finish();
+    }
 /*CLASS END*/
 }
