@@ -3,6 +3,9 @@ package com.chatterbox.chatterbox;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+
+import com.google.android.gms.common.SignInButton;
 
 /**
  * Project: ChatterBox
@@ -11,7 +14,9 @@ import android.support.v7.app.AppCompatActivity;
  * <p/>
  * Description: sign in activity to authorize user to application
  */
-public class SignInActivity extends AppCompatActivity{
+public class SignInActivity extends AppCompatActivity implements View.OnClickListener{
+    private SignInButton mSignInButton;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,8 +24,15 @@ public class SignInActivity extends AppCompatActivity{
 
         initUICtrls();
     }
-    /*initialize the user controls*/
+
+    /*initialize the user controls and set evnts*/
     public void initUICtrls(){
+        mSignInButton = (SignInButton)findViewById(R.id.sign_in_button);
+        mSignInButton.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
 
     }
 /*CLASS END*/
