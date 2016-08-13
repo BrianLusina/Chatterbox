@@ -1,11 +1,14 @@
 package com.chatterbox.chatterbox;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 /**
  * Project: ChatterBox
@@ -14,7 +17,8 @@ import com.google.android.gms.common.SignInButton;
  * <p/>
  * Description: sign in activity to authorize user to application
  */
-public class SignInActivity extends AppCompatActivity implements View.OnClickListener{
+public class SignInActivity extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener{
+
     private SignInButton mSignInButton;
 
     @Override
@@ -33,6 +37,11 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
 /*CLASS END*/
