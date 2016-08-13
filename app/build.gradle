@@ -26,5 +26,8 @@ dependencies {
 
     /*super toasts to the rescue*/
     compile 'com.github.johnpersano:supertoasts:2.0'
+
+    /*firebase auth dependency, to allow users to sign in*/
+    compile 'com.google.firebase:firebase-auth:9.2.1'
 }
 apply plugin: 'com.google.gms.google-services'
