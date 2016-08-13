@@ -5,9 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 /**
  * Project: ChatterBox
  * Package: com.chatterbox.chatterbox
- * Created by lusinabrian on 13/08/16 at 08:01
+ * Created by lusinabrian on 13/08/16 at 08:13
  * <p/>
  * Description:
  */
-public class MainActivity extends AppCompatActivity{
+public class SignInActivity extends AppCompatActivity{
 }

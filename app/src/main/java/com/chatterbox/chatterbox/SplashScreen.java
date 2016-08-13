@@ -3,7 +3,6 @@ package com.chatterbox.chatterbox;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Window;
@@ -43,7 +42,8 @@ public class SplashScreen extends AppCompatActivity{
                     ie.printStackTrace();
                     Log.d(ie.toString(),SPLASHSCREEN_TAG);
                 }
-                Intent openMain = new Intent(SplashScreen.this, MainActivity.class);
+                /*open sign in screen*/
+                Intent openMain = new Intent(SplashScreen.this, SignInActivity.class);
                 startActivity(openMain);
             }
         };
