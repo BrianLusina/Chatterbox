@@ -81,13 +81,18 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     private String mUsername;
     private String mPhotoUrl;
     private SharedPreferences mSharedPreferences;
-    private GoogleApiClient mGoogleApiClient;
 
     private Button mSendButton;
     private RecyclerView mMessageRecyclerView;
     private LinearLayoutManager mLinearLayoutManager;
+    private FirebaseRecyclerAdapter<FriendlyMessage, MessageViewHolder> mFirebaseAdapter;
     private ProgressBar mProgressBar;
+    private DatabaseReference mFirebaseDatabaseReference;
+    private FirebaseAnalytics mFirebaseAnalytics;
     private EditText mMessageEditText;
+    private AdView mAdView;
+    private FirebaseRemoteConfig mFirebaseRemoteConfig;
+    private GoogleApiClient mGoogleApiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,7 +147,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 sendInvitation();
                 return true;
             case R.id.crash_menu:
-                FirebaseCrash.logcat(Log.ERROR, TAG, "crash caused");
+                FirebaseCrash.logcat(Log.ERROR, MAINACTIVITY_TAG, "crash caused");
                 causeCrash();
                 return true;
             case R.id.sign_out_menu:
@@ -173,6 +178,34 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 .setCallToActionText(getString(R.string.invitation_cta))
                 .build();
         startActivityForResult(intent, REQUEST_INVITE);
+    }
+
+
+    /**Fetch the config to determine the allowed length of messages.*/
+    public void fetchConfig() {
+        long cacheExpiration = 3600; // 1 hour in seconds
+        // If developer mode is enabled reduce cacheExpiration to 0 so that each fetch goes to the
+        // server. This should not be used in release builds.
+        if (mFirebaseRemoteConfig.getInfo().getConfigSettings().isDeveloperModeEnabled()) {
+            cacheExpiration = 0;
+        }
+        mFirebaseRemoteConfig.fetch(cacheExpiration)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        // Make the fetched config available via FirebaseRemoteConfig get<type> calls.
+                        mFirebaseRemoteConfig.activateFetched();
+                        applyRetrievedLengthLimit();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // There has been an error fetching the config
+                        Log.w(TAG, "Error fetching config: " + e.getMessage());
+                        applyRetrievedLengthLimit();
+                    }
+                });
     }
 
 
