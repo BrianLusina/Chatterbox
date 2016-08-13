@@ -1,6 +1,7 @@
 package com.chatterbox.chatterbox;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
@@ -51,6 +52,10 @@ public class SplashScreen extends AppCompatActivity{
     /**initialized the UI controls for this splash screen*/
     public void initUICtrls(){
 
+        //set the fonts
+        String fontPath = "fonts/RobotoCondensed-Bold.ttf";
+        Typeface typeface = Typeface.createFromAsset(getAssets(), fontPath);
+        appName.setTypeface(typeface);
     }
     /*kill this splash screen to save memory*/
     @Override
