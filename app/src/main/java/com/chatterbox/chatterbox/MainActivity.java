@@ -161,6 +161,21 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         }
     }
 
+    /*cause a fake crash*/
+    private void causeCrash() {
+        throw new NullPointerException("Fake null pointer exception");
+    }
+
+    /*send app invite*/
+    private void sendInvitation() {
+        Intent intent = new AppInviteInvitation.IntentBuilder(getString(R.string.invitation_title))
+                .setMessage(getString(R.string.invitation_message))
+                .setCallToActionText(getString(R.string.invitation_cta))
+                .build();
+        startActivityForResult(intent, REQUEST_INVITE);
+    }
+
+
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
