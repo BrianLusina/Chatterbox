@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.github.johnpersano.supertoasts.library.Style;
+import com.github.johnpersano.supertoasts.library.SuperToast;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
@@ -66,7 +68,11 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         // An unresolvable error has occurred and Google APIs (including Sign-In) will not
         // be available.
         Log.d(SIGNINACTIVITY_TAG, "onConnectionFailed:" + connectionResult);
-        Toast.makeText(this, "Google Play Services error.", Toast.LENGTH_SHORT).show();
+        SuperToast superToast = new SuperToast(this);
+        superToast.setDuration(Style.DURATION_SHORT);
+        superToast.setAnimations(Style.ANIMATIONS_FLY);
+        superToast.setText("Google Play Services error.");
+        superToast.show();
     }
 /*CLASS END*/
 }
