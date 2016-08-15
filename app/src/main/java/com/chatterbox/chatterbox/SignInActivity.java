@@ -106,6 +106,14 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+        if(requestCode == RC_SIGN_IN){
+
+        }
+    }
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
