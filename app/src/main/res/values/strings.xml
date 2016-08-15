@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">ChatterBox</string>
     <string name="sign_in">Sign In</string>
-    <string name="app_tag">Chatter, chatter, chatter...</string>
+    <!--ellipsis &#8230;-->
+    <string name="app_tag">Chatter, chatter, chatter&#8230;</string>
 
     <string name="sign_out">Sign Out</string>
     <string name="contacts_permission_rationale">Access to account information is required to sign in.</string>
