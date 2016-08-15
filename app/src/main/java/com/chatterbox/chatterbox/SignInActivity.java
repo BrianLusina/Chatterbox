@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.github.johnpersano.supertoasts.library.Style;
+import com.github.johnpersano.supertoasts.library.SuperToast;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -34,18 +36,24 @@ import com.google.firebase.auth.GoogleAuthProvider;
  */
 public class SignInActivity extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener{
 
+    /*FIELDS*/
     private SignInButton mSignInButton;
     private static final String SIGNINACTIVITY_TAG = SplashScreen.class.getSimpleName();
     private GoogleApiClient mGoogleApiClient;
     private static final int RC_SIGN_IN = 9001;
 
+    private FirebaseAuth mFirebase;
+
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signin_layout);
 
         initUICtrls();
         configureGoogleSignIn();
+
+        /*instantiate Firebase*/
+        mFirebase = FirebaseAuth.getInstance();
     }
 
     /*initialize the user controls and set evnts*/
@@ -64,6 +72,21 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                 .enableAutoManage(this,this)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, googleSignInOptions)
                 .build();
+    }
+
+    public void handleFirebaseAuthResult(AuthResult authResult){
+        if(authResult != null){
+            //welcome the user
+            FirebaseUser firebaseUser = authResult.getUser();
+            SuperToast superToast = new SuperToast(this);
+            superToast.setDuration(Style.DURATION_SHORT);
+            superToast.setAnimations(Style.ANIMATIONS_FLY);
+            superToast.setText("Welcome," + firebaseUser.getEmail());
+            superToast.show();
+
+            //go back to main activity
+            startActivity(new Intent(this, MainActivity.class));
+        }
     }
     @Override
     public void onClick(View v) {
