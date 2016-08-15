@@ -12,7 +12,7 @@ import com.google.firebase.messaging.RemoteMessage;
  * <p/>
  * Description:
  */
-public class ChatterBoxMessageService extends FirebaseMessagingService{
+public class ChatterBoxMessagingService extends FirebaseMessagingService{
 
     private static final String TAG = "MyCBService";
 
