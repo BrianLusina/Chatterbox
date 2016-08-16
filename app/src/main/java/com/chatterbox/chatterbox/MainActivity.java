@@ -231,6 +231,18 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             }
         });
 
+        mSendButton = (Button) findViewById(R.id.sendButton);
+        mSendButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MessageModel friendlyMessage = new MessageModel(mMessageEditText.getText().toString(), mUsername,
+                        mPhotoUrl);
+                mFirebaseDatabaseReference.child(MESSAGES_CHILD).push().setValue(friendlyMessage);
+                mMessageEditText.setText("");
+                mFirebaseAnalytics.logEvent(MESSAGE_SENT_EVENT, null);
+            }
+        });
+
     }/*initfirebaseDatabase end*/
 
     @Override
