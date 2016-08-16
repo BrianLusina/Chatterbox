@@ -175,7 +175,29 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             }
         });
 
-    }
+        mMessageRecyclerView.setLayoutManager(mLinearLayoutManager);
+        mMessageRecyclerView.setAdapter(mFirebaseAdapter);
+
+        // Initialize and request AdMob ad.
+        /*
+        mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+        */
+
+        // Initialize Firebase Measurement.
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+
+        // Initialize Firebase Remote Config.
+        mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
+
+        // Define Firebase Remote Config Settings.
+        FirebaseRemoteConfigSettings firebaseRemoteConfigSettings =
+                new FirebaseRemoteConfigSettings.Builder()
+                        .setDeveloperModeEnabled(true)
+                        .build();
+
+    }/*initfirebaseDatabase end*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
