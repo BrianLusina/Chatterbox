@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     private static final String MAINACTIVITY_TAG = MainActivity.class.getSimpleName();
     public static final String MESSAGES_CHILD = "messages";
     private static final int REQUEST_INVITE = 1;
-    public static final int DEFAULT_MSG_LENGTH_LIMIT = 10;
+    public static final int DEFAULT_MSG_LENGTH_LIMIT = Integer.MAX_VALUE;
     public static final String ANONYMOUS = "anonymous";
     private static final String MESSAGE_SENT_EVENT = "message_sent";
     private String mUsername;
