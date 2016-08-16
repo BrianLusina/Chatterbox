@@ -261,8 +261,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         mSendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MessageModel friendlyMessage = new MessageModel(mMessageEditText.getText().toString(), mUsername,
-                        mPhotoUrl);
+                MessageModel friendlyMessage = new MessageModel(mUsername, mPhotoUrl, mMessageEditText.getText().toString());
                 mFirebaseDatabaseReference.child(MESSAGES_CHILD).push().setValue(friendlyMessage);
                 mMessageEditText.setText("");
                 mFirebaseAnalytics.logEvent(MESSAGE_SENT_EVENT, null);
