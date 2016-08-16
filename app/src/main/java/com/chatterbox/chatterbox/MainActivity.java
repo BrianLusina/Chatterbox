@@ -320,6 +320,29 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 });
     }
 
+    @Override
+    public void onPause() {
+        if (mAdView != null) {
+            mAdView.pause();
+        }
+        super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mAdView != null) {
+            mAdView.resume();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        if (mAdView != null) {
+            mAdView.destroy();
+        }
+        super.onDestroy();
+    }
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
