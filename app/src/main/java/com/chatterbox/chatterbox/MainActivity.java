@@ -127,6 +127,32 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d(MAINACTIVITY_TAG, "onActivityResult: requestCode=" + requestCode + ", resultCode=" + resultCode);
+
+        if (requestCode == REQUEST_INVITE) {
+            if (resultCode == RESULT_OK) {
+                // Use Firebase Measurement to log that invitation was sent.
+                Bundle payload = new Bundle();
+                payload.putString(FirebaseAnalytics.Param.VALUE, "inv_sent");
+
+                // Check how many invitations were sent and log.
+                String[] ids = AppInviteInvitation.getInvitationIds(resultCode, data);
+                Log.d(MAINACTIVITY_TAG, "Invitations sent: " + ids.length);
+            } else {
+                // Use Firebase Measurement to log that invitation was not sent
+                Bundle payload = new Bundle();
+                payload.putString(FirebaseAnalytics.Param.VALUE, "inv_not_sent");
+                mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SHARE, payload);
+
+                // Sending failed or it was canceled, show failure message to the user
+                Log.d(MAINACTIVITY_TAG, "Failed to send invitation.");
+            }
+        }
+    }
+
     /** Initialize ProgressBar and RecyclerView.*/
     public void initViews(){
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
@@ -314,7 +340,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         // There has been an error fetching the config
-                        Log.w(TAG, "Error fetching config: " + e.getMessage());
+                        Log.w(MAINACTIVITY_TAG, "Error fetching config: " + e.getMessage());
                         applyRetrievedLengthLimit();
                     }
                 });
@@ -346,7 +372,18 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+        Log.d(MAINACTIVITY_TAG, "onConnectionFailed:" + connectionResult);
+    }
 
+
+    /**
+     * Apply retrieved length limit to edit text field. This result may be fresh from the server or it may be from
+     * cached values.
+     */
+    private void applyRetrievedLengthLimit() {
+        Long friendly_msg_length = mFirebaseRemoteConfig.getLong("friendly_msg_length");
+        mMessageEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(friendly_msg_length.intValue())});
+        Log.d(MAINACTIVITY_TAG, "FML is: " + friendly_msg_length);
     }
 
 /*CLASS END*/
