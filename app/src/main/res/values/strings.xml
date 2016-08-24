@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">ChatterBox</string>
     <string name="sign_in">Sign In</string>
+
+    <string name="sign_in_header_txt">Chatter away&#8230;!</string>
+
     <!--ellipsis &#8230;-->
     <string name="app_tag">Chatter, chatter, chatter&#8230;</string>
 
