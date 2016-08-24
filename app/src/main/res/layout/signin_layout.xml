@@ -23,8 +23,10 @@
             android:textStyle="bold"
             android:layout_gravity="center_horizontal"
             android:drawableTop="@mipmap/ic_launcher"
+            android:textColor="@color/black"
             android:text="@string/sign_in_header_txt"/>
 
+        <!--TODO: add animation to label to move up on click, like Material design layouts-->
         <!--email-->
         <AutoCompleteTextView
             android:id="@+id/useremail_id"
@@ -35,6 +37,7 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
+            android:textColor="@color/black"
             tools:targetApi="jelly_bean_mr1" />
 
         <!--password-->
@@ -47,17 +50,21 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:textColor="@color/black"
             tools:targetApi="jelly_bean_mr1" />
 
+        <!--TODO:add style to on click of button, customize it to change color when clicked, like a shadow-->
         <Button
             android:id="@+id/login_btn_id"
             android:layout_width="300dp"
             android:text="@string/loginbtn_str"
+            android:background="@color/indigo_600"
             android:layout_marginTop="10dp"
             android:layout_gravity="center_horizontal"
             android:layout_height="wrap_content" />
     </LinearLayout>
 
+    <!--TODO: add Twitter, Github and Facebook login buttons-->
     <LinearLayout
         android:id="@+id/social_signin_form"
         android:layout_width="match_parent"
@@ -70,8 +77,7 @@
             android:id="@+id/sign_in_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="visible" />
-
+            android:visibility="visible" />x
     </LinearLayout>
 
 </FrameLayout>

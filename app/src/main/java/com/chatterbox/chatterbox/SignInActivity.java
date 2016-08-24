@@ -5,6 +5,9 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.github.johnpersano.supertoasts.library.Style;
 import com.github.johnpersano.supertoasts.library.SuperToast;
@@ -19,6 +22,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.EmailAuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
@@ -27,13 +31,16 @@ import com.google.firebase.auth.GoogleAuthProvider;
  * Project: ChatterBox
  * Package: com.chatterbox.chatterbox
  * Created by lusinabrian on 13/08/16 at 08:13
- * <p/>
  * Description: sign in activity to authorize user to application
  */
 public class SignInActivity extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener{
 
     /*FIELDS*/
     private SignInButton mSignInButton;
+    private AutoCompleteTextView mEmail;
+    private EditText passwordField;
+    private Button loginBtn;
+
     private static final String SIGNINACTIVITY_TAG = SplashScreen.class.getSimpleName();
     private GoogleApiClient mGoogleApiClient;
     private static final int RC_SIGN_IN = 9001;
@@ -56,6 +63,10 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     public void initUICtrls(){
         mSignInButton = (SignInButton)findViewById(R.id.sign_in_button);
         mSignInButton.setOnClickListener(this);
+
+        mEmail = (AutoCompleteTextView) findViewById(R.id.useremail_id);
+        passwordField = (EditText) findViewById(R.id.userpassword_id);
+        loginBtn = (Button)findViewById(R.id.login_btn_id);
     }
 
     /*configures Google Sign in*/
