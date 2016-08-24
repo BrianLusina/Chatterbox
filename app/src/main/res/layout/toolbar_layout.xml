@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_toolbar_id"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:minHeight="?attr/actionBarSize"
+    android:elevation="4dp"
+    android:layout_height="wrap_content"
+    tools:ignore="UnusedAttribute"
+    android:background="@color/royal_blue"
+    local:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+    local:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+</android.support.v7.widget.Toolbar>
