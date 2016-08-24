@@ -16,7 +16,6 @@ import android.widget.TextView;
  * Project: ChatterBox
  * Package: com.chatterbox.chatterbox
  * Created by lusinabrian on 13/08/16 at 07:47
- * <p/>
  * Description: Handles the SplashScreen Activity, which is the first thing to open when app starts
  */
 public class SplashScreen extends AppCompatActivity implements Animation.AnimationListener {
@@ -38,6 +37,7 @@ public class SplashScreen extends AppCompatActivity implements Animation.Animati
         animFadeIn = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_in);
         //add animation listener
         animFadeIn.setAnimationListener(this);
+
         /*Sets the timer*/
         Thread timer = new Thread(){
             @Override
@@ -64,6 +64,7 @@ public class SplashScreen extends AppCompatActivity implements Animation.Animati
         String fontPath = "fonts/roboto_rediumitalic.ttf";
         Typeface typeface = Typeface.createFromAsset(getAssets(), fontPath);
         appName.setTypeface(typeface);
+
         /*add animation to application tag*/
         appTag.setAnimation(animFadeIn);
     }
