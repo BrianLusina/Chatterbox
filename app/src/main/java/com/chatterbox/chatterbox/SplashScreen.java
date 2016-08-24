@@ -37,13 +37,13 @@ public class SplashScreen extends AppCompatActivity{
             public void run(){
                 try{
                     sleep(3000);
+                    /*open sign in screen*/
+                    Intent openMain = new Intent(SplashScreen.this, SignInActivity.class);
+                    startActivity(openMain);
                 }catch(InterruptedException ie){
                     ie.printStackTrace();
                     Log.d(ie.toString(),SPLASHSCREEN_TAG);
                 }
-                /*open sign in screen*/
-                Intent openMain = new Intent(SplashScreen.this, SignInActivity.class);
-                startActivity(openMain);
             }
         };
         timer.start();
@@ -54,7 +54,7 @@ public class SplashScreen extends AppCompatActivity{
         appName = (TextView)findViewById(R.id.appname_splash);
         appTag = (TextView)findViewById(R.id.apptag_splash);
         //set the fonts
-        String fontPath = "fonts/RobotoCondensed-Bold.ttf";
+        String fontPath = "fonts/roboto_rediumitalic.ttf";
         Typeface typeface = Typeface.createFromAsset(getAssets(), fontPath);
         appName.setTypeface(typeface);
     }
