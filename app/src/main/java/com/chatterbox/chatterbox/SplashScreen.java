@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,8 +19,9 @@ import android.widget.TextView;
  * <p/>
  * Description: Handles the SplashScreen Activity, which is the first thing to open when app starts
  */
-public class SplashScreen extends AppCompatActivity{
+public class SplashScreen extends AppCompatActivity implements Animation.AnimationListener {
     private final String SPLASHSCREEN_TAG = SplashScreen.class.getSimpleName();
+    private Animation animFadeIn;
     private TextView appName, appTag;
     private ImageView appIcon;
     @Override
@@ -31,6 +34,10 @@ public class SplashScreen extends AppCompatActivity{
 
         setContentView(R.layout.splashscreen_layout);
         initUICtrls();
+        //load animations
+        animFadeIn = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_in);
+        //add animation listener
+        animFadeIn.setAnimationListener(this);
         /*Sets the timer*/
         Thread timer = new Thread(){
             @Override
@@ -57,12 +64,29 @@ public class SplashScreen extends AppCompatActivity{
         String fontPath = "fonts/roboto_rediumitalic.ttf";
         Typeface typeface = Typeface.createFromAsset(getAssets(), fontPath);
         appName.setTypeface(typeface);
+        /*add animation to application tag*/
+        appTag.setAnimation(animFadeIn);
     }
     /*kill this splash screen to save memory*/
     @Override
     protected void onPause(){
         super.onPause();
         finish();
+    }
+
+    @Override
+    public void onAnimationStart(Animation animation) {
+
+    }
+
+    @Override
+    public void onAnimationEnd(Animation animation) {
+
+    }
+
+    @Override
+    public void onAnimationRepeat(Animation animation) {
+
     }
 /*CLASS END*/
 }
