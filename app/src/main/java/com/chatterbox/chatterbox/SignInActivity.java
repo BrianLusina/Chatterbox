@@ -37,6 +37,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
     /*FIELDS*/
     private SignInButton mSignInButton;
+    private TwitterLoginButton twitterLoginButton;
     private AutoCompleteTextView mEmail;
     private EditText passwordField;
     private Button loginBtn;
@@ -62,6 +63,9 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     /*initialize the user controls and set evnts*/
     public void initUICtrls(){
         mSignInButton = (SignInButton)findViewById(R.id.sign_in_button);
+        twitterLoginButton (TwitterLoginButton)findViewById(R.id.twitter_login_button);
+
+        twitterLoginButton.setOnClickListener(this);
         mSignInButton.setOnClickListener(this);
 
         mEmail = (AutoCompleteTextView) findViewById(R.id.useremail_id);
@@ -102,8 +106,11 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                 //sign in the user
                 signIn();
                 break;
-            default:
-                return;
+
+            case R.id.twitter_login_button:
+                //sign in with Twitter
+                siginInTwitter();
+                break;
         }
     }
 
@@ -111,6 +118,10 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     private void signIn(){
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
+    private void signInTwitter(){
+        Intent signInIntentTweet =
     }
 
     @Override
