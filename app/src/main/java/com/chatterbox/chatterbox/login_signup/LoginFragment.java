@@ -89,17 +89,19 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
     /**initialize the user controls and set events*/
     public void initUICtrls(View rootView){
         mSignInButton = (SignInButton) rootView.findViewById(R.id.sign_in_button);
-/*
-        twitterLoginButton = (TwitterLoginButton)findViewById(R.id.twitter_login_button);
-        twitterLoginButton.setOnClickListener(this);
-*/
-        mSignInButton.setOnClickListener(this);
-
         mEmail = (AutoCompleteTextView) rootView.findViewById(R.id.useremail_id);
         passwordField = (EditText) rootView.findViewById(R.id.userpassword_id);
         loginBtn = (Button) rootView.findViewById(R.id.login_btn_id);
         mEmailTextInputLayout = (TextInputLayout)rootView.findViewById(R.id.useremail_txtinputlayout_id);
         mPasswordTxtInputLayout = (TextInputLayout)rootView.findViewById(R.id.userpassword_txtinputlayout_id);
+
+        /*
+        twitterLoginButton = (TwitterLoginButton)findViewById(R.id.twitter_login_button);
+        twitterLoginButton.setOnClickListener(this);
+        */
+
+        mSignInButton.setOnClickListener(this);
+        loginBtn.setOnClickListener(this);
 
         mEmail.addTextChangedListener(new MyTextWatcher(mEmail));
         passwordField.addTextChangedListener(new MyTextWatcher(passwordField));
@@ -139,11 +141,26 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
                 signIn();
                 break;
 
+            case R.id.login_btn_id:
+                submitEmailDetails();
+                break;
 /*            case R.id.twitter_login_button:
                 //sign in with Twitter
 //                siginInTwitter();
                 break;*/
         }
+    }
+
+    /**SEND email details if all data fields are valid*/
+    /*todo: submit details to FIREBASE*/
+    private void submitEmailDetails() {
+        if(!validateEmail()){
+            return ;
+        }
+        if(validatePassword()){
+            return ;
+        }
+
     }
 
     /**Method that signs in the user*/
@@ -152,6 +169,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
+    /*sign in with TWITTER*/
     private void signInTwitter(){
 
     }
@@ -247,8 +265,16 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
 
     /**VALIDATE user password*/
     private boolean validatePassword() {
-
-        return false;
+        String password = passwordField.getText().toString().trim();
+        if(password.isEmpty()){
+            mPasswordTxtInputLayout.setError(getString(R.string.err_msg_password));
+            requestFocus(passwordField);
+            return false;
+        }else{
+            //TODO: SEND password to FIREBASEAUTH
+            mPasswordTxtInputLayout.setErrorEnabled(false);
+        }
+        return true;
     }
 
     /**validate user email*/
@@ -263,6 +289,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
             /*TODO: send email to FIREBASE AUTH*/
             mEmailTextInputLayout.setErrorEnabled(false);
         }
+        return true;
     }
 
     /**checks for a valid email address from a pattern*/
