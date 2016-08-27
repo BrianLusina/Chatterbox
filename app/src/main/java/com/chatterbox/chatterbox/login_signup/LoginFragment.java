@@ -4,18 +4,23 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.chatterbox.chatterbox.MainActivity;
 import com.chatterbox.chatterbox.R;
-import com.chatterbox.chatterbox.SplashScreen;
 import com.github.johnpersano.supertoasts.library.Style;
 import com.github.johnpersano.supertoasts.library.SuperToast;
 import com.google.android.gms.auth.api.Auth;
@@ -43,9 +48,11 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
 
     /*FIELDS*/
     private SignInButton mSignInButton;
-    //    private TwitterLoginButton twitterLoginButton;
+    //private TwitterLoginButton twitterLoginButton;
     private AutoCompleteTextView mEmail;
     private EditText passwordField;
+    private TextInputLayout mEmailTextInputLayout, mPasswordTxtInputLayout;
+
     private Button loginBtn;
 
     private static final String LOGINFRAGMENT_TAG = LoginFragment.class.getSimpleName();
@@ -73,7 +80,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.signin_layout, container, false);
+        View rootView = inflater.inflate(R.layout.login_layout, container, false);
         initUICtrls(rootView);
 
         return super.onCreateView(inflater, container, savedInstanceState);
@@ -91,6 +98,11 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
         mEmail = (AutoCompleteTextView) rootView.findViewById(R.id.useremail_id);
         passwordField = (EditText) rootView.findViewById(R.id.userpassword_id);
         loginBtn = (Button) rootView.findViewById(R.id.login_btn_id);
+        mEmailTextInputLayout = (TextInputLayout)rootView.findViewById(R.id.useremail_txtinputlayout_id);
+        mPasswordTxtInputLayout = (TextInputLayout)rootView.findViewById(R.id.userpassword_txtinputlayout_id);
+
+        mEmail.addTextChangedListener(new MyTextWatcher(mEmail));
+        passwordField.addTextChangedListener(new MyTextWatcher(passwordField));
     }
 
     /*configures Google Sign in*/
@@ -200,4 +212,70 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
         superToast.setText("Google Play Services error.");
         superToast.show();
     }
-}
+
+    /**TEXT WATCHER, to check to user input in the edit text and autocomplete*/
+    private class MyTextWatcher implements TextWatcher {
+        private View view;
+
+        public MyTextWatcher(View view) {
+            this.view = view;
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            switch (view.getId()){
+                case R.id.useremail_id:
+                    validateEmail();
+                    break;
+
+                case R.id.userpassword_id:
+                    validatePassword();
+                    break;
+            }
+        }
+    }
+
+    /**VALIDATE user password*/
+    private boolean validatePassword() {
+
+        return false;
+    }
+
+    /**validate user email*/
+    private boolean validateEmail() {
+        String email = mEmail.getText().toString().trim();
+
+        if(email.isEmpty() || isValidEmail(email)){
+            mEmailTextInputLayout.setError(getString(R.string.err_msg_email));
+            requestFocus(mEmail);
+            return false;
+        }else{
+            /*TODO: send email to FIREBASE AUTH*/
+            mEmailTextInputLayout.setErrorEnabled(false);
+        }
+    }
+
+    /**checks for a valid email address from a pattern*/
+    private boolean isValidEmail(String email) {
+        return !TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
+
+
+    /**sets the focus to the edit text with the error message*/
+    private void requestFocus(View view) {
+        if(view.requestFocus()){
+            getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        }
+    }
+
+}/*end*/
