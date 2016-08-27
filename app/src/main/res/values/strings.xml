@@ -7,6 +7,11 @@
     <!--ellipsis &#8230;-->
     <string name="app_tag">Chatter, chatter, chatter&#8230;</string>
 
+    <!--ERROR MESSAGES-->
+    <string name="err_msg_name">Enter your full name</string>
+    <string name="err_msg_email">Enter valid email address</string>
+    <string name="err_msg_password">Enter the password</string>
+
     <string name="sign_out">Sign Out</string>
     <string name="contacts_permission_rationale">Access to account information is required to sign in.</string>
     <string name="invite_menu_label">Invite</string>
