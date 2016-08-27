@@ -1,10 +1,21 @@
+buildscript {
+    repositories {
+        maven { url 'https://maven.fabric.io/public' }
+    }
+
+    dependencies {
+        classpath 'io.fabric.tools:gradle:1.+'
+    }
+}
 apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
 
 repositories {
     mavenCentral() // jcenter() works as well because it pulls from Maven Central
     flatDir {
         dirs 'libs'
     }
+    maven { url 'https://maven.fabric.io/public' }
 }
 
 android {
@@ -17,6 +28,8 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -50,6 +63,9 @@ dependencies {
     /*super toasts to the rescue*/
     compile 'com.github.johnpersano:supertoasts:2.0'
 
+    /*Pager sliding tab strip*/
+    compile 'com.astuetz:pagerslidingtabstrip:1.0.1'
+
     /*firebase auth dependency, to allow users to sign in*/
     compile 'com.google.firebase:firebase-auth:9.2.1'
 
@@ -65,7 +81,13 @@ dependencies {
     compile 'com.firebaseui:firebase-ui-database:0.4.0'
 
     // Testing dependencies
-    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
-    androidTestCompile 'com.android.support.test:runner:0.5'
+//    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
+//    androidTestCompile 'com.android.support.test:runner:0.5'
+//    compile('com.twitter.sdk.android:twitter:2.0.0@aar') {
+//        transitive = true;
+//    }
+    compile('com.crashlytics.sdk.android:crashlytics:2.6.2@aar') {
+        transitive = true;
+    }
 }
 apply plugin: 'com.google.gms.google-services'

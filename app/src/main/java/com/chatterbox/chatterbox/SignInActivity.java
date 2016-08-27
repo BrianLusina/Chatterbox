@@ -26,6 +26,7 @@ import com.google.firebase.auth.EmailAuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import io.fabric.sdk.android.Fabric;
 
 /**
  * Project: ChatterBox
@@ -37,7 +38,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
     /*FIELDS*/
     private SignInButton mSignInButton;
-    private TwitterLoginButton twitterLoginButton;
+//    private TwitterLoginButton twitterLoginButton;
     private AutoCompleteTextView mEmail;
     private EditText passwordField;
     private Button loginBtn;
@@ -47,12 +48,14 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     private static final int RC_SIGN_IN = 9001;
 
     private FirebaseAuth mFirebaseAuth;
+    // Note: Your consumer key and secret should be obfuscated in your source code before shipping.
+    private static final String TWITTER_KEY = "piwheAPcw5HJq2ShHJrrIOzWA";
+    private static final String TWITTER_SECRET = "c4y9c29daJEhgoSUzOpvE7egeMOPXg6UsULQ0n0DyP1jQ0cd4r";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signin_layout);
-
         initUICtrls();
         configureGoogleSignIn();
 
@@ -63,9 +66,9 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     /*initialize the user controls and set evnts*/
     public void initUICtrls(){
         mSignInButton = (SignInButton)findViewById(R.id.sign_in_button);
-        twitterLoginButton (TwitterLoginButton)findViewById(R.id.twitter_login_button);
-
-        twitterLoginButton.setOnClickListener(this);
+//        twitterLoginButton = (TwitterLoginButton)findViewById(R.id.twitter_login_button);
+//
+//        twitterLoginButton.setOnClickListener(this);
         mSignInButton.setOnClickListener(this);
 
         mEmail = (AutoCompleteTextView) findViewById(R.id.useremail_id);
@@ -107,10 +110,10 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                 signIn();
                 break;
 
-            case R.id.twitter_login_button:
+/*            case R.id.twitter_login_button:
                 //sign in with Twitter
-                siginInTwitter();
-                break;
+//                siginInTwitter();
+                break;*/
         }
     }
 
@@ -121,7 +124,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void signInTwitter(){
-        Intent signInIntentTweet =
+
     }
 
     @Override

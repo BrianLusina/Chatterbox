@@ -11,6 +11,10 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.crashlytics.android.Crashlytics;
+import com.twitter.sdk.android.Twitter;
+import com.twitter.sdk.android.core.TwitterAuthConfig;
+import io.fabric.sdk.android.Fabric;
 
 /**
  * Project: ChatterBox
@@ -19,6 +23,17 @@ import android.widget.TextView;
  * Description: Handles the SplashScreen Activity, which is the first thing to open when app starts
  */
 public class SplashScreen extends AppCompatActivity implements Animation.AnimationListener {
+
+    // Note: Your consumer key and secret should be obfuscated in your source code before shipping.
+    private static final String TWITTER_KEY = "piwheAPcw5HJq2ShHJrrIOzWA";
+    private static final String TWITTER_SECRET = "c4y9c29daJEhgoSUzOpvE7egeMOPXg6UsULQ0n0DyP1jQ0cd4r";
+
+
+    // Note: Your consumer key and secret should be obfuscated in your source code before shipping.
+    private static final String TWITTER_KEY = "piwheAPcw5HJq2ShHJrrIOzWA";
+    private static final String TWITTER_SECRET = "c4y9c29daJEhgoSUzOpvE7egeMOPXg6UsULQ0n0DyP1jQ0cd4r";
+
+
     private final String SPLASHSCREEN_TAG = SplashScreen.class.getSimpleName();
     private Animation animFadeIn;
     private TextView appName, appTag;
@@ -26,7 +41,8 @@ public class SplashScreen extends AppCompatActivity implements Animation.Animati
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
+        Fabric.with(this, new Twitter(authConfig), new Crashlytics());
         /*request full screen*/
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
