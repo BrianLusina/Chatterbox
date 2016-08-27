@@ -21,6 +21,8 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".login_signup.LogSignActivity"/>
+
         <!--sign in activity-->
         <activity android:name=".SignInActivity" />
 
