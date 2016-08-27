@@ -1,5 +1,8 @@
 package com.chatterbox.chatterbox.login_signup;
 
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+
 /**
  * Project: ChatterBox
  * Package: com.chatterbox.chatterbox.login_signup
@@ -7,5 +10,14 @@ package com.chatterbox.chatterbox.login_signup;
  * <p/>
  * Description:
  */
-public class SignInFragment {
+public class SignInFragment extends Fragment {
+
+    public SignInFragment() {
+        // Required empty public constructor
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 }
