@@ -26,8 +26,10 @@ public class LogSignActivity extends AppCompatActivity{
         initViews();
 
         setSupportActionBar(toolbar);
+        setUpViewPager(viewPager);
 
-
+        //assigns the viewpager to TabLayout
+        tabLayout.setupWithViewPager(viewPager);
     }
     /**Initialize the UI contols*/
     private void initViews() {
@@ -37,8 +39,10 @@ public class LogSignActivity extends AppCompatActivity{
     }
 
     /**Defines the number of tabs by setting appropriate fragment and tab name.*/
-    private void setUpViewPager(){
+    private void setUpViewPager(ViewPager viewPager){
        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        viewPagerAdapter.add(new )
+        viewPagerAdapter.addFragment(new LoginFragment(), "Login");
+        viewPagerAdapter.addFragment(new SignUpFragment(), "Sign Up");
+        viewPager.setAdapter(viewPagerAdapter);
     }
 }

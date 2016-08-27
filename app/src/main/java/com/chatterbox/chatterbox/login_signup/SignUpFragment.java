@@ -10,9 +10,9 @@ import android.support.v4.app.Fragment;
  * <p/>
  * Description:
  */
-public class SignInFragment extends Fragment {
+public class SignUpFragment extends Fragment {
 
-    public SignInFragment() {
+    public SignUpFragment() {
         // Required empty public constructor
     }
 
