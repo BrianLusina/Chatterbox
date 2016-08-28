@@ -18,7 +18,6 @@ import android.view.WindowManager;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-
 import com.chatterbox.chatterbox.MainActivity;
 import com.chatterbox.chatterbox.R;
 import com.github.johnpersano.supertoasts.library.Style;
@@ -89,7 +88,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
         View rootView = inflater.inflate(R.layout.login_layout, container, false);
         initUICtrls(rootView);
 
-        return super.onCreateView(inflater, container, savedInstanceState);
+        return rootView;
     }
 
     /**initialize the user controls and set events*/
