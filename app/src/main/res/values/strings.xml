@@ -33,5 +33,6 @@
     <string name="signup_email_str">Email</string>
     <string name="signup_password_str">Password</string>
     <string name="signup_button_str">Register</string>
+    <string name="err_msg_password_short">Enter minimum 6 characters</string>
 
 </resources>
