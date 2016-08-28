@@ -3,11 +3,13 @@ package com.chatterbox.chatterbox.login_signup;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.chatterbox.chatterbox.R;
 import com.crashlytics.android.Crashlytics;
+import com.github.florent37.materialviewpager.MaterialViewPager;
 
 import cat.ereza.customactivityoncrash.CustomActivityOnCrash;
 import io.fabric.sdk.android.Fabric;
@@ -19,9 +21,10 @@ import io.fabric.sdk.android.Fabric;
  * Description: Activity with signin and login fragments
  */
 public class LogSignActivity extends AppCompatActivity{
+    private MaterialViewPager materialViewPager;
     private Toolbar toolbar;
     private TabLayout tabLayout;
-    private ViewPager viewPager;
+    private ViewPager mViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,11 +33,12 @@ public class LogSignActivity extends AppCompatActivity{
         initViews();
 
         setSupportActionBar(toolbar);
-        setUpViewPager(viewPager);
+        setUpViewPager(mViewPager);
+        materialViewPager.getPagerTitleStrip().setViewPager(materialViewPager.getViewPager());
 
-        //assigns the viewpager to TabLayout
-        tabLayout.setupWithViewPager(viewPager);
-
+     /*   //assigns the viewpager to TabLayout
+        tabLayout.setupWithViewPager(mViewPager);
+        */
         CustomActivityOnCrash.install(this);
         CustomActivityOnCrash.setEnableAppRestart(true);
         CustomActivityOnCrash.setRestartActivityClass(LogSignActivity.class);
@@ -45,9 +49,25 @@ public class LogSignActivity extends AppCompatActivity{
     }
     /**Initialize the UI contols*/
     private void initViews() {
+        materialViewPager = (MaterialViewPager) findViewById(R.id.materialViewPager);
+        mViewPager = materialViewPager.getViewPager();
+        toolbar = materialViewPager.getToolbar();
+
+        if (toolbar != null) {
+            setSupportActionBar(toolbar);
+
+            ActionBar actionBar = getSupportActionBar();
+            actionBar.setDisplayHomeAsUpEnabled(false);
+            actionBar.setDisplayShowHomeEnabled(false);
+            actionBar.setDisplayShowTitleEnabled(true);
+            actionBar.setDisplayUseLogoEnabled(false);
+            actionBar.setHomeButtonEnabled(false);
+        }
+
+        //TODO:SET MATERIALVIEWPAGER Listener for header animations
 //        toolbar = (Toolbar) findViewById(R.id.user_login_toolbar);
 //        tabLayout = (TabLayout)findViewById(R.id.user_login_tabs);
-//        viewPager = (ViewPager)findViewById(R.id.user_login_viewpager);
+//        mViewPager = (ViewPager)findViewById(R.id.user_login_viewpager);
     }
 
     /**Defines the number of tabs by setting appropriate fragment and tab name.*/
