@@ -15,15 +15,6 @@
         android:layout_marginTop="100dp"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:textStyle="bold"
-            android:layout_gravity="center_horizontal"
-            android:drawableTop="@mipmap/ic_launcher"
-            android:textColor="@color/black"
-            android:text="@string/sign_in_header_txt"/>
-
         <!--TODO: add animation to label to move up on click, like Material design layouts-->
         <!--email-->
         <android.support.design.widget.TextInputLayout
