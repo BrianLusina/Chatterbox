@@ -64,7 +64,7 @@
             android:layout_height="wrap_content" />
 
         <Button
-            android:id="@+id/loginreset_btn_id"
+            android:id="@+id/login_reset_btn_id"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dip"

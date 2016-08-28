@@ -179,7 +179,6 @@ public class SignUpFragment extends Fragment{
             requestFocus(signUp_email);
             return false;
         }else{
-            /*TODO: send email to FIREBASE AUTH*/
             signUp_passwordTxtInptLayout.setErrorEnabled(false);
         }
         return true;

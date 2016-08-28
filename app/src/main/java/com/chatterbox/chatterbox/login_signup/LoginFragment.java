@@ -53,7 +53,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
     private EditText passwordField;
     private TextInputLayout mEmailTextInputLayout, mPasswordTxtInputLayout;
 
-    private Button loginBtn;
+    private Button loginBtn, login_reset_btb;
 
     private static final String LOGINFRAGMENT_TAG = LoginFragment.class.getSimpleName();
     private GoogleApiClient mGoogleApiClient;
@@ -98,6 +98,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
         mEmail = (AutoCompleteTextView) rootView.findViewById(R.id.useremail_id);
         passwordField = (EditText) rootView.findViewById(R.id.userpassword_id);
         loginBtn = (Button) rootView.findViewById(R.id.login_btn_id);
+        login_reset_btb = (Button) rootView.findViewById(R.id.login_reset_btn_id);
         mEmailTextInputLayout = (TextInputLayout)rootView.findViewById(R.id.useremail_txtinputlayout_id);
         mPasswordTxtInputLayout = (TextInputLayout)rootView.findViewById(R.id.userpassword_txtinputlayout_id);
 
@@ -108,7 +109,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
 
         mSignInButton.setOnClickListener(this);
         loginBtn.setOnClickListener(this);
-
+        login_reset_btb.setOnClickListener(this);
         mEmail.addTextChangedListener(new MyTextWatcher(mEmail));
         passwordField.addTextChangedListener(new MyTextWatcher(passwordField));
     }
@@ -150,11 +151,21 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
             case R.id.login_btn_id:
                 submitEmailDetails();
                 break;
+
+            case R.id.login_reset_btn_id:
+                resetPassword();
+                break;
 /*            case R.id.twitter_login_button:
                 //sign in with Twitter
 //                siginInTwitter();
                 break;*/
         }
+    }
+
+    /**reset the user password*/
+    private void resetPassword() {
+        Intent openReset = new Intent(getActivity(), ResetPasswordActivity.class);
+        startActivity(openReset);
     }
 
     /**SEND email details if all data fields are valid*/

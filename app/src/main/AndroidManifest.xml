@@ -34,6 +34,9 @@
             </intent-filter>
         </activity>
 
+        <!--Reset User password-->
+        <activity android:name=".login_signup.ResetPasswordActivity"/>
+
         <!--SERVICES-->
         <service
             android:name=".ChatterBoxMessagingService"
