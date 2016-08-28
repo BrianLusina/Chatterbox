@@ -32,8 +32,6 @@ public class LogSignActivity extends AppCompatActivity{
         initViews();
 
         setSupportActionBar(toolbar);
-        setUpViewPager(mViewPager);
-        materialViewPager.getPagerTitleStrip().setViewPager(mViewPager);
 
         CustomActivityOnCrash.install(this);
         CustomActivityOnCrash.setEnableAppRestart(true);
@@ -49,6 +47,13 @@ public class LogSignActivity extends AppCompatActivity{
         mViewPager = materialViewPager.getViewPager();
         toolbar = materialViewPager.getToolbar();
 
+        /*SETS THE viewpager adapter*/
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        viewPagerAdapter.addFragment(new LoginFragment(), "Login");
+        viewPagerAdapter.addFragment(new SignUpFragment(), "Sign Up");
+        mViewPager.setAdapter(viewPagerAdapter);
+        materialViewPager.getPagerTitleStrip().setViewPager(mViewPager);
+
         if (toolbar != null) {
             setSupportActionBar(toolbar);
 
@@ -60,30 +65,22 @@ public class LogSignActivity extends AppCompatActivity{
             actionBar.setHomeButtonEnabled(false);
         }
 
-        //TODO:SET MATERIALVIEWPAGER Listener for header animations
+        //TODO:SET MATERIAL VIEWPAGER Listener for header animations
         materialViewPager.setMaterialViewPagerListener(new MaterialViewPager.Listener() {
             @Override
             public HeaderDesign getHeaderDesign(int page) {
                 switch (page){
                     /*LOGIN*/
                     case 0:
-/*                        return HeaderDesign.fromColorResAndDrawable(R.color.holo_blue,);*/
+                        /*return HeaderDesign.fromColorResAndDrawable(R.color.holo_blue,);*/
                         break;
                     /*SIGN UP*/
                     case 1:
                         break;
-/*                        return HeaderDesign.fromColorResAndDrawable(R.color.accent_color,);*/
+                    /*return HeaderDesign.fromColorResAndDrawable(R.color.accent_color,);*/
                 }
                 return null;
             }
         });
-    }
-
-    /**Defines the number of tabs by setting appropriate fragment and tab name.*/
-    private void setUpViewPager(ViewPager viewPager){
-        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        viewPagerAdapter.addFragment(new LoginFragment(), "Login");
-        viewPagerAdapter.addFragment(new SignUpFragment(), "Sign Up");
-        viewPager.setAdapter(viewPagerAdapter);
     }
 }

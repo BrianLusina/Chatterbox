@@ -2,7 +2,7 @@ package com.chatterbox.chatterbox.login_signup;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.List;
  * Created by lusinabrian on 27/08/16 at 16:31
  * Description:
  */
-public class ViewPagerAdapter extends FragmentPagerAdapter{
+public class ViewPagerAdapter extends FragmentStatePagerAdapter{
     private final List<Fragment> fragmentList = new ArrayList<>();
     private final List<String> fragmentTitleList = new ArrayList<>();
 
