@@ -71,8 +71,10 @@ dependencies {
     /*super toasts to the rescue*/
     compile 'com.github.johnpersano:supertoasts:2.0'
 
-    /*Pager sliding tab strip*/
-//    compile 'com.astuetz:pagerslidingtabstrip:1.0.1'
+    /*Using Material Viewpager*/
+    compile ('com.github.florent37:materialviewpager:1.2.0@aar'){
+        transitive = true
+    }
 
     /*CUSTOM CRASH */
     compile 'cat.ereza:customactivityoncrash:1.5.0'

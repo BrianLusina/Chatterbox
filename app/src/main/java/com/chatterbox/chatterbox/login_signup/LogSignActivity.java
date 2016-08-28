@@ -34,7 +34,10 @@ public class LogSignActivity extends AppCompatActivity{
 
         //assigns the viewpager to TabLayout
         tabLayout.setupWithViewPager(viewPager);
+
         CustomActivityOnCrash.install(this);
+        CustomActivityOnCrash.setEnableAppRestart(true);
+        CustomActivityOnCrash.setRestartActivityClass(LogSignActivity.class);
         Fabric.with(this, new Crashlytics());
 
         //TODO: Set to false when publishing app
