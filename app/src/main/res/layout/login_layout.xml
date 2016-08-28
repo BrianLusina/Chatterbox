@@ -71,6 +71,16 @@
             android:layout_marginTop="10dp"
             android:layout_gravity="center_horizontal"
             android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/loginreset_btn_id"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dip"
+            android:background="@null"
+            android:text="@string/loginreset_btn_id"
+            android:textAllCaps="false"
+            android:textColor="@color/black" />
     </LinearLayout>
 
     <!--TODO: add Twitter, Github and Facebook login buttons-->
