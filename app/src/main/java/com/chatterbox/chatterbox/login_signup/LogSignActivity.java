@@ -1,7 +1,6 @@
 package com.chatterbox.chatterbox.login_signup;
 
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import com.chatterbox.chatterbox.R;
 import com.crashlytics.android.Crashlytics;
 import com.github.florent37.materialviewpager.MaterialViewPager;
+import com.github.florent37.materialviewpager.header.HeaderDesign;
 
 import cat.ereza.customactivityoncrash.CustomActivityOnCrash;
 import io.fabric.sdk.android.Fabric;
@@ -23,7 +23,6 @@ import io.fabric.sdk.android.Fabric;
 public class LogSignActivity extends AppCompatActivity{
     private MaterialViewPager materialViewPager;
     private Toolbar toolbar;
-    private TabLayout tabLayout;
     private ViewPager mViewPager;
 
     @Override
@@ -34,11 +33,8 @@ public class LogSignActivity extends AppCompatActivity{
 
         setSupportActionBar(toolbar);
         setUpViewPager(mViewPager);
-        materialViewPager.getPagerTitleStrip().setViewPager(materialViewPager.getViewPager());
+        materialViewPager.getPagerTitleStrip().setViewPager(mViewPager);
 
-     /*   //assigns the viewpager to TabLayout
-        tabLayout.setupWithViewPager(mViewPager);
-        */
         CustomActivityOnCrash.install(this);
         CustomActivityOnCrash.setEnableAppRestart(true);
         CustomActivityOnCrash.setRestartActivityClass(LogSignActivity.class);
@@ -59,22 +55,32 @@ public class LogSignActivity extends AppCompatActivity{
             ActionBar actionBar = getSupportActionBar();
             actionBar.setDisplayHomeAsUpEnabled(false);
             actionBar.setDisplayShowHomeEnabled(false);
-            actionBar.setDisplayShowTitleEnabled(true);
+            actionBar.setDisplayShowTitleEnabled(false);
             actionBar.setDisplayUseLogoEnabled(false);
             actionBar.setHomeButtonEnabled(false);
         }
 
         //TODO:SET MATERIALVIEWPAGER Listener for header animations
-//        toolbar = (Toolbar) findViewById(R.id.user_login_toolbar);
-//        tabLayout = (TabLayout)findViewById(R.id.user_login_tabs);
-//        mViewPager = (ViewPager)findViewById(R.id.user_login_viewpager);
+        materialViewPager.setMaterialViewPagerListener(new MaterialViewPager.Listener() {
+            @Override
+            public HeaderDesign getHeaderDesign(int page) {
+                switch (page){
+                    case 0:
+
+                        break;
+                    case 1:
+                        break;
+                }
+                return null;
+            }
+        });
     }
 
     /**Defines the number of tabs by setting appropriate fragment and tab name.*/
     private void setUpViewPager(ViewPager viewPager){
-       ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPagerAdapter.addFragment(new LoginFragment(), "Login");
         viewPagerAdapter.addFragment(new SignUpFragment(), "Sign Up");
-        viewPager.setAdapter(viewPagerAdapter);
+        mViewPager.setAdapter(viewPagerAdapter);
     }
 }
