@@ -65,11 +65,14 @@ public class LogSignActivity extends AppCompatActivity{
             @Override
             public HeaderDesign getHeaderDesign(int page) {
                 switch (page){
+                    /*LOGIN*/
                     case 0:
-
+/*                        return HeaderDesign.fromColorResAndDrawable(R.color.holo_blue,);*/
                         break;
+                    /*SIGN UP*/
                     case 1:
                         break;
+/*                        return HeaderDesign.fromColorResAndDrawable(R.color.accent_color,);*/
                 }
                 return null;
             }
@@ -81,6 +84,6 @@ public class LogSignActivity extends AppCompatActivity{
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPagerAdapter.addFragment(new LoginFragment(), "Login");
         viewPagerAdapter.addFragment(new SignUpFragment(), "Sign Up");
-        mViewPager.setAdapter(viewPagerAdapter);
+        viewPager.setAdapter(viewPagerAdapter);
     }
 }
