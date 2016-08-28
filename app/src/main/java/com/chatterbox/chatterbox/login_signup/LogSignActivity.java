@@ -7,6 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.chatterbox.chatterbox.R;
+import com.crashlytics.android.Crashlytics;
+
+import cat.ereza.customactivityoncrash.CustomActivityOnCrash;
+import io.fabric.sdk.android.Fabric;
 
 /**
  * Project: ChatterBox
@@ -30,6 +34,11 @@ public class LogSignActivity extends AppCompatActivity{
 
         //assigns the viewpager to TabLayout
         tabLayout.setupWithViewPager(viewPager);
+        CustomActivityOnCrash.install(this);
+        Fabric.with(this, new Crashlytics());
+
+        //TODO: Set to false when publishing app
+        CustomActivityOnCrash.setShowErrorDetails(true);
     }
     /**Initialize the UI contols*/
     private void initViews() {
