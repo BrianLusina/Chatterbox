@@ -34,5 +34,9 @@
     <string name="signup_password_str">Password</string>
     <string name="signup_button_str">Register</string>
     <string name="err_msg_password_short">Enter minimum 6 characters</string>
+    <string name="resetpassword_forgot_password">Forgot password?</string>
+    <string name="forgot_password_msg">We just need your email to send you password reset instructions</string>
+    <string name="btn_reset_password">Reset Password</string>
+    <string name="resetpass_btn_back_id"><![CDATA[<< Back]]></string>
 
 </resources>
