@@ -45,9 +45,9 @@ public class LogSignActivity extends AppCompatActivity{
     }
     /**Initialize the UI contols*/
     private void initViews() {
-        toolbar = (Toolbar) findViewById(R.id.user_login_toolbar);
-        tabLayout = (TabLayout)findViewById(R.id.user_login_tabs);
-        viewPager = (ViewPager)findViewById(R.id.user_login_viewpager);
+//        toolbar = (Toolbar) findViewById(R.id.user_login_toolbar);
+//        tabLayout = (TabLayout)findViewById(R.id.user_login_tabs);
+//        viewPager = (ViewPager)findViewById(R.id.user_login_viewpager);
     }
 
     /**Defines the number of tabs by setting appropriate fragment and tab name.*/

@@ -18,6 +18,7 @@
     app:viewpager_displayToolbarWhenSwipe="true"
     app:viewpager_transparentToolbar="true"
     app:viewpager_animatedHeaderImage="true"
+    app:viewpager_pagerTitleStrip="@layout/material_view_pager_pagertitlestrip_standard"
     app:viewpager_disableToolbar="false"/>
 <!--<android.support.design.widget.CoordinatorLayout-->
     <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
