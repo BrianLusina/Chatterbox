@@ -68,6 +68,12 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
         // Required empty public constructor
     }
 
+    public static Fragment newInstance(){
+        LoginFragment fragment = new LoginFragment();
+        fragment.setRetainInstance(true);
+        return fragment;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

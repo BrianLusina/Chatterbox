@@ -49,8 +49,8 @@ public class LogSignActivity extends AppCompatActivity{
 
         /*SETS THE viewpager adapter*/
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        viewPagerAdapter.addFragment(new LoginFragment(), "Login");
-        viewPagerAdapter.addFragment(new SignUpFragment(), "Sign Up");
+        viewPagerAdapter.addFragment(LoginFragment.newInstance(), "Login");
+        viewPagerAdapter.addFragment(SignUpFragment.newInstance(), "Sign Up");
         mViewPager.setAdapter(viewPagerAdapter);
         materialViewPager.getPagerTitleStrip().setViewPager(mViewPager);
 
