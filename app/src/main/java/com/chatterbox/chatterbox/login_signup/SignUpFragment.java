@@ -64,8 +64,8 @@ public class SignUpFragment extends Fragment{
         signUp_email = (EditText)rootView.findViewById(R.id.signup_email_id);
         signUp_password = (EditText)rootView.findViewById(R.id.signup_password_id);
         registerbtn = (Button) rootView.findViewById(R.id.signup_button_id);
-        signUp_emailtxtInptLayout = (TextInputLayout)rootView.findViewById(R.id.useremail_txtinputlayout_id);
-        signUp_passwordTxtInptLayout = (TextInputLayout)rootView.findViewById(R.id.userpassword_txtinputlayout_id);
+        signUp_emailtxtInptLayout = (TextInputLayout)rootView.findViewById(R.id.signup_emailtxtInput_id);
+        signUp_passwordTxtInptLayout = (TextInputLayout)rootView.findViewById(R.id.signup_pass_txtInput_id);
         progressBar = (ProgressBar)rootView.findViewById(R.id.signup_progressBar_id);
 
         signUp_email.addTextChangedListener(new MyTextWatcher(signUp_email));
