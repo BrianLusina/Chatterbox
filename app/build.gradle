@@ -64,6 +64,8 @@ dependencies {
     /*Glide*/
     compile 'com.github.bumptech.glide:glide:3.7.0'
 
+    /*Observable ScrollView*/
+    compile 'com.github.ksoichiro:android-observablescrollview:1.6.0'
 
     // Google
     compile 'com.google.android.gms:play-services-auth:9.2.1'
