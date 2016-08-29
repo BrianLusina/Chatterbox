@@ -38,5 +38,6 @@
     <string name="forgot_password_msg">We just need your email to send you password reset instructions</string>
     <string name="btn_reset_password">Reset Password</string>
     <string name="resetpass_btn_back_id"><![CDATA[<< Back]]></string>
+    <string name="loginlay_signin_with">Or, sign in with...</string>
 
 </resources>
