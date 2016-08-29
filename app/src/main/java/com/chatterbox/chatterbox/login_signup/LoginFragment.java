@@ -47,7 +47,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
     private static final String LOGINFRAGMENT_TAG = LoginFragment.class.getSimpleName();
 
     /*FIELDS*/
-    private SignInButton mSignInButton;
+    private SignInButton mSignInButton_google;
     //private TwitterLoginButton twitterLoginButton;
     private AutoCompleteTextView mEmail;
     private EditText passwordField;
@@ -119,7 +119,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
 
     /**initialize the user controls and set events*/
     public void initUICtrls(View rootView){
-        mSignInButton = (SignInButton) rootView.findViewById(R.id.sign_in_button);
+        mSignInButton_google = (SignInButton) rootView.findViewById(R.id.sign_in_button);
         mEmail = (AutoCompleteTextView) rootView.findViewById(R.id.useremail_id);
         passwordField = (EditText) rootView.findViewById(R.id.userpassword_id);
         loginBtn = (Button) rootView.findViewById(R.id.login_btn_id);
@@ -132,7 +132,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
         twitterLoginButton.setOnClickListener(this);
         */
 
-        mSignInButton.setOnClickListener(this);
+        mSignInButton_google.setOnClickListener(this);
         loginBtn.setOnClickListener(this);
         login_reset_btb.setOnClickListener(this);
         mEmail.addTextChangedListener(new MyTextWatcher(mEmail));
@@ -170,7 +170,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
         switch(v.getId()){
             case R.id.sign_in_button:
                 //sign in the user
-                signIn();
+                signIn_google();
                 break;
 
             case R.id.login_btn_id:
@@ -227,7 +227,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
     }
 
     /**Method that signs in the user*/
-    private void signIn(){
+    private void signIn_google(){
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
