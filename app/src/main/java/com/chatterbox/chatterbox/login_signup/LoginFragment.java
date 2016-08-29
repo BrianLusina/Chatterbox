@@ -297,12 +297,11 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
     private boolean validateEmail() {
         String email = mEmail.getText().toString().trim();
 
-        if(email.isEmpty() || isValidEmail(email)){
+        if(email.isEmpty() || !isValidEmail(email)){
             mEmailTextInputLayout.setError(getString(R.string.err_msg_email));
             requestFocus(mEmail);
             return false;
         }else{
-            /*TODO: send email to FIREBASE AUTH*/
             mEmailTextInputLayout.setErrorEnabled(false);
         }
         return true;
