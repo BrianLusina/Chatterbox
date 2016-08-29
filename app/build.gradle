@@ -65,7 +65,7 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:3.7.0'
 
     /*Observable ScrollView*/
-    compile 'com.github.ksoichiro:android-observablescrollview:1.6.0'
+//    compile 'com.github.ksoichiro:android-observablescrollview:1.6.0'
 
     // Google
     compile 'com.google.android.gms:play-services-auth:9.2.1'
@@ -77,6 +77,9 @@ dependencies {
     compile ('com.github.florent37:materialviewpager:1.2.0@aar'){
         transitive = true
     }
+    
+    /*PagerSlidingTab strip*/
+    compile 'com.astuetz:pagerslidingtabstrip:1.0.1'
 
     /*CUSTOM CRASH */
     compile 'cat.ereza:customactivityoncrash:1.5.0'
