@@ -44,6 +44,7 @@ import com.google.firebase.auth.GoogleAuthProvider;
  * Description:
  */
 public class LoginFragment extends Fragment implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener{
+    private static final String LOGINFRAGMENT_TAG = LoginFragment.class.getSimpleName();
 
     /*FIELDS*/
     private SignInButton mSignInButton;
@@ -51,14 +52,12 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
     private AutoCompleteTextView mEmail;
     private EditText passwordField;
     private TextInputLayout mEmailTextInputLayout, mPasswordTxtInputLayout;
-
     private Button loginBtn, login_reset_btb;
-
-    private static final String LOGINFRAGMENT_TAG = LoginFragment.class.getSimpleName();
     private GoogleApiClient mGoogleApiClient;
     private static final int RC_SIGN_IN = 9001;
-
     private FirebaseAuth mFirebaseAuth;
+    //responds to changes in user's sign in state
+    private FirebaseAuth.AuthStateListener mAuthListener;
     // Note: Your consumer key and secret should be obfuscated in your source code before shipping.
     private static final String TWITTER_KEY = "piwheAPcw5HJq2ShHJrrIOzWA";
     private static final String TWITTER_SECRET = "c4y9c29daJEhgoSUzOpvE7egeMOPXg6UsULQ0n0DyP1jQ0cd4r";
@@ -80,6 +79,19 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
 
         /*instantiate Firebase*/
         mFirebaseAuth = FirebaseAuth.getInstance();
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if(user != null){
+                    //user is signed in
+                    Log.d(LOGINFRAGMENT_TAG, "onAuthStateChanged:signed_in: " + user.getUid());
+                }else{
+                    /*user is signed out*/
+                    Log.d(LOGINFRAGMENT_TAG, "onAuthStateChanged:signed_out");
+                }
+            }
+        };
     }
 
     @Nullable
@@ -89,6 +101,20 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
         initUICtrls(rootView);
 
         return rootView;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mFirebaseAuth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if(mAuthListener != null){
+            mFirebaseAuth.removeAuthStateListener(mAuthListener);
+        }
     }
 
     /**initialize the user controls and set events*/
