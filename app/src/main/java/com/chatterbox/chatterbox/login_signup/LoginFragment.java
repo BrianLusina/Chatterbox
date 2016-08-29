@@ -196,11 +196,32 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
     /**SEND email details if all data fields are valid*/
     /*todo: submit details to FIREBASE*/
     private void submitEmailDetails() {
-        if(!validateEmail()){
-            return ;
-        }
-        if(validatePassword()){
-            return ;
+        if(!validateEmail() && validatePassword()){
+            final SuperToast superToast = new SuperToast(getActivity());
+
+            String email = mEmail.getText().toString().trim();
+            String password = passwordField.getText().toString();
+            mFirebaseAuth.signInWithEmailAndPassword(email, password)
+                    //TODO:Change display messages to the user
+                    .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            Log.d(LOGINFRAGMENT_TAG, "SignInWithEmail:onComplete:" + task.isSuccessful());
+                            // If sign in fails, display a message to the user. If sign in succeeds
+                            // the auth state listener will be notified and logic to handle the
+                            // signed in user can be handled in the listener.
+                            if (!task.isSuccessful()) {
+                                Log.w(LOGINFRAGMENT_TAG, "signInWithEmail:failed", task.getException());
+                                superToast.setText("Authentication failed. "+ task.getException());
+                                superToast.setDuration(Style.DURATION_SHORT);
+                                superToast.show();
+                            } else {
+                                Intent intent = new Intent(getActivity(), MainActivity.class);
+                                startActivity(intent);
+                                onDetach();
+                            }
+                        }
+                    });
         }
 
     }

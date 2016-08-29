@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,6 +37,7 @@ import com.google.firebase.auth.FirebaseAuth;
  * Description:
  */
 public class SignUpFragment extends Fragment{
+    public static final String SIGNUPFRAGMENT_TAG = SignUpFragment.class.getSimpleName();
     private EditText signUp_email, signUp_password;
     private Button registerbtn;
     private TextInputLayout signUp_emailtxtInptLayout, signUp_passwordTxtInptLayout;
@@ -102,7 +104,8 @@ public class SignUpFragment extends Fragment{
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             /*TODO: display a better message to user on sign up*/
-                            superToast.setText("Create User with Email"+ task.isSuccessful());
+                            Log.d(SIGNUPFRAGMENT_TAG, "Create User with Email"+ task.isSuccessful());
+                            superToast.setText("Success! :)");
                             superToast.setDuration(Style.DURATION_SHORT);
                             superToast.show();
                             progressBar.setVisibility(View.GONE);
