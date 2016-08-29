@@ -52,5 +52,23 @@ public class LogSignActivity extends AppCompatActivity{
         //bind the tabs to the viewpager
         pagerSlidingTabStrip = (PagerSlidingTabStrip)findViewById(R.id.userlogin_pagerslidetabs_id);
         pagerSlidingTabStrip.setViewPager(mViewPager);
+
+        //set the titles
+        pagerSlidingTabStrip.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 }
