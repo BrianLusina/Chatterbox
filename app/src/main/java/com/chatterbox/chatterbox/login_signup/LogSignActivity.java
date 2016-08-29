@@ -2,15 +2,12 @@ package com.chatterbox.chatterbox.login_signup;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
+import com.astuetz.PagerSlidingTabStrip;
 import com.chatterbox.chatterbox.R;
 import com.crashlytics.android.Crashlytics;
-import com.github.florent37.materialviewpager.MaterialViewPager;
-import com.github.florent37.materialviewpager.header.HeaderDesign;
-
 import cat.ereza.customactivityoncrash.CustomActivityOnCrash;
 import io.fabric.sdk.android.Fabric;
 
@@ -21,9 +18,9 @@ import io.fabric.sdk.android.Fabric;
  * Description: Activity with signin and login fragments
  */
 public class LogSignActivity extends AppCompatActivity{
-    private MaterialViewPager materialViewPager;
     private Toolbar toolbar;
     private ViewPager mViewPager;
+    private PagerSlidingTabStrip pagerSlidingTabStrip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,44 +40,17 @@ public class LogSignActivity extends AppCompatActivity{
     }
     /**Initialize the UI contols*/
     private void initViews() {
-        materialViewPager = (MaterialViewPager) findViewById(R.id.materialViewPager);
-        mViewPager = materialViewPager.getViewPager();
-        toolbar = materialViewPager.getToolbar();
+        mViewPager = (ViewPager) findViewById(R.id.userlogin_viewpager_id);
+        toolbar = (Toolbar)findViewById(R.id.main_toolbar_id);
 
         /*SETS THE viewpager adapter*/
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPagerAdapter.addFragment(LoginFragment.newInstance(), "Login");
         viewPagerAdapter.addFragment(SignUpFragment.newInstance(), "Sign Up");
         mViewPager.setAdapter(viewPagerAdapter);
-        materialViewPager.getPagerTitleStrip().setViewPager(mViewPager);
 
-        if (toolbar != null) {
-            setSupportActionBar(toolbar);
-
-            ActionBar actionBar = getSupportActionBar();
-            actionBar.setDisplayHomeAsUpEnabled(false);
-            actionBar.setDisplayShowHomeEnabled(false);
-            actionBar.setDisplayShowTitleEnabled(false);
-            actionBar.setDisplayUseLogoEnabled(false);
-            actionBar.setHomeButtonEnabled(false);
-        }
-
-        //TODO:SET MATERIAL VIEWPAGER Listener for header animations
-        materialViewPager.setMaterialViewPagerListener(new MaterialViewPager.Listener() {
-            @Override
-            public HeaderDesign getHeaderDesign(int page) {
-                switch (page){
-                    /*LOGIN*/
-                    case 0:
-                        /*return HeaderDesign.fromColorResAndDrawable(R.color.holo_blue,);*/
-                        break;
-                    /*SIGN UP*/
-                    case 1:
-                        break;
-                    /*return HeaderDesign.fromColorResAndDrawable(R.color.accent_color,);*/
-                }
-                return null;
-            }
-        });
+        //bind the tabs to the viewpager
+        pagerSlidingTabStrip = (PagerSlidingTabStrip)findViewById(R.id.userlogin_pagerslidetabs_id);
+        pagerSlidingTabStrip.setViewPager(mViewPager);
     }
 }
