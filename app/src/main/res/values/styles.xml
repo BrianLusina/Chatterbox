@@ -9,7 +9,7 @@
         <item name="colorPrimaryDark">@color/indigo_500</item>
         <item name="colorAccent">@color/indigo_600</item>
         <item name="android:textColorPrimary">@color/white</item>
-
+<!--
         <item name="windowNoTitle">true</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowTranslucentStatus" tools:targetApi="21">true</item>
@@ -18,7 +18,7 @@
 
         <item name="android:colorButtonNormal" tools:targetApi="lollipop">@drawable/button_selector</item>
         <item name="colorButtonNormal">@drawable/button_selector</item>
-        <item name="android:buttonStyle">@style/FriendlyButtonStyle</item>
+        <item name="android:buttonStyle">@style/FriendlyButtonStyle</item>-->
     </style>
     
     <style name="AppBaseTheme" parent="@style/Theme.AppCompat.Light.NoActionBar"/>

@@ -1,4 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent">
+
+    <include layout="@layout/toolbar_layout"/>
+
+    <com.astuetz.PagerSlidingTabStrip
+        android:id="@+id/userlogin_pagerslidetabs_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"/>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/userlogin_viewpager_id"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>
+<!--
 <com.github.florent37.materialviewpager.MaterialViewPager
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -20,3 +42,4 @@
     app:viewpager_animatedHeaderImage="true"
     app:viewpager_pagerTitleStrip="@layout/material_view_pager_pagertitlestrip_standard"
     app:viewpager_disableToolbar="false"/>
+-->
