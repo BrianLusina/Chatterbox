@@ -18,6 +18,7 @@ import android.view.WindowManager;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.chatterbox.chatterbox.Constants;
 import com.chatterbox.chatterbox.MainActivity;
@@ -39,7 +40,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.twitter.sdk.android.Twitter;
+import com.twitter.sdk.android.core.Callback;
+import com.twitter.sdk.android.core.Result;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
+import com.twitter.sdk.android.core.TwitterException;
+import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 
 import io.fabric.sdk.android.Fabric;
@@ -52,6 +57,7 @@ import io.fabric.sdk.android.Fabric;
  */
 public class LoginFragment extends Fragment implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener{
     private static final String LOGINFRAGMENT_TAG = LoginFragment.class.getSimpleName();
+    final SuperToast superToast = new SuperToast(getActivity());
 
     /*FIELDS*/
     private SignInButton mSignInButton_google;
@@ -63,7 +69,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
     private TextInputLayout mEmailTextInputLayout, mPasswordTxtInputLayout;
     private Button loginBtn, login_reset_btb;
     private GoogleApiClient mGoogleApiClient;
-    private static final int RC_SIGN_IN = 9001;
     private FirebaseAuth mFirebaseAuth;
     //responds to changes in user's sign in state
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -194,7 +199,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
                 break;
             case R.id.twitter_login_button:
                 //sign in with Twitter
-                siginInTwitter();
+                signInTwitter();
                 break;
         }
     }
@@ -209,7 +214,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
     /*todo: submit details to FIREBASE*/
     private void submitEmailDetails() {
         if(!validateEmail() && validatePassword()){
-            final SuperToast superToast = new SuperToast(getActivity());
 
             String email = mEmail.getText().toString().trim();
             String password = passwordField.getText().toString();
@@ -241,11 +245,29 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
     /**Method that signs in the user*/
     private void signIn_google(){
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
-        startActivityForResult(signInIntent, RC_SIGN_IN);
+        startActivityForResult(signInIntent, Constants.RC_SIGN_IN);
     }
 
     /**Sign in with Twitter*/
     private void signInTwitter(){
+        twitterLoginButton.setCallback(new Callback<TwitterSession>() {
+            @Override
+            public void success(Result<TwitterSession> result) {
+                // The TwitterSession is also available through:
+                // Twitter.getInstance().core.getSessionManager().getActiveSession()
+                TwitterSession session = result.data;
+                // TODO: Remove toast and use the TwitterSession's userID
+                // with your app's user model
+                String msg = "@" + session.getUserName() + " logged in! (#" + session.getUserId() + ")";
+                superToast.setText(msg);
+                superToast.setDuration(Style.DURATION_SHORT);
+                superToast.show();
+            }
+            @Override
+            public void failure(TwitterException exception) {
+                Log.d("TwitterKit", "Login with Twitter failure", exception);
+            }
+        });
 
     }
 
@@ -253,7 +275,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-        if(requestCode == RC_SIGN_IN){
+        if(requestCode == Constants.RC_SIGN_IN){
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             if (result.isSuccess()) {
                 // Google Sign In was successful, authenticate with Firebase
@@ -264,6 +286,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
                 Log.e(LOGINFRAGMENT_TAG, "Google Sign In failed.");
             }
         }
+
+        twitterLoginButton.onActivityResult(requestCode, resultCode, data);
     }
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct){

@@ -13,6 +13,7 @@ public class Constants {
     public static final String FRIENDLY_MSG_LENGTH = "friendly_msg_length";
     public static final String TWITTER_CONSUMER_KEY = BuildConfig.TWITTER_CONSUMER_KEY;
     public static final String TWITTER_CONSUMER_SECRET = BuildConfig.TWITTER_SECRET;
+    public static final int RC_SIGN_IN = 9001;
 
 /*CLASS END*/
 }
