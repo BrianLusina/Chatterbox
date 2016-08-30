@@ -21,5 +21,7 @@ public class Constants {
     public static final String ANONYMOUS = "anonymous";
     public static final String MESSAGE_SENT_EVENT = "message_sent";
 
+    public static final int PROFILE_SETTING = 1;
+
 /*CLASS END*/
 }

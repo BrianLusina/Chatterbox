@@ -1,4 +1,4 @@
-package com.chatterbox.chatterbox;
+package com.chatterbox.chatterbox.services;
 
 import android.util.Log;
 

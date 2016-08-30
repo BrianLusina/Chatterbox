@@ -24,7 +24,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.chatterbox.chatterbox.Constants;
-import com.chatterbox.chatterbox.MessageModel;
+import com.chatterbox.chatterbox.models.MessageModel;
 import com.chatterbox.chatterbox.R;
 import com.chatterbox.chatterbox.SignInActivity;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -56,6 +56,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Description:
  */
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener{
+    private static final String MAINACTIVITY_TAG = MainActivity.class.getSimpleName();
 
     public static class MessageViewHolder extends RecyclerView.ViewHolder {
         public TextView messageTextView;
@@ -73,7 +74,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     // Firebase instance variables
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
-    private static final String MAINACTIVITY_TAG = MainActivity.class.getSimpleName();
     private String mUsername;
     private String mPhotoUrl;
     private SharedPreferences mSharedPreferences;
@@ -120,7 +120,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
         initViews();
         initFirebaseDatabase();
-
     }
 
     @Override

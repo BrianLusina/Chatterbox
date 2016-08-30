@@ -1,4 +1,4 @@
-package com.chatterbox.chatterbox;
+package com.chatterbox.chatterbox.models;
 
 /**
  * Project: ChatterBox

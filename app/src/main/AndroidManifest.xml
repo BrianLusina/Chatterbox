@@ -53,7 +53,7 @@
 
         <!--SERVICES-->
         <service
-            android:name=".ChatterBoxMessagingService"
+            android:name=".services.ChatterBoxMessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
@@ -61,7 +61,7 @@
         </service>
 
         <service
-            android:name=".ChatterBoxInstanceIdService"
+            android:name=".services.ChatterBoxInstanceIdService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
