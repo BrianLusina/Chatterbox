@@ -19,7 +19,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import com.chatterbox.chatterbox.Constants;
-import com.chatterbox.chatterbox.MainActivity;
+import com.chatterbox.chatterbox.mainpack.MainActivity;
 import com.chatterbox.chatterbox.R;
 import com.github.johnpersano.supertoasts.library.Style;
 import com.github.johnpersano.supertoasts.library.SuperToast;

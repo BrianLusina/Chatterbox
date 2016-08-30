@@ -14,6 +14,10 @@
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
 
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="41f11c4d0f34030da023daca96924eaff1547a35" />
+
         <!--splash screen-->
         <activity android:name=".SplashScreen">
             <intent-filter>
@@ -29,8 +33,13 @@
         <!--sign in activity-->
         <activity android:name=".SignInActivity" />
 
+        <!--Home activity-->
+        <activity
+            android:name=".mainpack.HomeActivity"
+            android:configChanges="orientation|screenSize"/>
+
         <!--main activity-->
-        <activity android:name=".MainActivity">
+        <activity android:name=".mainpack.MainActivity">
             <intent-filter>
                 <action android:name="com.chatterbox.chatterbox.MAINACTIVITY"/>
                 <category android:name="android.intent.category.DEFAULT"/>
@@ -38,7 +47,9 @@
         </activity>
 
         <!--Reset User password-->
-        <activity android:name=".login_signup.ResetPasswordActivity"/>
+        <activity
+            android:name=".login_signup.ResetPasswordActivity"
+            android:configChanges="orientation|screenSize"/>
 
         <!--SERVICES-->
         <service
@@ -57,9 +68,6 @@
             </intent-filter>
         </service>
 
-        <meta-data
-            android:name="io.fabric.ApiKey"
-            android:value="41f11c4d0f34030da023daca96924eaff1547a35" />
     </application>
 
 </manifest>

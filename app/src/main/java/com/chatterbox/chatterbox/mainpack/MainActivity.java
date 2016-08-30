@@ -1,4 +1,4 @@
-package com.chatterbox.chatterbox;
+package com.chatterbox.chatterbox.mainpack;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -23,10 +23,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.chatterbox.chatterbox.Constants;
+import com.chatterbox.chatterbox.MessageModel;
+import com.chatterbox.chatterbox.R;
+import com.chatterbox.chatterbox.SignInActivity;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.appinvite.AppInvite;
 import com.google.android.gms.appinvite.AppInviteInvitation;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.common.ConnectionResult;
@@ -51,7 +53,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Project: ChatterBox
  * Package: com.chatterbox.chatterbox
  * Created by lusinabrian on 13/08/16 at 08:01
- * <p/>
  * Description:
  */
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener{
