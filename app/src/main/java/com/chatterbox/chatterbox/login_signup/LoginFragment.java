@@ -18,8 +18,6 @@ import android.view.WindowManager;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
-
 import com.chatterbox.chatterbox.Constants;
 import com.chatterbox.chatterbox.MainActivity;
 import com.chatterbox.chatterbox.R;

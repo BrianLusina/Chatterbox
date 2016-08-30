@@ -22,7 +22,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".login_signup.LogSignActivity"/>
+        <activity
+            android:name=".login_signup.LogSignActivity"
+            android:configChanges="screenSize|orientation" />
 
         <!--sign in activity-->
         <activity android:name=".SignInActivity" />
