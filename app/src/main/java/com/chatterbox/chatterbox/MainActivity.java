@@ -73,11 +73,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
     private static final String MAINACTIVITY_TAG = MainActivity.class.getSimpleName();
-    public static final String MESSAGES_CHILD = "messages";
-    private static final int REQUEST_INVITE = 1;
-    public static final int DEFAULT_MSG_LENGTH_LIMIT = Integer.MAX_VALUE;
-    public static final String ANONYMOUS = "anonymous";
-    private static final String MESSAGE_SENT_EVENT = "message_sent";
     private String mUsername;
     private String mPhotoUrl;
     private SharedPreferences mSharedPreferences;
@@ -101,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         // Set default username is anonymous.
-        mUsername = ANONYMOUS;
+        mUsername = Constants.ANONYMOUS;
 
         // Initialize Firebase Auth
         mFirebaseAuth = FirebaseAuth.getInstance();
@@ -132,7 +127,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         super.onActivityResult(requestCode, resultCode, data);
         Log.d(MAINACTIVITY_TAG, "onActivityResult: requestCode=" + requestCode + ", resultCode=" + resultCode);
 
-        if (requestCode == REQUEST_INVITE) {
+        if (requestCode == Constants.REQUEST_INVITE) {
             if (resultCode == RESULT_OK) {
                 // Use Firebase Measurement to log that invitation was sent.
                 Bundle payload = new Bundle();
@@ -169,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 MessageModel.class,
                 R.layout.item_message,
                 MessageViewHolder.class,
-                mFirebaseDatabaseReference.child(MESSAGES_CHILD)) {
+                mFirebaseDatabaseReference.child(Constants.MESSAGES_CHILD)) {
 
             @Override
             protected void populateViewHolder(MessageViewHolder viewHolder, MessageModel friendlyMessage, int position) {
@@ -263,9 +258,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             @Override
             public void onClick(View view) {
                 MessageModel friendlyMessage = new MessageModel(mUsername, mPhotoUrl, mMessageEditText.getText().toString());
-                mFirebaseDatabaseReference.child(MESSAGES_CHILD).push().setValue(friendlyMessage);
+                mFirebaseDatabaseReference.child(Constants.MESSAGES_CHILD).push().setValue(friendlyMessage);
                 mMessageEditText.setText("");
-                mFirebaseAnalytics.logEvent(MESSAGE_SENT_EVENT, null);
+                mFirebaseAnalytics.logEvent(Constants.MESSAGE_SENT_EVENT, null);
             }
         });
 
@@ -292,7 +287,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 mFirebaseAuth.signOut();
                 Auth.GoogleSignInApi.signOut(mGoogleApiClient);
                 mFirebaseUser = null;
-                mUsername = ANONYMOUS;
+                mUsername = Constants.ANONYMOUS;
                 mPhotoUrl = null;
                 startActivity(new Intent(this, SignInActivity.class));
                 return true;
@@ -315,7 +310,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 .setMessage(getString(R.string.invitation_message))
                 .setCallToActionText(getString(R.string.invitation_cta))
                 .build();
-        startActivityForResult(intent, REQUEST_INVITE);
+        startActivityForResult(intent, Constants.REQUEST_INVITE);
     }
 
 

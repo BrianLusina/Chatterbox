@@ -15,5 +15,11 @@ public class Constants {
     public static final String TWITTER_CONSUMER_SECRET = BuildConfig.TWITTER_SECRET;
     public static final int RC_SIGN_IN = 9001;
 
+    public static final String MESSAGES_CHILD = "messages";
+    public static final int REQUEST_INVITE = 1;
+    public static final int DEFAULT_MSG_LENGTH_LIMIT = Integer.MAX_VALUE;
+    public static final String ANONYMOUS = "anonymous";
+    public static final String MESSAGE_SENT_EVENT = "message_sent";
+
 /*CLASS END*/
 }
