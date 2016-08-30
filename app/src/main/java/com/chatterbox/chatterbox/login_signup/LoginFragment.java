@@ -18,6 +18,8 @@ import android.view.WindowManager;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.chatterbox.chatterbox.Constants;
 import com.chatterbox.chatterbox.MainActivity;
 import com.chatterbox.chatterbox.R;
 import com.github.johnpersano.supertoasts.library.Style;
@@ -36,6 +38,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.twitter.sdk.android.Twitter;
+import com.twitter.sdk.android.core.TwitterAuthConfig;
+
+import io.fabric.sdk.android.Fabric;
 
 /**
  * Project: ChatterBox
@@ -59,8 +65,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
     //responds to changes in user's sign in state
     private FirebaseAuth.AuthStateListener mAuthListener;
     // Note: Your consumer key and secret should be obfuscated in your source code before shipping.
-    private static final String TWITTER_KEY = "piwheAPcw5HJq2ShHJrrIOzWA";
-    private static final String TWITTER_SECRET = "c4y9c29daJEhgoSUzOpvE7egeMOPXg6UsULQ0n0DyP1jQ0cd4r";
 
     public LoginFragment() {
         // Required empty public constructor
@@ -76,6 +80,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         configureGoogleSignIn();
+        configureTwitterSIgnIn();
 
         /*instantiate Firebase*/
         mFirebaseAuth = FirebaseAuth.getInstance();
@@ -151,6 +156,11 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
                 .build();
     }
 
+    /**CONFIGURE user to sign in with Twitter*/
+    public void configureTwitterSIgnIn(){
+        TwitterAuthConfig authConfig = new TwitterAuthConfig(Constants.TWITTER_CONSUMER_KEY, Constants.TWITTER_CONSUMER_SECRET);
+        Fabric.with(getActivity(), new Twitter(authConfig));
+    }
     public void handleFirebaseAuthResult(AuthResult authResult){
         if(authResult != null){
             //welcome the user

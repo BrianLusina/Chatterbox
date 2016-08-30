@@ -83,6 +83,10 @@ dependencies {
         transitive = true
     }
 
+    /*MATERIAL DRAWER*/
+    compile('com.mikepenz:materialdrawer:5.6.0@aar') {
+        transitive = true
+    }
     /*PagerSlidingTab strip*/
 /*
     compile 'com.astuetz:pagerslidingtabstrip:1.0.1'
@@ -111,6 +115,9 @@ dependencies {
 //        transitive = true;
 //    }
     compile('com.crashlytics.sdk.android:crashlytics:2.6.2@aar') {
+        transitive = true;
+    }
+    compile('com.twitter.sdk.android:twitter:2.0.0@aar') {
         transitive = true;
     }
 }

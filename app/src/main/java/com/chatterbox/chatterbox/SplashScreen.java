@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import com.chatterbox.chatterbox.login_signup.LogSignActivity;
 import com.crashlytics.android.Crashlytics;
+import com.twitter.sdk.android.Twitter;
+import com.twitter.sdk.android.core.TwitterAuthConfig;
 import io.fabric.sdk.android.Fabric;
 
 /**
@@ -23,6 +25,9 @@ import io.fabric.sdk.android.Fabric;
  * Description: Handles the SplashScreen Activity, which is the first thing to open when app starts
  */
 public class SplashScreen extends AppCompatActivity implements Animation.AnimationListener {
+
+    // Note: Your consumer key and secret should be obfuscated in your source code before shipping.
+
 
     private final String SPLASHSCREEN_TAG = SplashScreen.class.getSimpleName();
     private Animation animFadeIn;
