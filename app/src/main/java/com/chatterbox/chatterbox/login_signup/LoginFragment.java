@@ -40,6 +40,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.twitter.sdk.android.Twitter;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
+import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 
 import io.fabric.sdk.android.Fabric;
 
@@ -54,6 +55,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
 
     /*FIELDS*/
     private SignInButton mSignInButton_google;
+    private TwitterLoginButton twitterLoginButton;
+
     //private TwitterLoginButton twitterLoginButton;
     private AutoCompleteTextView mEmail;
     private EditText passwordField;
@@ -131,12 +134,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
         login_reset_btb = (Button) rootView.findViewById(R.id.login_reset_btn_id);
         mEmailTextInputLayout = (TextInputLayout)rootView.findViewById(R.id.useremail_txtinputlayout_id);
         mPasswordTxtInputLayout = (TextInputLayout)rootView.findViewById(R.id.userpassword_txtinputlayout_id);
+        twitterLoginButton = (TwitterLoginButton)rootView.findViewById(R.id.twitter_login_button);
 
-        /*
-        twitterLoginButton = (TwitterLoginButton)findViewById(R.id.twitter_login_button);
+        /*Click listeners*/
         twitterLoginButton.setOnClickListener(this);
-        */
-
         mSignInButton_google.setOnClickListener(this);
         loginBtn.setOnClickListener(this);
         login_reset_btb.setOnClickListener(this);
@@ -161,6 +162,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
         TwitterAuthConfig authConfig = new TwitterAuthConfig(Constants.TWITTER_CONSUMER_KEY, Constants.TWITTER_CONSUMER_SECRET);
         Fabric.with(getActivity(), new Twitter(authConfig));
     }
+
     public void handleFirebaseAuthResult(AuthResult authResult){
         if(authResult != null){
             //welcome the user
@@ -190,10 +192,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
             case R.id.login_reset_btn_id:
                 resetPassword();
                 break;
-/*            case R.id.twitter_login_button:
+            case R.id.twitter_login_button:
                 //sign in with Twitter
-//                siginInTwitter();
-                break;*/
+                siginInTwitter();
+                break;
         }
     }
 
@@ -242,7 +244,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
-    /*sign in with TWITTER*/
+    /**Sign in with Twitter*/
     private void signInTwitter(){
 
     }
