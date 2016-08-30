@@ -237,7 +237,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
         mMessageEditText = (EditText) findViewById(R.id.messageEditText);
         /*mMessageEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(mSharedPreferences
-                .getInt(ChatterBoxPreferences.FRIENDLY_MSG_LENGTH, DEFAULT_MSG_LENGTH_LIMIT))});
+                .getInt(Constants.FRIENDLY_MSG_LENGTH, DEFAULT_MSG_LENGTH_LIMIT))});
         */
         mMessageEditText.addTextChangedListener(new TextWatcher() {
             @Override

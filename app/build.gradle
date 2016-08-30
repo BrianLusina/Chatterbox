@@ -42,6 +42,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    buildTypes.each {
+        it.buildConfigField 'String', 'TWITTER_CONSUMER_KEY', TwitterConsumerKey
+        it.buildConfigField 'String', 'TWITTER_SECRET', TwitterSecret
+    }
     dexOptions {
         javaMaxHeapSize "4g"
     }
