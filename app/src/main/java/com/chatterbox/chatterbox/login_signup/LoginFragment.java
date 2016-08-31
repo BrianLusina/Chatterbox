@@ -22,6 +22,9 @@ import com.chatterbox.chatterbox.Constants;
 import com.chatterbox.chatterbox.mainpack.HomeActivity;
 import com.chatterbox.chatterbox.mainpack.MainActivity;
 import com.chatterbox.chatterbox.R;
+import com.crashlytics.android.Crashlytics;
+import com.crashlytics.android.answers.Answers;
+import com.crashlytics.android.answers.CustomEvent;
 import com.github.johnpersano.supertoasts.library.Style;
 import com.github.johnpersano.supertoasts.library.SuperToast;
 import com.google.android.gms.auth.api.Auth;
@@ -42,6 +45,7 @@ import com.google.firebase.auth.TwitterAuthProvider;
 import com.twitter.sdk.android.Twitter;
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
+import com.twitter.sdk.android.core.TwitterApiClient;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
 import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.TwitterSession;
@@ -68,6 +72,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
     private TextInputLayout mEmailTextInputLayout, mPasswordTxtInputLayout;
     private Button loginBtn, login_reset_btb;
     private GoogleApiClient mGoogleApiClient;
+    private TwitterApiClient mTwitterApiClient;
     private FirebaseAuth mFirebaseAuth;
     //responds to changes in user's sign in state
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -163,6 +168,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
 
     /**CONFIGURE user to sign in with Twitter*/
     public void configureTwitterSIgnIn(){
+        mTwitterApiClient = new TwitterApiClient();
         TwitterAuthConfig authConfig = new TwitterAuthConfig(Constants.TWITTER_CONSUMER_KEY, Constants.TWITTER_CONSUMER_SECRET);
         Fabric.with(getActivity(), new Twitter(authConfig));
     }
@@ -184,23 +190,84 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
     @Override
     public void onClick(View v) {
         switch(v.getId()){
+            /*sign in with Google*/
             case R.id.sign_in_button:
-                //sign in the user
                 signIn_google();
                 break;
-
+            /*sign in with email and password*/
             case R.id.login_btn_id:
                 submitEmailDetails();
                 break;
-
+            /*reset password*/
             case R.id.login_reset_btn_id:
                 resetPassword();
                 break;
+
+            /*sign in with Twitter*/
             case R.id.twitter_login_button:
-                //sign in with Twitter
                 signInTwitter();
                 break;
         }
+    }
+
+    /**Method that signs in the user*/
+    private void signIn_google(){
+        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+        startActivityForResult(signInIntent, Constants.RC_SIGN_IN);
+    }
+
+    /**Sign in with Twitter*/
+    private void signInTwitter(){
+        twitterLoginButton.setCallback(new Callback<TwitterSession>() {
+            final SuperToast superToast = new SuperToast(getActivity());
+
+            @Override
+            public void success(Result<TwitterSession> result) {
+                // The TwitterSession is also available through:
+                // Twitter.getInstance().core.getSessionManager().getActiveSession()
+                TwitterSession session = result.data;
+                // TODO: Remove toast and use the TwitterSession's userID
+                // with your app's user model
+                String msg = "@" + session.getUserName() + " logged in! (#" + session.getUserId() + ")";
+                superToast.setText(msg);
+                superToast.setDuration(Style.DURATION_SHORT);
+                superToast.show();
+
+            }
+            @Override
+            public void failure(TwitterException exception) {
+                Answers.getInstance().logCustom(new CustomEvent("Login with Twitter Failure"));
+                /*TODO: display snackbar*/
+                superToast.setText("Twitter login failure");
+                superToast.setDuration(Style.DURATION_SHORT);
+                superToast.show();
+                Crashlytics.logException(exception);
+                Log.d("TwitterKit", "Login with Twitter failure", exception);
+
+            }
+        });
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+        if(requestCode == Constants.RC_SIGN_IN){
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            if (result.isSuccess()) {
+                // Google Sign In was successful, authenticate with Firebase
+                GoogleSignInAccount account = result.getSignInAccount();
+                firebaseAuthWithGoogle(account);
+            } else {
+                // Google Sign In failed
+                Log.e(LOGINFRAGMENT_TAG, "Google Sign In failed.");
+            }
+        }
+        if(requestCode == Constants.RC_SIGN_IN){
+            twitterLoginButton.onActivityResult(requestCode, resultCode, data);
+        }
+
     }
 
     /**reset the user password*/
@@ -242,57 +309,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
 
     }
 
-    /**Method that signs in the user*/
-    private void signIn_google(){
-        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
-        startActivityForResult(signInIntent, Constants.RC_SIGN_IN);
-    }
-
-    /**Sign in with Twitter*/
-    private void signInTwitter(){
-        twitterLoginButton.setCallback(new Callback<TwitterSession>() {
-            final SuperToast superToast = new SuperToast(getActivity());
-
-            @Override
-            public void success(Result<TwitterSession> result) {
-                // The TwitterSession is also available through:
-                // Twitter.getInstance().core.getSessionManager().getActiveSession()
-                TwitterSession session = result.data;
-                // TODO: Remove toast and use the TwitterSession's userID
-                // with your app's user model
-                String msg = "@" + session.getUserName() + " logged in! (#" + session.getUserId() + ")";
-                superToast.setText(msg);
-                superToast.setDuration(Style.DURATION_SHORT);
-                superToast.show();
-            }
-            @Override
-            public void failure(TwitterException exception) {
-                Log.d("TwitterKit", "Login with Twitter failure", exception);
-            }
-        });
-
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-        if(requestCode == Constants.RC_SIGN_IN){
-            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-            if (result.isSuccess()) {
-                // Google Sign In was successful, authenticate with Firebase
-                GoogleSignInAccount account = result.getSignInAccount();
-                firebaseAuthWithGoogle(account);
-            } else {
-                // Google Sign In failed
-                Log.e(LOGINFRAGMENT_TAG, "Google Sign In failed.");
-            }
-        }
-        if(requestCode == Constants.RC_SIGN_IN){
-            twitterLoginButton.onActivityResult(requestCode, resultCode, data);
-        }
-
-    }
 
     /**After a user successfully signs in with Google, exchange the OAuth access token and OAuth secret for a Firebase credential, and authenticate with Firebase using the Firebase credential*/
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct){
@@ -341,7 +357,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
                             SuperToast superToast = new SuperToast(getActivity());
                             superToast.setDuration(Style.DURATION_SHORT);
                             superToast.setAnimations(Style.ANIMATIONS_FLY);
-                            superToast.setText("Authentication failed");
+                            superToast.setText("Authentication failed, Please try again");
                             superToast.show();
                         }else{
                             startActivity(new Intent(getActivity(), HomeActivity.class));
