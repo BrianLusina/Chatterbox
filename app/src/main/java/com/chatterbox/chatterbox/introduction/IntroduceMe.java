@@ -53,9 +53,10 @@ public class IntroduceMe extends AppIntro{
         showStatusBar(true);
 
         // Hide Skip/Done button.
-        showSkipButton(false);
-        setProgressButtonEnabled(false);
-
+        showSkipButton(true);
+        setProgressButtonEnabled(true);
+        showDoneButton(true);
+        
         /*animation*/
         setZoomAnimation();
     }
