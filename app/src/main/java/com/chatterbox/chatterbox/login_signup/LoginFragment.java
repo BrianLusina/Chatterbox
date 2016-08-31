@@ -55,7 +55,6 @@ import io.fabric.sdk.android.Fabric;
  */
 public class LoginFragment extends Fragment implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener{
     private static final String LOGINFRAGMENT_TAG = LoginFragment.class.getSimpleName();
-    final SuperToast superToast = new SuperToast(getActivity());
 
     /*FIELDS*/
     private SignInButton mSignInButton_google;
@@ -212,6 +211,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
     /*todo: submit details to FIREBASE*/
     private void submitEmailDetails() {
         if(!validateEmail() && validatePassword()){
+            final SuperToast superToast = new SuperToast(getActivity());
 
             String email = mEmail.getText().toString().trim();
             String password = passwordField.getText().toString();
@@ -249,6 +249,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
     /**Sign in with Twitter*/
     private void signInTwitter(){
         twitterLoginButton.setCallback(new Callback<TwitterSession>() {
+            final SuperToast superToast = new SuperToast(getActivity());
+
             @Override
             public void success(Result<TwitterSession> result) {
                 // The TwitterSession is also available through:
