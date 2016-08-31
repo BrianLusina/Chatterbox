@@ -333,7 +333,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
                             superToast.setText("Authentication failed");
                             superToast.show();
                         } else {
-                            startActivity(new Intent(getActivity(), MainActivity.class));
+                            startActivity(new Intent(getActivity(), HomeActivity.class));
                             onDetach();
                         }
                     }

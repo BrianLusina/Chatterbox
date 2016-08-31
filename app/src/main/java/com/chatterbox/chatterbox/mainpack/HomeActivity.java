@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 
 import com.chatterbox.chatterbox.Constants;
 import com.chatterbox.chatterbox.R;
-import com.chatterbox.chatterbox.SignInActivity;
 import com.chatterbox.chatterbox.login_signup.LogSignActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -128,7 +127,7 @@ public class HomeActivity extends AppCompatActivity{
                                 case 0:
 
                                     break;
-                                
+
                             }
                         }
                         //we do not consume the event and want the Drawer to continue with the event chain

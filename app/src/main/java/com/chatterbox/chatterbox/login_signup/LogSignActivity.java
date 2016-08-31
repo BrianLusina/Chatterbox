@@ -6,8 +6,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.astuetz.PagerSlidingTabStrip;
+import com.chatterbox.chatterbox.Constants;
 import com.chatterbox.chatterbox.R;
 import com.crashlytics.android.Crashlytics;
+import com.twitter.sdk.android.Twitter;
+import com.twitter.sdk.android.core.TwitterAuthConfig;
+
 import cat.ereza.customactivityoncrash.CustomActivityOnCrash;
 import io.fabric.sdk.android.Fabric;
 
@@ -29,6 +33,11 @@ public class LogSignActivity extends AppCompatActivity{
         initViews();
 
         setSupportActionBar(toolbar);
+
+        TwitterAuthConfig authConfig = new TwitterAuthConfig(Constants.TWITTER_CONSUMER_KEY,
+                        Constants.TWITTER_CONSUMER_SECRET);
+
+        Fabric.with(this, new Twitter(authConfig));
 
         CustomActivityOnCrash.install(this);
         CustomActivityOnCrash.setEnableAppRestart(true);
