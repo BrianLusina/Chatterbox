@@ -2,6 +2,7 @@ package com.chatterbox.chatterbox.mainpack;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -14,13 +15,18 @@ import com.chatterbox.chatterbox.SignInActivity;
 import com.chatterbox.chatterbox.login_signup.LogSignActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
+import com.mikepenz.materialdrawer.DrawerBuilder;
+import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileSettingDrawerItem;
+import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
+import com.mikepenz.materialdrawer.model.SectionDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 
@@ -34,7 +40,7 @@ public class HomeActivity extends AppCompatActivity{
     private Toolbar toolbar;
     //save our header or result
     private AccountHeader headerResult = null;
-    private Drawer Drawer = null;
+    private Drawer drawer = null;
 
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
@@ -71,7 +77,33 @@ public class HomeActivity extends AppCompatActivity{
         /*set the user profile*/
         profile = new ProfileDrawerItem().withName(mUsername).withEmail(mEmail).withIcon(mPhotoUrl);
 
+        /*create the account header*/
         buildHeader(false, savedInstanceState);
+
+        // create the account drawer
+        drawer = new DrawerBuilder()
+                .withActivity(this)
+                .withToolbar(toolbar)
+                .withAccountHeader(headerResult)
+                .addDrawerItems(
+                        new PrimaryDrawerItem().withName("Notifications").withIcon(FontAwesome.Icon.faw_bell).withTag("Notifications").withIdentifier(0),
+
+                        new PrimaryDrawerItem().withName("Friends").withIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_account).actionBar().paddingDp(5).colorRes(R.color.material_drawer_dark_primary_text)).withTag("Friends").withIdentifier(1),
+
+                        new PrimaryDrawerItem().withName("Rooms").withIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_plus_box).actionBar().paddingDp(5).colorRes(R.color.material_drawer_dark_primary_text)).withTag("Rooms").withIdentifier(2),
+
+                        new PrimaryDrawerItem().withName("Images").withIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_image).actionBar().paddingDp(5).colorRes(R.color.material_drawer_dark_primary_text)).withTag("Images").withIdentifier(3),
+                        
+                        /**/
+                        new SectionDrawerItem().withName("Section"),
+
+                        new SecondaryDrawerItem().withName("Help").withSelectedIconColor(Color.RED).withIconTintingEnabled(true).withIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_help).actionBar().paddingDp(5).colorRes(R.color.material_drawer_dark_primary_text)).withTag("Help").withIdentifier(2)
+                ).addStickyDrawerItems(
+                    new SecondaryDrawerItem().withName("Settings").withIcon(FontAwesome.Icon.faw_cogs).withIdentifier(10),
+                    new SecondaryDrawerItem().withName("About").withIcon(FontAwesome.Icon.faw_exclamation)
+                )
+                .withSavedInstance(savedInstanceState)
+                .build();
     }
 
     /**
@@ -89,24 +121,35 @@ public class HomeActivity extends AppCompatActivity{
                 .withCompactStyle(b)
                 .addProfiles(
                         profile,
-                        new ProfileSettingDrawerItem().withName("Add Account").withDescription("Add new GitHub Account").withIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_plus).actionBar().paddingDp(5).colorRes(R.color.material_drawer_dark_primary_text)).withIdentifier(Constants.PROFILE_SETTING),
-                        new ProfileSettingDrawerItem().withName("Manage Account").withIcon(GoogleMaterial.Icon.gmd_settings)
+                        new ProfileSettingDrawerItem()
+                                .withName("Add Account")
+                                .withDescription("Add new GitHub Account")
+                                .withIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_plus).actionBar()
+                                        .paddingDp(5)
+                                        .colorRes(R.color.material_drawer_dark_primary_text))
+                                .withIdentifier(Constants.PROFILE_SETTING),
+
+                        new ProfileSettingDrawerItem()
+                                .withName("Manage Account")
+                                .withIcon(GoogleMaterial.Icon.gmd_settings)
                 )
                 .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
                     @Override
                     public boolean onProfileChanged(View view, IProfile profile, boolean current) {
                         //if the clicked item has the identifier 1 add a new profile ;)
-                        if (profile instanceof IDrawerItem && ((IDrawerItem) profile).getIdentifier() == Constants.PROFILE_SETTING) {
-                            IProfile newProfile = new ProfileDrawerItem().withNameShown(true).withName(mUsername).withEmail(mEmail).withIcon(mPhotoUrl);
+                        if (profile instanceof IDrawerItem && ((IDrawerItem) profile)
+                                .getIdentifier() == Constants.PROFILE_SETTING) {
+                            IProfile newProfile = new ProfileDrawerItem()
+                                    .withNameShown(true)
+                                    .withName(mUsername)
+                                    .withEmail(mEmail)
+                                    .withIcon(mPhotoUrl);
                             if (headerResult.getProfiles() != null) {
-                                //we know that there are 2 setting elements. set the new profile above them ;)
-                                headerResult.addProfile(newProfile, headerResult.getProfiles().size() - 2);
+                              headerResult.addProfile(newProfile, headerResult.getProfiles().size() - 2);
                             } else {
                                 headerResult.addProfiles(newProfile);
                             }
                         }
-
-                        //false if you have not consumed the event and it should close the drawer
                         return false;
                     }
                 })

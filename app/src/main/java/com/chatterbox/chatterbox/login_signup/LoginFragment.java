@@ -93,7 +93,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
         super.onCreate(savedInstanceState);
         configureGoogleSignIn();
         configureTwitterSIgnIn();
-
+        /*initialize Answers*/
+        Fabric.with(getActivity(), new Answers());
         /*instantiate Firebase*/
         mFirebaseAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
