@@ -1,4 +1,4 @@
-package com.chatterbox.chatterbox;
+package com.chatterbox.chatterbox.introduction;
 
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -12,11 +12,8 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.chatterbox.chatterbox.R;
 import com.chatterbox.chatterbox.login_signup.LogSignActivity;
-import com.crashlytics.android.Crashlytics;
-import com.twitter.sdk.android.Twitter;
-import com.twitter.sdk.android.core.TwitterAuthConfig;
-import io.fabric.sdk.android.Fabric;
 
 /**
  * Project: ChatterBox
