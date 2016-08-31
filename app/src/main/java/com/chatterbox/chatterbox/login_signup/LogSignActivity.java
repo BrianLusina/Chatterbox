@@ -1,6 +1,9 @@
 package com.chatterbox.chatterbox.login_signup;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -8,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import com.astuetz.PagerSlidingTabStrip;
 import com.chatterbox.chatterbox.Constants;
 import com.chatterbox.chatterbox.R;
+import com.chatterbox.chatterbox.introduction.IntroduceMe;
 import com.crashlytics.android.Crashlytics;
 import com.twitter.sdk.android.Twitter;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
@@ -33,6 +37,40 @@ public class LogSignActivity extends AppCompatActivity{
         initViews();
 
         setSupportActionBar(toolbar);
+
+        /*LAUNCHES APP INTRO*/
+        Thread thread = new Thread(){
+            /**
+             * Calls the <code>run()</code> method of the Runnable object the receiver
+             * holds. If no Runnable is set, does nothing.
+             * @see Thread#start
+             */
+            @Override
+            public void run() {
+                super.run();
+                SharedPreferences getPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+
+                //create a new boolean and preference and set it to true
+                boolean isFirstStart = getPrefs.getBoolean("firststart", true);
+
+                //if activity has never started before
+                if(isFirstStart){
+                    //launch this activity
+                    Intent intent = new Intent(LogSignActivity.this, IntroduceMe.class);
+                    startActivity(intent);
+
+                    //make a new shared preferences editor
+                    SharedPreferences.Editor editor = getPrefs.edit();
+
+                    //  Edit preference to make it false because we don't want this to run again
+                    editor.putBoolean("firstStart", false);
+
+                    //apply the changes
+                    editor.apply();
+                }
+            }
+        };
+        thread.start();
 
         TwitterAuthConfig authConfig = new TwitterAuthConfig(Constants.TWITTER_CONSUMER_KEY,
                         Constants.TWITTER_CONSUMER_SECRET);

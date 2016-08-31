@@ -1,10 +1,13 @@
 package com.chatterbox.chatterbox.introduction;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.PersistableBundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
+import com.chatterbox.chatterbox.login_signup.LogSignActivity;
 import com.github.paolorotolo.appintro.AppIntro;
 import com.github.paolorotolo.appintro.AppIntroFragment;
 
@@ -23,21 +26,31 @@ public class IntroduceMe extends AppIntro{
         // Just set a title, description, background and image. AppIntro will do the rest.
         addSlide(AppIntroFragment.newInstance(title, description, image, background_colour));
 
+
+        // SHOW or HIDE the statusbar
+        showStatusBar(true);
+
         // Hide Skip/Done button.
         showSkipButton(false);
         setProgressButtonEnabled(false);
+
+        /*animation*/
+        setZoomAnimation();
     }
 
     @Override
     public void onSkipPressed(Fragment currentFragment) {
         super.onSkipPressed(currentFragment);
-        // Do something when users tap on Skip button.
+        Intent openLogin = new Intent(IntroduceMe.this, LogSignActivity.class);
+        startActivity(openLogin);
     }
 
     @Override
     public void onDonePressed(Fragment currentFragment) {
         super.onDonePressed(currentFragment);
-        // Do something when users tap on Done button.
+        Intent openLogin = new Intent(IntroduceMe.this, LogSignActivity.class);
+        startActivity(openLogin);
+        finish();
     }
 
     @Override

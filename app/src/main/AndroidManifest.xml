@@ -18,6 +18,9 @@
             android:name="io.fabric.ApiKey"
             android:value="41f11c4d0f34030da023daca96924eaff1547a35" />
 
+        <!--app introduction-->
+        <activity android:name=".introduction.IntroduceMe"/>
+
         <!--splash screen-->
         <activity android:name=".introduction.SplashScreen">
             <intent-filter>
