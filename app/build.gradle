@@ -89,6 +89,14 @@ dependencies {
         transitive = true
     }
 
+    //used to provide different itemAnimators for the RecyclerView
+    compile 'com.mikepenz:itemanimators:0.2.4@aar'
+    // used to provide the MiniDrawer to normal Drawer crossfade effect via a SlidingPane layout
+    compile 'com.mikepenz:crossfader:1.3.7@aar'
+    // used to provide the two step crossfade DrawerLayout. Which allows to have a mini layout which transforms to a normal layout within the drawer
+    // https://github.com/mikepenz/CrossfadeDrawerLayout
+    compile('com.mikepenz:crossfadedrawerlayout:0.3.4@aar')
+
     /*App Intros*/
     compile 'com.github.paolorotolo:appintro:4.0.0'
     /*PagerSlidingTab strip*/

@@ -93,7 +93,7 @@ public class HomeActivity extends AppCompatActivity{
                         new PrimaryDrawerItem().withName("Rooms").withIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_plus_box).actionBar().paddingDp(5).colorRes(R.color.material_drawer_dark_primary_text)).withTag("Rooms").withIdentifier(2),
 
                         new PrimaryDrawerItem().withName("Images").withIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_image).actionBar().paddingDp(5).colorRes(R.color.material_drawer_dark_primary_text)).withTag("Images").withIdentifier(3),
-                        
+
                         /**/
                         new SectionDrawerItem().withName("Section"),
 
