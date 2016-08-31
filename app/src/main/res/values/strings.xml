@@ -39,5 +39,6 @@
     <string name="btn_reset_password">Reset Password</string>
     <string name="resetpass_btn_back_id"><![CDATA[<< Back]]></string>
     <string name="loginlay_signin_with">Or, sign in with...</string>
+    <string name="app_desc">So you can chat more...</string>
 
 </resources>
