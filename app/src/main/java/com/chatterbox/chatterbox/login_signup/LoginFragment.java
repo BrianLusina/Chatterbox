@@ -19,6 +19,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import com.chatterbox.chatterbox.Constants;
+import com.chatterbox.chatterbox.mainpack.HomeActivity;
 import com.chatterbox.chatterbox.mainpack.MainActivity;
 import com.chatterbox.chatterbox.R;
 import com.github.johnpersano.supertoasts.library.Style;
@@ -37,6 +38,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.auth.TwitterAuthProvider;
 import com.twitter.sdk.android.Twitter;
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
@@ -286,10 +288,13 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
                 Log.e(LOGINFRAGMENT_TAG, "Google Sign In failed.");
             }
         }
+        if(requestCode == Constants.RC_SIGN_IN){
+            twitterLoginButton.onActivityResult(requestCode, resultCode, data);
+        }
 
-        twitterLoginButton.onActivityResult(requestCode, resultCode, data);
     }
 
+    /**After a user successfully signs in with Google, exchange the OAuth access token and OAuth secret for a Firebase credential, and authenticate with Firebase using the Firebase credential*/
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct){
         Log.d(LOGINFRAGMENT_TAG, "firebaseAuthWithGooogle:" + acct.getId());
 
@@ -317,6 +322,35 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
                     }
                 });
     }
+
+    /**After a user successfully signs in with Twitter, exchange the OAuth access token and OAuth secret for a Firebase credential, and authenticate with Firebase using the Firebase credential*/
+    private void firebaseWithTwitter(TwitterSession session){
+        Log.d(LOGINFRAGMENT_TAG, "Handle Twitter session: " + session);
+
+        AuthCredential credential = TwitterAuthProvider.getCredential(
+                session.getAuthToken().token,
+                session.getAuthToken().secret);
+        mFirebaseAuth.signInWithCredential(credential)
+                .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        Log.d(LOGINFRAGMENT_TAG, "Sign in with Credential: onComplete:" + task.isSuccessful());
+                        /**if sign in is not successful, display message to user*/
+                        if(!task.isSuccessful()){
+                            Log.w(LOGINFRAGMENT_TAG, "Sign in with TwitterCredential", task.getException());
+                            SuperToast superToast = new SuperToast(getActivity());
+                            superToast.setDuration(Style.DURATION_SHORT);
+                            superToast.setAnimations(Style.ANIMATIONS_FLY);
+                            superToast.setText("Authentication failed");
+                            superToast.show();
+                        }else{
+                            startActivity(new Intent(getActivity(), HomeActivity.class));
+                            onDetach();
+                        }
+                    }
+                });
+    }
+
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
