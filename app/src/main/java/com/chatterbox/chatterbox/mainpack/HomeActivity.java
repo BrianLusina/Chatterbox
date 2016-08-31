@@ -83,12 +83,29 @@ public class HomeActivity extends AppCompatActivity{
             mPhotoUrl = mFirebaseUser.getPhotoUrl().toString();
         }
 
-        /*set the user profile*/
-        profile = new ProfileDrawerItem().withName(mUsername).withEmail(mEmail).withIcon(mPhotoUrl);
+        /*user profile*/
+        final IProfile user_profile = new ProfileDrawerItem().withName(mUsername).withEmail(mEmail).withIcon(mPhotoUrl);
 
-        /*create the account header*/
-        buildHeader(false, savedInstanceState);
+        /*Build the header*/
+        headerResult  = new AccountHeaderBuilder()
+                .withActivity(this)
+                .withHeaderBackground(R.drawable.home_drawer_header_view)
+                .addProfiles(user_profile,
+                        new ProfileSettingDrawerItem()
+                                .withName("Add Account")
+                                .withDescription("Add new GitHub Account")
+                                .withIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_plus).actionBar()
+                                        .paddingDp(5)
+                                        .colorRes(R.color.material_drawer_dark_primary_text))
+                                .withIdentifier(Constants.PROFILE_SETTING),
 
+                        new ProfileSettingDrawerItem()
+                                .withName("Manage Account")
+                                .withIcon(GoogleMaterial.Icon.gmd_settings)
+                )
+                .withSavedInstance(savedInstanceState)
+                .build();
+        
         // create the account drawer
         drawer = new DrawerBuilder()
                 .withActivity(this)
@@ -195,20 +212,7 @@ public class HomeActivity extends AppCompatActivity{
                 .withActivity(this)
                 .withHeaderBackground(R.drawable.home_drawer_header_view)
                 .withCompactStyle(b)
-                .addProfiles(
-                        profile,
-                        new ProfileSettingDrawerItem()
-                                .withName("Add Account")
-                                .withDescription("Add new GitHub Account")
-                                .withIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_plus).actionBar()
-                                        .paddingDp(5)
-                                        .colorRes(R.color.material_drawer_dark_primary_text))
-                                .withIdentifier(Constants.PROFILE_SETTING),
-
-                        new ProfileSettingDrawerItem()
-                                .withName("Manage Account")
-                                .withIcon(GoogleMaterial.Icon.gmd_settings)
-                )
+                .addProfiles(profile)
                 .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
                     @Override
                     public boolean onProfileChanged(View view, IProfile profile, boolean current) {
