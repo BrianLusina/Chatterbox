@@ -1,10 +1,8 @@
 package com.chatterbox.chatterbox.introduction;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
@@ -43,7 +41,7 @@ public class IntroduceMe extends AppIntro{
         addSlide(AppIntroFragment.newInstance(titles[0], descriptions[0], R.drawable.chatterbox_logo, getResources().getColor(R.color.royal_blue)));
 
         /*2nd screen*/
-        addSlide(AppIntroFragment.newInstance(titles[1], descriptions[1], R.drawable.chatterbox_logo, getResources().getColor(R.color.deep_sky_blue)));
+        addSlide(AppIntroFragment.newInstance(titles[1], descriptions[1], R.drawable.chatterbox_logo, getResources().getColor(R.color.foreground1)));
 
         /*3rd screen*/
         addSlide(AppIntroFragment.newInstance(titles[2], descriptions[2], R.drawable.chatterbox_logo, getResources().getColor(R.color.holo_blue)));
