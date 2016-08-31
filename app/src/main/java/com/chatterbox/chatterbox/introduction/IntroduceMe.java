@@ -56,7 +56,7 @@ public class IntroduceMe extends AppIntro{
         showSkipButton(true);
         setProgressButtonEnabled(true);
         showDoneButton(true);
-        
+
         /*animation*/
         setZoomAnimation();
     }
@@ -64,15 +64,12 @@ public class IntroduceMe extends AppIntro{
     @Override
     public void onSkipPressed(Fragment currentFragment) {
         super.onSkipPressed(currentFragment);
-        Intent openLogin = new Intent(IntroduceMe.this, LogSignActivity.class);
-        startActivity(openLogin);
+        finish();
     }
 
     @Override
     public void onDonePressed(Fragment currentFragment) {
         super.onDonePressed(currentFragment);
-        Intent openLogin = new Intent(IntroduceMe.this, LogSignActivity.class);
-        startActivity(openLogin);
         finish();
     }
 
