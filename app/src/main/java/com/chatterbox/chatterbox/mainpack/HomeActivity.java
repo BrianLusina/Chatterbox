@@ -5,9 +5,11 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.view.GravityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.chatterbox.chatterbox.Constants;
 import com.chatterbox.chatterbox.R;
@@ -23,6 +25,8 @@ import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
+import com.mikepenz.materialdrawer.MiniDrawer;
+import com.mikepenz.materialdrawer.interfaces.ICrossfader;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileSettingDrawerItem;
@@ -30,6 +34,8 @@ import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.SectionDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
+import com.mikepenz.materialdrawer.util.DrawerUIUtils;
+import com.mikepenz.materialize.util.UIUtils;
 
 /**
  * Project: ChatterBox
@@ -86,6 +92,9 @@ public class HomeActivity extends AppCompatActivity{
         drawer = new DrawerBuilder()
                 .withActivity(this)
                 .withToolbar(toolbar)
+                .withDrawerLayout(R.layout.home_crossfade_drawer)
+                .withGenerateMiniDrawer(true)
+                .withDrawerWidthDp(72)
                 .withAccountHeader(headerResult)
                 .addDrawerItems(
                         new PrimaryDrawerItem().withName("Notifications").withIcon(FontAwesome.Icon.faw_bell).withTag("Notifications").withIdentifier(0),
@@ -104,8 +113,52 @@ public class HomeActivity extends AppCompatActivity{
                     new SecondaryDrawerItem().withName("Settings").withIcon(FontAwesome.Icon.faw_cogs).withIdentifier(10),
                     new SecondaryDrawerItem().withName("About").withIcon(FontAwesome.Icon.faw_exclamation)
                 )
+                .withShowDrawerOnFirstLaunch(true)
                 .withSavedInstance(savedInstanceState)
                 .build();
+
+        //get the CrossfadeDrawerLayout which will be used as alternative DrawerLayout for the Drawer
+        crossfadeDrawerLayout = (CrossfadeDrawerLayout)drawer.getDrawerLayout();
+
+        //define maxDrawerWidth
+        crossfadeDrawerLayout.setMaxWidthPx(DrawerUIUtils.getOptimalDrawerWidth(this));
+
+        //add second view (which is the miniDrawer)
+        final MiniDrawer miniResult = drawer.getMiniDrawer();
+
+        //build the view for the MiniDrawer
+        View view = miniResult.build(this);
+
+        //set the background of the MiniDrawer as this would be transparent
+        view.setBackgroundColor(UIUtils.getThemeColorFromAttrOrRes(
+                this,
+                com.mikepenz.materialdrawer.R.attr.material_drawer_background,
+                com.mikepenz.materialdrawer.R.color.material_drawer_background)
+        );
+
+        //we do not have the MiniDrawer view during CrossfadeDrawerLayout creation so we will add it here
+        crossfadeDrawerLayout.getSmallView()
+                .addView(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+
+        //define the crossfader to be used with the miniDrawer. This is required to be able to automatically toggle open / close
+        miniResult.withCrossFader(new ICrossfader() {
+            @Override
+            public void crossfade() {
+                boolean isFaded = isCrossfaded();
+                crossfadeDrawerLayout.crossfade(400);
+
+                //only close the drawer if we were already faded and want to close it now
+                if (isFaded) {
+                    drawer.getDrawerLayout().closeDrawer(GravityCompat.START);
+                }
+            }
+
+            @Override
+            public boolean isCrossfaded() {
+                return crossfadeDrawerLayout.isCrossfaded();
+            }
+        });
+
     }
 
     /**
@@ -162,5 +215,25 @@ public class HomeActivity extends AppCompatActivity{
     private void initViews() {
         toolbar = (Toolbar) findViewById(R.id.main_toolbar_id);
         floatingActionButton = (FloatingActionButton)findViewById(R.id.home_floating_action_btn);
+    }
+
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        //add the values which need to be saved from the drawer to the bundle
+        outState = drawer.saveInstanceState(outState);
+        //add the values which need to be saved from the accountHeader to the bundle
+        outState = headerResult.saveInstanceState(outState);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onBackPressed() {
+        //handle the back press :D close the drawer first and if the drawer is closed close the activity
+        if (drawer != null && drawer.isDrawerOpen()) {
+            drawer.closeDrawer();
+        } else {
+            super.onBackPressed();
+        }
     }
 }
