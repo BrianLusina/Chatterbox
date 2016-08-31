@@ -15,6 +15,7 @@ import com.chatterbox.chatterbox.SignInActivity;
 import com.chatterbox.chatterbox.login_signup.LogSignActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.mikepenz.crossfadedrawerlayout.view.CrossfadeDrawerLayout;
 import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.iconics.IconicsDrawable;
@@ -41,6 +42,7 @@ public class HomeActivity extends AppCompatActivity{
     //save our header or result
     private AccountHeader headerResult = null;
     private Drawer drawer = null;
+    private CrossfadeDrawerLayout crossfadeDrawerLayout = null;
 
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
