@@ -51,6 +51,8 @@ import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 
+import java.util.HashMap;
+
 import io.fabric.sdk.android.Fabric;
 
 /**
@@ -92,9 +94,11 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         configureGoogleSignIn();
-        configureTwitterSIgnIn();
+        //configureTwitterSIgnIn();
+
         /*initialize Answers*/
         Fabric.with(getActivity(), new Answers());
+
         /*instantiate Firebase*/
         mFirebaseAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -103,7 +107,14 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if(user != null){
                     //user is signed in
-                    Log.d(LOGINFRAGMENT_TAG, "onAuthStateChanged:signed_in: " + user.getUid());
+                    HashMap<String, String> userData = new HashMap<>();
+                    userData.put("Uid", user.getUid());
+                    userData.put("Email", user.getEmail());
+                    userData.put("Display Name", user.getDisplayName());
+                    userData.put("Photo Url", (user.getPhotoUrl().toString() != null) ? user.getPhotoUrl().toString() : "" );
+
+                    Log.d(LOGINFRAGMENT_TAG, "onAuthStateChanged:signed_in: " + userData);
+                    new Intent(getActivity(), HomeActivity.class);
                 }else{
                     /*user is signed out*/
                     Log.d(LOGINFRAGMENT_TAG, "onAuthStateChanged:signed_out");
@@ -247,7 +258,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
 
             }
         });
-
     }
 
     @Override
@@ -265,10 +275,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
                 Log.e(LOGINFRAGMENT_TAG, "Google Sign In failed.");
             }
         }
-        if(requestCode == Constants.RC_SIGN_IN){
-            twitterLoginButton.onActivityResult(requestCode, resultCode, data);
-        }
-
+        //twitterLoginButton.onActivityResult(requestCode, resultCode, data);
     }
 
     /**reset the user password*/
@@ -307,7 +314,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
                         }
                     });
         }
-
     }
 
 
@@ -421,7 +427,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
             requestFocus(passwordField);
             return false;
         }else{
-            //TODO: SEND password to FIREBASEAUTH
             mPasswordTxtInputLayout.setErrorEnabled(false);
         }
         return true;

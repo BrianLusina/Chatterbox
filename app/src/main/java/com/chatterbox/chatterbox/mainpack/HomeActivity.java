@@ -50,7 +50,6 @@ public class HomeActivity extends AppCompatActivity{
     private AccountHeader headerResult = null;
     private Drawer drawer = null;
     private CrossfadeDrawerLayout crossfadeDrawerLayout = null;
-
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
     private String mUsername;
@@ -105,7 +104,7 @@ public class HomeActivity extends AppCompatActivity{
                 )
                 .withSavedInstance(savedInstanceState)
                 .build();
-        
+
         // create the account drawer
         drawer = new DrawerBuilder()
                 .withActivity(this)
