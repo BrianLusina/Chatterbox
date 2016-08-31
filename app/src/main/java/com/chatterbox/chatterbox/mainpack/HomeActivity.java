@@ -35,6 +35,7 @@ import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.SectionDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
+import com.mikepenz.materialdrawer.model.interfaces.Nameable;
 import com.mikepenz.materialdrawer.util.DrawerUIUtils;
 import com.mikepenz.materialize.util.UIUtils;
 
@@ -118,7 +119,22 @@ public class HomeActivity extends AppCompatActivity{
                 ).addStickyDrawerItems(
                     new SecondaryDrawerItem().withName("Settings").withIcon(FontAwesome.Icon.faw_cogs).withIdentifier(6),
                     new SecondaryDrawerItem().withName("About").withIcon(FontAwesome.Icon.faw_exclamation)
-                )
+                ).withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                    @Override
+                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+                        if(drawerItem instanceof Nameable){
+                            switch ((int) drawerItem.getIdentifier()){
+                                /*chat fragment*/
+                                case 0:
+
+                                    break;
+                                
+                            }
+                        }
+                        //we do not consume the event and want the Drawer to continue with the event chain
+                        return false;
+                    }
+                })
                 .withShowDrawerOnFirstLaunch(true)
                 .withSavedInstance(savedInstanceState)
                 .build();
