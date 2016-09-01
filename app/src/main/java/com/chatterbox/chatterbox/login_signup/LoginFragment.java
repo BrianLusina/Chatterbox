@@ -176,7 +176,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
             }
             @Override
             public void failure(TwitterException exception) {
-                Answers.getInstance().logCustom(new CustomEvent("Login with Twitter Failure"));
                 Log.d(LOGINFRAGMENT_TAG, "Twitter Login: failure");
                 Log.d("TwitterKit", "Login with Twitter failure", exception);
                 /*TODO: display snackbar*/
@@ -257,11 +256,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
             /*reset password*/
             case R.id.login_reset_btn_id:
                 resetPassword();
-                break;
-
-            /*sign in with Twitter*/
-            case R.id.twitter_login_button:
-                intializeTwitterLogin();
                 break;
         }
     }

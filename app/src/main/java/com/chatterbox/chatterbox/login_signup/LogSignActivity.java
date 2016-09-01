@@ -128,14 +128,14 @@ public class LogSignActivity extends AppCompatActivity{
     }
 
 
-    @Override
+/*    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         FragmentManager fragmentManager = getSupportFragmentManager();
         if(fragmentManager != null){
-            fragmentManager.findFragmentByTag().onActivityResult(requestCode, resultCode, data);
+            fragmentManager.findFragmentByTag("LoginFragment").onActivityResult(requestCode, resultCode, data);
         }else{
             Log.d(LOGSIGNACTIVITY_TAG,"Fragment is null");
         }
-    }
+    }*/
 }

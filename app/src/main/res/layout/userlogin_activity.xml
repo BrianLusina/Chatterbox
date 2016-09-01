@@ -15,7 +15,6 @@
         android:minHeight="?attr/actionBarSize"
         app:pstsIndicatorColor="@color/royal_blue"
         app:pstsTabTextStyle="bold"
-        app:pstsTabTextSize="20sp"
         app:pstsDividerColor="@color/black"
         app:pstsIndicatorHeight="2dp"
         android:background="@color/title_background"
