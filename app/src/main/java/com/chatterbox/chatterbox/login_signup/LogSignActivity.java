@@ -33,6 +33,9 @@ public class LogSignActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        TwitterAuthConfig authConfig = new TwitterAuthConfig(Constants.TWITTER_CONSUMER_KEY, Constants.TWITTER_CONSUMER_SECRET);
+        Fabric.with(this, new Twitter(authConfig));
+
         setContentView(R.layout.userlogin_activity);
         initViews();
 

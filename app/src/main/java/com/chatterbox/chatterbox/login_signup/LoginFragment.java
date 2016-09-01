@@ -94,8 +94,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         configureGoogleSignIn();
-        //configureTwitterSIgnIn();
-
+     
         /*initialize Answers*/
         Fabric.with(getActivity(), new Answers());
 
@@ -178,13 +177,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
                 .build();
     }
 
-    /**CONFIGURE user to sign in with Twitter*/
-    public void configureTwitterSIgnIn(){
-        mTwitterApiClient = new TwitterApiClient();
-        TwitterAuthConfig authConfig = new TwitterAuthConfig(Constants.TWITTER_CONSUMER_KEY, Constants.TWITTER_CONSUMER_SECRET);
-        Fabric.with(getActivity(), new Twitter(authConfig));
-    }
-
     public void handleFirebaseAuthResult(AuthResult authResult){
         if(authResult != null){
             //welcome the user
@@ -236,8 +228,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
             @Override
             public void success(Result<TwitterSession> result) {
                 // The TwitterSession is also available through:
-                // Twitter.getInstance().core.getSessionManager().getActiveSession()
                 TwitterSession session = result.data;
+                firebaseWithTwitter(session);
                 // TODO: Remove toast and use the TwitterSession's userID
                 // with your app's user model
                 String msg = "@" + session.getUserName() + " logged in! (#" + session.getUserId() + ")";
