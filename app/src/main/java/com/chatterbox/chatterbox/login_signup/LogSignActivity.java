@@ -4,9 +4,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 
 import com.astuetz.PagerSlidingTabStrip;
 import com.chatterbox.chatterbox.Constants;
@@ -14,6 +16,9 @@ import com.chatterbox.chatterbox.R;
 import com.chatterbox.chatterbox.introduction.IntroduceMe;
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.answers.Answers;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.twitter.sdk.android.Twitter;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
 
@@ -27,6 +32,7 @@ import io.fabric.sdk.android.Fabric;
  * Description: Activity with signin and login fragments
  */
 public class LogSignActivity extends AppCompatActivity{
+    private static final String LOGSIGNACTIVITY_TAG = LogSignActivity.class.getSimpleName();
     private Toolbar toolbar;
     private ViewPager mViewPager;
     private PagerSlidingTabStrip pagerSlidingTabStrip;
@@ -119,5 +125,17 @@ public class LogSignActivity extends AppCompatActivity{
 
             }
         });
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        if(fragmentManager != null){
+            fragmentManager.findFragmentByTag().onActivityResult(requestCode, resultCode, data);
+        }else{
+            Log.d(LOGSIGNACTIVITY_TAG,"Fragment is null");
+        }
     }
 }

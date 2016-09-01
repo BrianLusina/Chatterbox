@@ -157,6 +157,66 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
         passwordField.addTextChangedListener(new MyTextWatcher(passwordField));
     }
 
+    /**Sign in with Twitter*/
+    private void intializeTwitterLogin(){
+        twitterLoginButton.setCallback(new Callback<TwitterSession>() {
+            final SuperToast superToast = new SuperToast(getActivity());
+
+            @Override
+            public void success(Result<TwitterSession> result) {
+                // The TwitterSession is also available through:
+                TwitterSession session = result.data;
+                Log.d(LOGINFRAGMENT_TAG, "Twitter Login: success");
+                firebaseWithTwitter(session);
+                // TODO: Remove toast and use the TwitterSession's userID
+                String msg = "@" + session.getUserName() + " logged in! (#" + session.getUserId() + ")";
+                superToast.setText(msg);
+                superToast.setDuration(Style.DURATION_SHORT);
+                superToast.show();
+            }
+            @Override
+            public void failure(TwitterException exception) {
+                Answers.getInstance().logCustom(new CustomEvent("Login with Twitter Failure"));
+                Log.d(LOGINFRAGMENT_TAG, "Twitter Login: failure");
+                Log.d("TwitterKit", "Login with Twitter failure", exception);
+                /*TODO: display snackbar*/
+                superToast.setText("Twitter login failure");
+                superToast.setDuration(Style.DURATION_SHORT);
+                superToast.show();
+                Crashlytics.logException(exception);
+            }
+        });
+    }
+
+    /**After a user successfully signs in with Twitter, exchange the OAuth access token and OAuth secret for a Firebase credential, and authenticate with Firebase using the Firebase credential*/
+    private void firebaseWithTwitter(TwitterSession session){
+        Log.d(LOGINFRAGMENT_TAG, "Handle Twitter session: " + session);
+        //TODO: show dialog
+        AuthCredential credential = TwitterAuthProvider.getCredential(
+                session.getAuthToken().token,
+                session.getAuthToken().secret);
+        mFirebaseAuth.signInWithCredential(credential)
+                .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        Log.d(LOGINFRAGMENT_TAG, "Sign in with Credential: onComplete:" + task.isSuccessful());
+                        /**if sign in is not successful, display message to user*/
+                        if(!task.isSuccessful()){
+                            Log.w(LOGINFRAGMENT_TAG, "Sign in with TwitterCredential", task.getException());
+                            SuperToast superToast = new SuperToast(getActivity());
+                            superToast.setDuration(Style.DURATION_SHORT);
+                            superToast.setAnimations(Style.ANIMATIONS_FLY);
+                            superToast.setText("Authentication failed, Please try again");
+                            superToast.show();
+                        }else{
+                            startActivity(new Intent(getActivity(), HomeActivity.class));
+                            onDetach();
+                        }
+                    }
+                });
+    }
+
+
     /*configures Google Sign in*/
     public void configureGoogleSignIn(){
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -212,37 +272,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
         startActivityForResult(signInIntent, Constants.RC_SIGN_IN);
     }
 
-    /**Sign in with Twitter*/
-    private void intializeTwitterLogin(){
-        twitterLoginButton.setCallback(new Callback<TwitterSession>() {
-            final SuperToast superToast = new SuperToast(getActivity());
-
-            @Override
-            public void success(Result<TwitterSession> result) {
-                // The TwitterSession is also available through:
-                TwitterSession session = result.data;
-                firebaseWithTwitter(session);
-                // TODO: Remove toast and use the TwitterSession's userID
-                // with your app's user model
-                String msg = "@" + session.getUserName() + " logged in! (#" + session.getUserId() + ")";
-                superToast.setText(msg);
-                superToast.setDuration(Style.DURATION_SHORT);
-                superToast.show();
-
-            }
-            @Override
-            public void failure(TwitterException exception) {
-                Answers.getInstance().logCustom(new CustomEvent("Login with Twitter Failure"));
-                /*TODO: display snackbar*/
-                superToast.setText("Twitter login failure");
-                superToast.setDuration(Style.DURATION_SHORT);
-                superToast.show();
-                Crashlytics.logException(exception);
-                Log.d("TwitterKit", "Login with Twitter failure", exception);
-
-            }
-        });
-    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -259,7 +288,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
                 Log.e(LOGINFRAGMENT_TAG, "Google Sign In failed.");
             }
         }
-        //twitterLoginButton.onActivityResult(requestCode, resultCode, data);
+        twitterLoginButton.onActivityResult(requestCode, resultCode, data);
     }
 
     /**reset the user password*/
@@ -329,35 +358,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
                     }
                 });
     }
-
-    /**After a user successfully signs in with Twitter, exchange the OAuth access token and OAuth secret for a Firebase credential, and authenticate with Firebase using the Firebase credential*/
-    private void firebaseWithTwitter(TwitterSession session){
-        Log.d(LOGINFRAGMENT_TAG, "Handle Twitter session: " + session);
-
-        AuthCredential credential = TwitterAuthProvider.getCredential(
-                session.getAuthToken().token,
-                session.getAuthToken().secret);
-        mFirebaseAuth.signInWithCredential(credential)
-                .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d(LOGINFRAGMENT_TAG, "Sign in with Credential: onComplete:" + task.isSuccessful());
-                        /**if sign in is not successful, display message to user*/
-                        if(!task.isSuccessful()){
-                            Log.w(LOGINFRAGMENT_TAG, "Sign in with TwitterCredential", task.getException());
-                            SuperToast superToast = new SuperToast(getActivity());
-                            superToast.setDuration(Style.DURATION_SHORT);
-                            superToast.setAnimations(Style.ANIMATIONS_FLY);
-                            superToast.setText("Authentication failed, Please try again");
-                            superToast.show();
-                        }else{
-                            startActivity(new Intent(getActivity(), HomeActivity.class));
-                            onDetach();
-                        }
-                    }
-                });
-    }
-
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
