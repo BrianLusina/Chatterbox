@@ -42,18 +42,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.auth.TwitterAuthProvider;
-import com.twitter.sdk.android.Twitter;
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
 import com.twitter.sdk.android.core.TwitterApiClient;
-import com.twitter.sdk.android.core.TwitterAuthConfig;
 import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 
 import java.util.HashMap;
-
-import io.fabric.sdk.android.Fabric;
 
 /**
  * Project: ChatterBox
@@ -68,7 +64,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
     private SignInButton mSignInButton_google;
     private TwitterLoginButton twitterLoginButton;
 
-    //private TwitterLoginButton twitterLoginButton;
     private AutoCompleteTextView mEmail;
     private EditText passwordField;
     private TextInputLayout mEmailTextInputLayout, mPasswordTxtInputLayout;
@@ -78,7 +73,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
     private FirebaseAuth mFirebaseAuth;
     //responds to changes in user's sign in state
     private FirebaseAuth.AuthStateListener mAuthListener;
-    // Note: Your consumer key and secret should be obfuscated in your source code before shipping.
 
     public LoginFragment() {
         // Required empty public constructor
@@ -94,9 +88,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         configureGoogleSignIn();
-     
-        /*initialize Answers*/
-        Fabric.with(getActivity(), new Answers());
 
         /*instantiate Firebase*/
         mFirebaseAuth = FirebaseAuth.getInstance();
@@ -155,9 +146,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
         mEmailTextInputLayout = (TextInputLayout)rootView.findViewById(R.id.useremail_txtinputlayout_id);
         mPasswordTxtInputLayout = (TextInputLayout)rootView.findViewById(R.id.userpassword_txtinputlayout_id);
         twitterLoginButton = (TwitterLoginButton)rootView.findViewById(R.id.twitter_login_button);
+        //initialize Twitter login
+        intializeTwitterLogin();
 
         /*Click listeners*/
-        twitterLoginButton.setOnClickListener(this);
         mSignInButton_google.setOnClickListener(this);
         loginBtn.setOnClickListener(this);
         login_reset_btb.setOnClickListener(this);
@@ -209,7 +201,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
 
             /*sign in with Twitter*/
             case R.id.twitter_login_button:
-                signInTwitter();
+                intializeTwitterLogin();
                 break;
         }
     }
@@ -221,7 +213,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
     }
 
     /**Sign in with Twitter*/
-    private void signInTwitter(){
+    private void intializeTwitterLogin(){
         twitterLoginButton.setCallback(new Callback<TwitterSession>() {
             final SuperToast superToast = new SuperToast(getActivity());
 

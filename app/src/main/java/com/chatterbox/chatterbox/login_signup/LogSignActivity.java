@@ -13,6 +13,7 @@ import com.chatterbox.chatterbox.Constants;
 import com.chatterbox.chatterbox.R;
 import com.chatterbox.chatterbox.introduction.IntroduceMe;
 import com.crashlytics.android.Crashlytics;
+import com.crashlytics.android.answers.Answers;
 import com.twitter.sdk.android.Twitter;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
 
@@ -33,6 +34,7 @@ public class LogSignActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Configure Twitter SDK
         TwitterAuthConfig authConfig = new TwitterAuthConfig(Constants.TWITTER_CONSUMER_KEY, Constants.TWITTER_CONSUMER_SECRET);
         Fabric.with(this, new Twitter(authConfig));
 
@@ -75,15 +77,12 @@ public class LogSignActivity extends AppCompatActivity{
         };
         thread.start();
 
-        TwitterAuthConfig authConfig = new TwitterAuthConfig(Constants.TWITTER_CONSUMER_KEY,
-                        Constants.TWITTER_CONSUMER_SECRET);
-
-        Fabric.with(this, new Twitter(authConfig));
-
         CustomActivityOnCrash.install(this);
         CustomActivityOnCrash.setEnableAppRestart(true);
         CustomActivityOnCrash.setRestartActivityClass(LogSignActivity.class);
         Fabric.with(this, new Crashlytics());
+        /*initialize Answers*/
+        Fabric.with(this, new Answers());
 
         //TODO: Set to false when publishing app
         CustomActivityOnCrash.setShowErrorDetails(true);
