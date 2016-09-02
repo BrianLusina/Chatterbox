@@ -23,6 +23,7 @@ import com.chatterbox.chatterbox.Constants;
 import com.chatterbox.chatterbox.R;
 import com.chatterbox.chatterbox.SignInActivity;
 import com.chatterbox.chatterbox.login_signup.LogSignActivity;
+import com.chatterbox.chatterbox.settings.SettingsActivity;
 import com.google.android.gms.appinvite.AppInviteInvitation;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -236,7 +237,8 @@ public class HomeActivity extends AppCompatActivity{
 
                                     /*settings*/
                                     case 6:
-
+                                        Intent openSettings = new Intent(HomeActivity.this, SettingsActivity.class);
+                                        startActivity(openSettings);
                                         break;
 
                                     /*About*/
