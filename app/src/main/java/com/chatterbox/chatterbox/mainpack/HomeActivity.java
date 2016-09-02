@@ -419,8 +419,8 @@ public class HomeActivity extends AppCompatActivity{
      */
     private void applyRetrievedLengthLimit() {
         Long friendly_msg_length = mFirebaseRemoteConfig.getLong("friendly_msg_length");
-        mMessageEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(friendly_msg_length.intValue())});
-        Log.d(HOMEACTIVITY_TAG, "FML is: " + friendly_msg_length);
+//        mMessageEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(friendly_msg_length.intValue())});
+//        Log.d(HOMEACTIVITY_TAG, "FML is: " + friendly_msg_length);
     }
 
 }
