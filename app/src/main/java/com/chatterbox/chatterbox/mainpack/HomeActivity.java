@@ -157,7 +157,7 @@ public class HomeActivity extends AppCompatActivity{
                 .build();
 
         //get the CrossfadeDrawerLayout which will be used as alternative DrawerLayout for the Drawer
-        crossfadeDrawerLayout = (CrossfadeDrawerLayout) drawer.getDrawerLayout();
+        /*crossfadeDrawerLayout = (CrossfadeDrawerLayout) drawer.getDrawerLayout();
 
         //define maxDrawerWidth
         crossfadeDrawerLayout.setMaxWidthPx(DrawerUIUtils.getOptimalDrawerWidth(this));
@@ -173,10 +173,10 @@ public class HomeActivity extends AppCompatActivity{
                 this,
                 com.mikepenz.materialdrawer.R.attr.material_drawer_background,
                 com.mikepenz.materialdrawer.R.color.material_drawer_background)
-        );
+        );*/
 
         //we do not have the MiniDrawer view during CrossfadeDrawerLayout creation so we will add it here
-        crossfadeDrawerLayout.getSmallView()
+/*        crossfadeDrawerLayout.getSmallView()
                 .addView(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 
         //define the crossfader to be used with the miniDrawer. This is required to be able to automatically toggle open / close
@@ -196,7 +196,7 @@ public class HomeActivity extends AppCompatActivity{
             public boolean isCrossfaded() {
                 return crossfadeDrawerLayout.isCrossfaded();
             }
-        });
+        });*/
 
     }
 
