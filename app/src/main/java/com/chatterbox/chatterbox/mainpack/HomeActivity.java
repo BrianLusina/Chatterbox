@@ -111,9 +111,9 @@ public class HomeActivity extends AppCompatActivity{
                 .withActivity(this)
                 .withToolbar(toolbar)
                 .withHasStableIds(true)
-                .withDrawerLayout(R.layout.home_crossfade_drawer)
-                .withGenerateMiniDrawer(true)
-                .withDrawerWidthDp(72)
+//                .withDrawerLayout(R.layout.home_crossfade_drawer)
+//                .withGenerateMiniDrawer(true)
+//                .withDrawerWidthDp(72)
                 .withAccountHeader(headerResult)
                 .addDrawerItems(
                         new PrimaryDrawerItem().withName("Home").withIcon(FontAwesome.Icon.faw_home).withTag("Home").withIdentifier(0),
@@ -152,12 +152,12 @@ public class HomeActivity extends AppCompatActivity{
                         return false;
                     }
                 })
-                .withShowDrawerOnFirstLaunch(true)
+//                .withShowDrawerOnFirstLaunch(true)
                 .withSavedInstance(savedInstanceState)
                 .build();
 
         //get the CrossfadeDrawerLayout which will be used as alternative DrawerLayout for the Drawer
-        crossfadeDrawerLayout = (CrossfadeDrawerLayout)drawer.getDrawerLayout();
+        crossfadeDrawerLayout = (CrossfadeDrawerLayout) drawer.getDrawerLayout();
 
         //define maxDrawerWidth
         crossfadeDrawerLayout.setMaxWidthPx(DrawerUIUtils.getOptimalDrawerWidth(this));
