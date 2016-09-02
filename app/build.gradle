@@ -143,5 +143,7 @@ dependencies {
     compile('com.twitter.sdk.android:twitter:2.0.0@aar') {
         transitive = true;
     }
+
+    compile 'com.facebook.android:facebook-android-sdk:5'
 }
 apply plugin: 'com.google.gms.google-services'
