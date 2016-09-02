@@ -43,6 +43,10 @@
     <string name="loginlay_signin_with">Or, sign in with…</string>
     <string name="app_desc">So you can chat more…</string>
     <string name="title_chats">Chats</string>
+    <string name="chatfrag_item_lastchatter_img">Image of last person to chat</string>
+    <string name="chatsfrag_last_message">Message</string>
+    <string name="chatsfrag_whochat_message">Receiver</string>
+    <string name="chatsfrag_timestamp">15:30</string>
 
 
 </resources>
