@@ -70,7 +70,7 @@ public class HomeActivity extends AppCompatActivity{
     //save our header or result
     private AccountHeader headerResult = null;
     private Drawer drawer = null;
-    private MiniDrawer miniDrawer = null;
+    // private MiniDrawer miniDrawer = null;
     private CrossfadeDrawerLayout crossfadeDrawerLayout = null;
     private FirebaseRemoteConfig mFirebaseRemoteConfig;
     private FirebaseAuth mFirebaseAuth;
@@ -179,48 +179,79 @@ public class HomeActivity extends AppCompatActivity{
                         new PrimaryDrawerItem().withName("Notifications").withIcon(FontAwesome.Icon.faw_bell).withTag("Notifications").withIdentifier(2),
 
                         new ExpandableDrawerItem().withName("My Rooms").withIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_plus_box).actionBar().paddingDp(5).colorRes(R.color.material_drawer_dark_primary_text)).withTag("Rooms").withSelectable(false).withSubItems(
-                            new SecondaryDrawerItem().withName("Add Room").withLevel(2).withIcon(GoogleMaterial.Icon.gmd_8tracks).withIdentifier(3000),
-                            new SecondaryDrawerItem().withName("Rooms").withLevel(2).withIcon(GoogleMaterial.Icon.gmd_8tracks).withIdentifier(3001)
+                            new SecondaryDrawerItem().withName("Rooms").withLevel(2).withIcon(GoogleMaterial.Icon.gmd_8tracks).withIdentifier(3000),
+                            new SecondaryDrawerItem().withName("Add Room").withLevel(2).withIcon(GoogleMaterial.Icon.gmd_8tracks).withIdentifier(3001)
                         ),
 
-                        new PrimaryDrawerItem().withName("Images").withIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_image).actionBar().paddingDp(5).colorRes(R.color.material_drawer_dark_primary_text)).withTag("Images").withIdentifier(4),
-
-                        /**/
                         new DividerDrawerItem(),
 
-                        new SecondaryDrawerItem().withName("Help").withSelectedIconColor(Color.RED).withIconTintingEnabled(true).withIcon(FontAwesome.Icon.faw_question_circle).withTag("Help").withIdentifier(5),
-                        new SecondaryDrawerItem().withName("Open Source").withSelectedIconColor(Color.RED).withIconTintingEnabled(true).withIcon(FontAwesome.Icon.faw_github).withTag("Open Source").withIdentifier(6)
+                        new SecondaryDrawerItem().withName("Help").withSelectedIconColor(Color.RED).withIconTintingEnabled(true).withIcon(FontAwesome.Icon.faw_question_circle).withTag("Help").withIdentifier(4),
+                        new SecondaryDrawerItem().withName("Open Source").withSelectedIconColor(Color.RED).withIconTintingEnabled(true).withIcon(FontAwesome.Icon.faw_github).withTag("Open Source").withIdentifier(5)
                 ).addStickyDrawerItems(
-                    new SecondaryDrawerItem().withName("Settings").withIcon(FontAwesome.Icon.faw_cogs).withIdentifier(7),
-                    new SecondaryDrawerItem().withName("About").withIcon(FontAwesome.Icon.faw_exclamation).withIdentifier(8)
+                    new SecondaryDrawerItem().withName("Settings").withIcon(FontAwesome.Icon.faw_cogs).withIdentifier(6),
+                    new SecondaryDrawerItem().withName("About").withIcon(FontAwesome.Icon.faw_exclamation).withIdentifier(7)
                 ).withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
-                        if(drawerItem instanceof Nameable){
-                            String name = ((Nameable) drawerItem).getName().getText(HomeActivity.this);
-                            Fragment fragment = null;
-                            String title = name;
-                            switch ((int) drawerItem.getIdentifier()){
+                        if(drawerItem != null){
+                            if(drawerItem instanceof Nameable){
+                                String name = ((Nameable) drawerItem).getName().getText(HomeActivity.this);
+                                Fragment fragment = null;
+                                String title = name;
+                                switch ((int) drawerItem.getIdentifier()){
                                 /*chat fragment*/
-                                case 0:
-                                    fragment = ChatsFragment.newInstance();
-                                    title = getString(R.string.title_chats);
-                                    break;
+                                    case 0:
+                                        fragment = ChatsFragment.newInstance();
+                                        title = getString(R.string.title_chats);
+                                        break;
 
-                                default:
-                                    fragment = ChatsFragment.newInstance();
-                                    title = getString(R.string.title_chats);
-                                    break;
-                            }
-                            /**swap the fragments appropriately*/
-                            if(fragment != null){
-                                FragmentManager fragmentManager = getSupportFragmentManager();
-                                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                                fragmentTransaction.replace(R.id.container_body, fragment);
-                                fragmentTransaction.commit();
-                                getSupportActionBar().setTitle(title);
+                                    /*notifications*/
+                                    case 1:
+
+                                        break;
+                                    /*rooms*/
+                                    case 3000:
+
+                                        break;
+
+                                    /*add room dialog*/
+                                    case 3001:
+
+                                        break;
+                                    /*help*/
+                                    case 4:
+
+                                        break;
+                                    /*open source*/
+                                    case 5:
+
+                                        break;
+
+                                    /*settings*/
+                                    case 6:
+
+                                        break;
+
+                                    /*About*/
+                                    case 7:
+
+                                        break;
+                                    default:
+                                        fragment = ChatsFragment.newInstance();
+                                        title = getString(R.string.title_chats);
+                                        break;
+                                }
+                                /**swap the fragments appropriately*/
+                                if(fragment != null){
+                                    FragmentManager fragmentManager = getSupportFragmentManager();
+                                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                                    fragmentTransaction.replace(R.id.container_body, fragment);
+                                    fragmentTransaction.commit();
+                                    getSupportActionBar().setTitle(title);
+                                }
                             }
                         }
+
                         //we do not consume the event and want the Drawer to continue with the event chain
                         return false;
                     }
