@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+        <style name="AppTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
+                <!-- Customize your theme here. -->
+                <item name="colorPrimary">@color/royal_blue</item>
+                <item name="colorPrimaryDark">@color/indigo_500</item>
+                <item name="colorAccent">@color/indigo_600</item>
+                <item name="android:textColorPrimary">@color/white</item>
+                <item name="android:windowTranslucentNavigation">true</item>
+                <item name="android:windowTranslucentStatus">true</item>
+                <!--
+                        <item name="windowNoTitle">true</item>
+                        <item name="android:windowContentOverlay">@null</item>
+                        <item name="android:windowTranslucentStatus" tools:targetApi="21">true</item>
+                        <item name="android:navigationBarColor" tools:targetApi="21">@color/navigationBarColor</item>
+                        <item name="android:windowDrawsSystemBarBackgrounds" tools:targetApi="21">true</item>
+
+                        <item name="android:colorButtonNormal" tools:targetApi="lollipop">@drawable/button_selector</item>
+                        <item name="colorButtonNormal">@drawable/button_selector</item>
+                        <item name="android:buttonStyle">@style/FriendlyButtonStyle</item>-->
+        </style>
+
+</resources>

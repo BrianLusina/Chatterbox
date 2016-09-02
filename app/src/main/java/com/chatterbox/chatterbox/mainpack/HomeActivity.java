@@ -10,7 +10,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.chatterbox.chatterbox.Constants;
 import com.chatterbox.chatterbox.R;
 import com.chatterbox.chatterbox.login_signup.LogSignActivity;
@@ -46,18 +45,19 @@ import com.mikepenz.materialize.util.UIUtils;
 public class HomeActivity extends AppCompatActivity{
     private FloatingActionButton floatingActionButton;
     private Toolbar toolbar;
+
     //save our header or result
     private AccountHeader headerResult = null;
     private Drawer drawer = null;
+    private MiniDrawer miniDrawer = null;
     private CrossfadeDrawerLayout crossfadeDrawerLayout = null;
+
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
     private String mUsername;
     private String mPhotoUrl;
     private String mEmail;
     private SharedPreferences mSharedPreferences;
-
-    private IProfile profile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,8 +89,8 @@ public class HomeActivity extends AppCompatActivity{
         headerResult  = new AccountHeaderBuilder()
                 .withActivity(this)
                 .withHeaderBackground(R.drawable.home_drawer_header_view)
-                .addProfiles(user_profile,
-                        new ProfileSettingDrawerItem()
+                .addProfiles(user_profile
+/*                        new ProfileSettingDrawerItem()
                                 .withName("Add Account")
                                 .withDescription("Add new GitHub Account")
                                 .withIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_plus).actionBar()
@@ -100,7 +100,7 @@ public class HomeActivity extends AppCompatActivity{
 
                         new ProfileSettingDrawerItem()
                                 .withName("Manage Account")
-                                .withIcon(GoogleMaterial.Icon.gmd_settings)
+                                .withIcon(GoogleMaterial.Icon.gmd_settings)*/
                 )
                 .withSavedInstance(savedInstanceState)
                 .build();
@@ -109,6 +109,7 @@ public class HomeActivity extends AppCompatActivity{
         drawer = new DrawerBuilder()
                 .withActivity(this)
                 .withToolbar(toolbar)
+                .withHasStableIds(true)
                 .withDrawerLayout(R.layout.home_crossfade_drawer)
                 .withGenerateMiniDrawer(true)
                 .withDrawerWidthDp(72)
@@ -211,7 +212,7 @@ public class HomeActivity extends AppCompatActivity{
                 .withActivity(this)
                 .withHeaderBackground(R.drawable.home_drawer_header_view)
                 .withCompactStyle(b)
-                .addProfiles(profile)
+//                .addProfiles(profile)
                 .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
                     @Override
                     public boolean onProfileChanged(View view, IProfile profile, boolean current) {

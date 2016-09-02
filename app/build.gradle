@@ -97,6 +97,7 @@ dependencies {
 
     // used to provide the two step crossfade DrawerLayout. Which allows to have a mini layout which transforms to a normal layout within the drawer
     compile('com.mikepenz:crossfadedrawerlayout:0.3.4@aar')
+//    compile "com.android.support:appcompat-v7:${supportLibVersion}"
 
     // used to generate the Open Source section
     compile('com.mikepenz:aboutlibraries:5.7.1@aar') {
