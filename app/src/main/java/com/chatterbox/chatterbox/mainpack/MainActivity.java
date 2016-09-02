@@ -24,6 +24,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.chatterbox.chatterbox.Constants;
+import com.chatterbox.chatterbox.adapters.ChatViewHolder;
 import com.chatterbox.chatterbox.models.MessageModel;
 import com.chatterbox.chatterbox.R;
 import com.chatterbox.chatterbox.SignInActivity;
@@ -57,31 +58,17 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener{
     private static final String MAINACTIVITY_TAG = MainActivity.class.getSimpleName();
-
-    public static class MessageViewHolder extends RecyclerView.ViewHolder {
-        public TextView messageTextView;
-        public TextView messengerTextView;
-        public CircleImageView messengerImageView;
-
-        public MessageViewHolder(View v) {
-            super(v);
-            messageTextView = (TextView) itemView.findViewById(R.id.messageTextView);
-            messengerTextView = (TextView) itemView.findViewById(R.id.messengerTextView);
-            messengerImageView = (CircleImageView) itemView.findViewById(R.id.messengerImageView);
-        }
-    }
-
+    
     // Firebase instance variables
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
     private String mUsername;
     private String mPhotoUrl;
     private SharedPreferences mSharedPreferences;
-
     private Button mSendButton;
     private RecyclerView mMessageRecyclerView;
     private LinearLayoutManager mLinearLayoutManager;
-    private FirebaseRecyclerAdapter<MessageModel, MessageViewHolder> mFirebaseAdapter;
+    private FirebaseRecyclerAdapter<MessageModel, ChatViewHolder> mFirebaseAdapter;
     private ProgressBar mProgressBar;
     private DatabaseReference mFirebaseDatabaseReference;
     private FirebaseAnalytics mFirebaseAnalytics;
@@ -134,14 +121,14 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
      * populating the views with messages*/
     public void initFirebaseDatabase(){
         mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
-        mFirebaseAdapter = new FirebaseRecyclerAdapter<MessageModel, MessageViewHolder>(
+        mFirebaseAdapter = new FirebaseRecyclerAdapter<MessageModel, ChatViewHolder>(
                 MessageModel.class,
                 R.layout.item_message,
-                MessageViewHolder.class,
+                ChatViewHolder.class,
                 mFirebaseDatabaseReference.child(Constants.MESSAGES_CHILD)) {
 
             @Override
-            protected void populateViewHolder(MessageViewHolder viewHolder, MessageModel friendlyMessage, int position) {
+            protected void populateViewHolder(ChatViewHolder viewHolder, MessageModel friendlyMessage, int position) {
                 mProgressBar.setVisibility(ProgressBar.INVISIBLE);
                 viewHolder.messageTextView.setText(friendlyMessage.getText());
                 viewHolder.messengerTextView.setText(friendlyMessage.getName());

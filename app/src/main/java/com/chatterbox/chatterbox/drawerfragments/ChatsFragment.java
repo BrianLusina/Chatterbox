@@ -1,6 +1,7 @@
 package com.chatterbox.chatterbox.drawerfragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,9 +33,11 @@ import java.util.List;
  */
 public class ChatsFragment extends Fragment{
     private RecyclerView recyclerView;
+    private ChatsModel chatsModel;
     private ChatsFragAdapter chatsFragAdapter;
     private List<ChatsModel> chatsModelList;
     private CoordinatorLayout coordinatorLayout;
+    private static final String CHATSFRAG_TAG = ChatsFragment.class.getSimpleName();
 
     /**require empty constructor*/
     public ChatsFragment(){}
@@ -83,7 +87,9 @@ public class ChatsFragment extends Fragment{
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-
+                //TODO: open chat activity
+                Intent openChat = new Intent();
+                startActivity(openChat);
             }
         }));
     }
@@ -151,6 +157,38 @@ public class ChatsFragment extends Fragment{
     @Override
     public void onDetach() {
         super.onDetach();
+    }
+
+    /*mock images and text for food items*/
+    private void prepareMockChatItems() {
+        //add mock data
+        chatsModel = new ChatsModel("The Lusina", "The Lusina", "Message", "Wednesday");
+        chatsModelList.add(chatsModel);
+
+        chatsModel = new ChatsModel("The Lusina", "The Lusina", "Message", "Wednesday");
+        chatsModelList.add(chatsModel);
+
+        chatsModel = new ChatsModel("The Lusina", "The Lusina", "Message", "Wednesday");
+        chatsModelList.add(chatsModel);
+
+        chatsModel = new ChatsModel("The Lusina", "The Lusina", "Message", "Wednesday");
+        chatsModelList.add(chatsModel);
+
+        chatsModel = new ChatsModel("The Lusina", "The Lusina", "Message", "Wednesday");
+        chatsModelList.add(chatsModel);
+
+        chatsModel = new ChatsModel("The Lusina", "The Lusina", "Message", "Wednesday");
+        chatsModelList.add(chatsModel);
+
+        chatsModel = new ChatsModel("The Lusina", "The Lusina", "Message", "Wednesday");
+        chatsModelList.add(chatsModel);
+
+        chatsModel = new ChatsModel("The Lusina", "The Lusina", "Message", "Wednesday");
+        chatsModelList.add(chatsModel);
+        chatsModel = new ChatsModel("The Lusina", "The Lusina", "Message", "Wednesday");
+        chatsModelList.add(chatsModel);
+
+        Log.d(CHATSFRAG_TAG, chatsModel.toString());
     }
 /*END*/
 }
