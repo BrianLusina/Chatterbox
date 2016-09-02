@@ -21,8 +21,6 @@
             android:layout_marginEnd="10dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-
-
             android:src="@drawable/ic_single_tick"
             android:visibility="visible" />
 
