@@ -3,11 +3,13 @@ package com.chatterbox.chatterbox.mainpack;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import com.chatterbox.chatterbox.Constants;
@@ -45,6 +47,7 @@ import com.mikepenz.materialize.util.UIUtils;
 public class HomeActivity extends AppCompatActivity{
     private FloatingActionButton floatingActionButton;
     private Toolbar toolbar;
+    private static final String HOMEACTIVITY_TAG = HomeActivity.class.getSimpleName();
 
     //save our header or result
     private AccountHeader headerResult = null;
@@ -55,7 +58,7 @@ public class HomeActivity extends AppCompatActivity{
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
     private String mUsername;
-    private String mPhotoUrl;
+    private Uri mPhotoUrl;
     private String mEmail;
     private SharedPreferences mSharedPreferences;
 
@@ -79,28 +82,29 @@ public class HomeActivity extends AppCompatActivity{
         } else {
             mUsername = mFirebaseUser.getDisplayName();
             mEmail = mFirebaseUser.getEmail();
-            mPhotoUrl = mFirebaseUser.getPhotoUrl().toString();
+            mPhotoUrl = mFirebaseUser.getPhotoUrl();
         }
 
         /*user profile*/
         final IProfile user_profile = new ProfileDrawerItem().withName(mUsername).withEmail(mEmail).withIcon(mPhotoUrl);
+        Log.i(HOMEACTIVITY_TAG,"Username: "+ mUsername + " Email: " + mEmail + " Photo Url: " + mPhotoUrl);
 
         /*Build the header*/
         headerResult  = new AccountHeaderBuilder()
                 .withActivity(this)
                 .withHeaderBackground(R.drawable.home_drawer_header_view)
-                .addProfiles(user_profile
+                .addProfiles(user_profile,
+                        new ProfileSettingDrawerItem()
+                                .withName("Manage Account")
+                                .withIcon(GoogleMaterial.Icon.gmd_settings)
 /*                        new ProfileSettingDrawerItem()
                                 .withName("Add Account")
                                 .withDescription("Add new GitHub Account")
                                 .withIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_plus).actionBar()
                                         .paddingDp(5)
                                         .colorRes(R.color.material_drawer_dark_primary_text))
-                                .withIdentifier(Constants.PROFILE_SETTING),
-
-                        new ProfileSettingDrawerItem()
-                                .withName("Manage Account")
-                                .withIcon(GoogleMaterial.Icon.gmd_settings)*/
+                                .withIdentifier(Constants.PROFILE_SETTING)
+                                */
                 )
                 .withSavedInstance(savedInstanceState)
                 .build();
@@ -152,6 +156,7 @@ public class HomeActivity extends AppCompatActivity{
                         return false;
                     }
                 })
+                .withGenerateMiniDrawer(true)
 //                .withShowDrawerOnFirstLaunch(true)
                 .withSavedInstance(savedInstanceState)
                 .build();
