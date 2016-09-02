@@ -68,12 +68,9 @@ import java.util.HashMap;
  */
 public class LoginFragment extends Fragment implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener{
     private static final String LOGINFRAGMENT_TAG = LoginFragment.class.getSimpleName();
-
-    /*FIELDS*/
     private SignInButton mSignInButton_google;
     private TwitterLoginButton twitterLoginButton;
     private LoginButton facebookLoginBtn;
-
     private AutoCompleteTextView mEmail;
     private EditText passwordField;
     private TextInputLayout mEmailTextInputLayout, mPasswordTxtInputLayout;
@@ -81,14 +78,14 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
     private GoogleApiClient mGoogleApiClient;
     private TwitterApiClient mTwitterApiClient;
     private FirebaseAuth mFirebaseAuth;
+
     //responds to changes in user's sign in state
     private FirebaseAuth.AuthStateListener mAuthListener;
 
     private CallbackManager callbackManager;
 
-    public LoginFragment() {
-        // Required empty public constructor
-    }
+    /**Required empty public constructor*/
+    public LoginFragment() {}
 
     public static Fragment newInstance(){
         LoginFragment fragment = new LoginFragment();
@@ -101,8 +98,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
         super.onCreate(savedInstanceState);
         configureGoogleSignIn();
         configureFacebookSignIn();
+
         /*instantiate Firebase*/
         mFirebaseAuth = FirebaseAuth.getInstance();
+
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -131,7 +130,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.login_layout, container, false);
         initUICtrls(rootView);
-
         return rootView;
     }
 
@@ -229,6 +227,36 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
         });
     }
 
+
+    /**After a user successfully signs in with Google, exchange the OAuth access token and OAuth secret for a Firebase credential, and authenticate with Firebase using the Firebase credential*/
+    private void firebaseAuthWithGoogle(GoogleSignInAccount acct){
+        Log.d(LOGINFRAGMENT_TAG, "firebaseAuthWithGooogle:" + acct.getId());
+
+        AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
+        mFirebaseAuth.signInWithCredential(credential)
+                .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        Log.d(LOGINFRAGMENT_TAG, "signInWithCredential:onComplete:" + task.isSuccessful());
+
+                        // If sign in fails, display a message to the user. If sign in succeeds
+                        // the auth state listener will be notified and logic to handle the
+                        // signed in user can be handled in the listener.
+                        if (!task.isSuccessful()) {
+                            Log.w(LOGINFRAGMENT_TAG, "signInWithCredential", task.getException());
+                            SuperToast superToast = new SuperToast(getActivity());
+                            superToast.setDuration(Style.DURATION_SHORT);
+                            superToast.setAnimations(Style.ANIMATIONS_FLY);
+                            superToast.setText("Authentication failed");
+                            superToast.show();
+                        } else {
+                            startActivity(new Intent(getActivity(), HomeActivity.class));
+                            onDetach();
+                        }
+                    }
+                });
+    }
+
     /**After a user successfully signs in with Twitter, exchange the OAuth access token and OAuth secret for a Firebase credential, and authenticate with Firebase using the Firebase credential*/
     private void firebaseWithTwitter(TwitterSession session){
         Log.d(LOGINFRAGMENT_TAG, "Handle Twitter session: " + session);
@@ -283,7 +311,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
                     }
                 });
     }
-    
+
     /*configures Google Sign in*/
     public void configureGoogleSignIn(){
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -298,25 +326,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
 
     /**calls FacebookSdk.sdkInitialize to initialize the SDK, and then call CallbackManager.Factory.create to create a callback manager to handle login responses.*/
     private void configureFacebookSignIn() {
-        FacebookSdk.sdkInitialize(getContext());
         callbackManager = CallbackManager.Factory.create();
         initializeFacebookLogin();
-        LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-
-            }
-
-            @Override
-            public void onCancel() {
-
-            }
-
-            @Override
-            public void onError(FacebookException error) {
-
-            }
-        });
     }
 
     public void handleFirebaseAuthResult(AuthResult authResult){
@@ -416,35 +427,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
         }
     }
 
-
-    /**After a user successfully signs in with Google, exchange the OAuth access token and OAuth secret for a Firebase credential, and authenticate with Firebase using the Firebase credential*/
-    private void firebaseAuthWithGoogle(GoogleSignInAccount acct){
-        Log.d(LOGINFRAGMENT_TAG, "firebaseAuthWithGooogle:" + acct.getId());
-
-        AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
-        mFirebaseAuth.signInWithCredential(credential)
-                .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d(LOGINFRAGMENT_TAG, "signInWithCredential:onComplete:" + task.isSuccessful());
-
-                        // If sign in fails, display a message to the user. If sign in succeeds
-                        // the auth state listener will be notified and logic to handle the
-                        // signed in user can be handled in the listener.
-                        if (!task.isSuccessful()) {
-                            Log.w(LOGINFRAGMENT_TAG, "signInWithCredential", task.getException());
-                            SuperToast superToast = new SuperToast(getActivity());
-                            superToast.setDuration(Style.DURATION_SHORT);
-                            superToast.setAnimations(Style.ANIMATIONS_FLY);
-                            superToast.setText("Authentication failed");
-                            superToast.show();
-                        } else {
-                            startActivity(new Intent(getActivity(), HomeActivity.class));
-                            onDetach();
-                        }
-                    }
-                });
-    }
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {

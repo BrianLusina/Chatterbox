@@ -16,6 +16,7 @@ import com.chatterbox.chatterbox.R;
 import com.chatterbox.chatterbox.introduction.IntroduceMe;
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.answers.Answers;
+import com.facebook.FacebookSdk;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
@@ -43,6 +44,7 @@ public class LogSignActivity extends AppCompatActivity{
         // Configure Twitter SDK
         TwitterAuthConfig authConfig = new TwitterAuthConfig(Constants.TWITTER_CONSUMER_KEY, Constants.TWITTER_CONSUMER_SECRET);
         Fabric.with(this, new Twitter(authConfig));
+        FacebookSdk.sdkInitialize(getApplicationContext());
 
         setContentView(R.layout.userlogin_activity);
         initViews();
