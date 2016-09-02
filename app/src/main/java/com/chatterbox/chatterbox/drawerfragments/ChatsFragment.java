@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 
 import com.chatterbox.chatterbox.R;
 import com.chatterbox.chatterbox.adapters.ChatsFragAdapter;
+import com.chatterbox.chatterbox.mainpack.MainActivity;
 import com.chatterbox.chatterbox.models.ChatsModel;
 import com.chatterbox.chatterbox.touchlisteners.RecyclerItemClickListener;
 
@@ -59,6 +60,7 @@ public class ChatsFragment extends Fragment{
         super.onCreate(savedInstanceState);
         chatsModelList = new ArrayList<>();
         chatsFragAdapter = new ChatsFragAdapter(getActivity(), chatsModelList, R.layout.chatsfrag_item_layout);
+        prepareMockChatItems();
 
         if(!isNetworkAvailable()) {
             Snackbar snackbar = Snackbar
@@ -87,8 +89,8 @@ public class ChatsFragment extends Fragment{
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                //TODO: open chat activity
-                Intent openChat = new Intent();
+                //TODO: open chat activity based on position of chats in RecyclerView
+                Intent openChat = new Intent(getActivity(), MainActivity.class);
                 startActivity(openChat);
             }
         }));
