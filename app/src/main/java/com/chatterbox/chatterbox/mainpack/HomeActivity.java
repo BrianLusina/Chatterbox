@@ -34,6 +34,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.crash.FirebaseCrash;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
+import com.mikepenz.aboutlibraries.Libs;
+import com.mikepenz.aboutlibraries.LibsBuilder;
 import com.mikepenz.crossfadedrawerlayout.view.CrossfadeDrawerLayout;
 import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
@@ -205,26 +207,31 @@ public class HomeActivity extends AppCompatActivity{
                                         title = getString(R.string.title_chats);
                                         break;
 
-                                    /*notifications*/
+                                    /*TODO: notifications*/
                                     case 1:
 
                                         break;
-                                    /*rooms*/
+                                    /*TODO: display rooms*/
                                     case 3000:
 
                                         break;
 
-                                    /*add room dialog*/
+                                    /*todo: add room dialog*/
                                     case 3001:
 
                                         break;
-                                    /*help*/
+                                    /*todo: help screen*/
                                     case 4:
 
                                         break;
-                                    /*open source*/
+                                    /*display open source*/
                                     case 5:
-
+                                        new LibsBuilder().withActivityStyle(Libs.ActivityStyle
+                                                .LIGHT_DARK_TOOLBAR)
+                                                .withAboutAppName(getString(R.string.app_name))
+                                                .withAboutVersionShown(true)
+                                                .withAboutDescription(getString(R.string.app_about_desc))
+                                                .start(getApplicationContext());
                                         break;
 
                                     /*settings*/
