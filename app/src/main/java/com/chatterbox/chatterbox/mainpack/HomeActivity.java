@@ -105,6 +105,7 @@ public class HomeActivity extends AppCompatActivity{
                 .withSavedInstance(savedInstanceState)
                 .build();
 
+        crossfadeDrawerLayout = new CrossfadeDrawerLayout(this);
         // create the account drawer
         drawer = new DrawerBuilder()
                 .withActivity(this)
