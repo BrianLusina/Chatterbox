@@ -25,6 +25,7 @@ import com.chatterbox.chatterbox.R;
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.answers.Answers;
 import com.crashlytics.android.answers.CustomEvent;
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -45,6 +46,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
@@ -175,23 +177,24 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
 
     /**Initializes the Facebook login*/
     private void initializeFacebookLogin() {
-        facebookLoginBtn.setReadPermissions("email");
+        facebookLoginBtn.setReadPermissions("email", "public_profile");
         facebookLoginBtn.setFragment(this);
         // Callback registration
         facebookLoginBtn.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                // App code
+                Log.d(LOGINFRAGMENT_TAG, "FacebookLogin:success");
+                firebaseWithFacebook(loginResult.getAccessToken());
             }
 
             @Override
             public void onCancel() {
-                // App code
+                Log.d(LOGINFRAGMENT_TAG, "FacebookLogin:cancel");
             }
 
             @Override
             public void onError(FacebookException exception) {
-                // App code
+                Log.d(LOGINFRAGMENT_TAG, "facebook:onError", exception);
             }
         });
     }
@@ -254,7 +257,33 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
                 });
     }
 
+    /**
+     * If login succeeds, the LoginResult parameter has the new AccessToken, and the most recently granted or declined permissions.*/
+    private void firebaseWithFacebook(AccessToken accessToken) {
+        Log.d(LOGINFRAGMENT_TAG, "handleFacebookAccessToken:" + accessToken);
+        //TODO: show progress
 
+        AuthCredential credential = FacebookAuthProvider.getCredential(accessToken.getToken());
+        mFirebaseAuth.signInWithCredential(credential)
+                .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        Log.d(LOGINFRAGMENT_TAG, "signInWithCredential_Facebook:onComplete:" + task.isSuccessful());
+                        // If sign in fails, display a message to the user. If sign in succeeds
+                        // the auth state listener will be notified and logic to handle the
+                        // signed in user can be handled in the listener.
+                        if (!task.isSuccessful()) {
+                            Log.w(LOGINFRAGMENT_TAG, "signInWithCredential", task.getException());
+                            SuperToast superToast = new SuperToast(getActivity());
+                            superToast.setDuration(Style.DURATION_SHORT);
+                            superToast.setAnimations(Style.ANIMATIONS_FLY);
+                            superToast.setText("Authentication failed, Please try again");
+                            superToast.show();
+                        }
+                    }
+                });
+    }
+    
     /*configures Google Sign in*/
     public void configureGoogleSignIn(){
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
