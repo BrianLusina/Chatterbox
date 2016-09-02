@@ -24,13 +24,6 @@
 
         <!--app introduction-->
         <activity android:name=".introduction.IntroduceMe"/>
-
-        <activity android:name="com.facebook.FacebookActivity"
-            android:configChanges=
-                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:label="@string/app_name" />
-
 <!--
         &lt;!&ndash;splash screen&ndash;&gt;
         <activity android:name=".introduction.SplashScreen">

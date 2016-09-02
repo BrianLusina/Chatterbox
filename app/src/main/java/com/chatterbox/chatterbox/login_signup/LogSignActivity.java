@@ -16,7 +16,9 @@ import com.chatterbox.chatterbox.R;
 import com.chatterbox.chatterbox.introduction.IntroduceMe;
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.answers.Answers;
+import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
@@ -37,6 +39,7 @@ public class LogSignActivity extends AppCompatActivity{
     private Toolbar toolbar;
     private ViewPager mViewPager;
     private PagerSlidingTabStrip pagerSlidingTabStrip;
+    private CallbackManager callbackManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +47,9 @@ public class LogSignActivity extends AppCompatActivity{
         // Configure Twitter SDK
         TwitterAuthConfig authConfig = new TwitterAuthConfig(Constants.TWITTER_CONSUMER_KEY, Constants.TWITTER_CONSUMER_SECRET);
         Fabric.with(this, new Twitter(authConfig));
-        FacebookSdk.sdkInitialize(getApplicationContext());
+//        FacebookSdk.sdkInitialize(getApplicationContext());
+//        AppEventsLogger.activateApp(this);
+//        callbackManager = CallbackManager.Factory.create();
 
         setContentView(R.layout.userlogin_activity);
         initViews();
@@ -64,7 +69,7 @@ public class LogSignActivity extends AppCompatActivity{
                 SharedPreferences getPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 
                 //create a new boolean and preference and set it to true
-                boolean isFirstStart = getPrefs.getBoolean("firststart", true);
+                boolean isFirstStart = getPrefs.getBoolean("firstStart", true);
 
                 //if activity has never started before
                 if(isFirstStart){

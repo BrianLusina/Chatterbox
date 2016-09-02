@@ -58,6 +58,7 @@ import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -97,7 +98,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         configureGoogleSignIn();
-        configureFacebookSignIn();
+        //configureFacebookSignIn();
 
         /*instantiate Firebase*/
         mFirebaseAuth = FirebaseAuth.getInstance();
@@ -157,10 +158,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
         mEmailTextInputLayout = (TextInputLayout)rootView.findViewById(R.id.useremail_txtinputlayout_id);
         mPasswordTxtInputLayout = (TextInputLayout)rootView.findViewById(R.id.userpassword_txtinputlayout_id);
         twitterLoginButton = (TwitterLoginButton)rootView.findViewById(R.id.twitter_login_button);
-        facebookLoginBtn = (LoginButton)rootView.findViewById(R.id.facebook_login_button);
-
+        //facebookLoginBtn = (LoginButton)rootView.findViewById(R.id.facebook_login_button);
         //initalize FaceBook login
-        initializeFacebookLogin();
+        //initializeFacebookLogin();
 
         //initialize Twitter login
         intializeTwitterLogin();
@@ -175,7 +175,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
 
     /**Initializes the Facebook login*/
     private void initializeFacebookLogin() {
-        facebookLoginBtn.setReadPermissions("email", "public_profile");
+        facebookLoginBtn.setReadPermissions(Arrays.asList("email", "public_profile"));
         facebookLoginBtn.setFragment(this);
         // Callback registration
         facebookLoginBtn.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
