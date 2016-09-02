@@ -205,3 +205,30 @@ Read more on Material Drawer Library here -> [Click me](https://github.com/mikep
   
 ## Chats Fragment
 
+   1. __Layouts__
+        
+      The layouts for the chats fragment are as follows:
+      
+      + ChatFragment layout
+        
+        This is the layout that will render when the *FragmentTransaction* is committed in the `HomeActivity`.
+        THe layout will have a `RecyclerView` That will render the chat items. I use a RecyclerView for easier updating of each chat item that will be fetched from the Firebase database. This is how the layout looks like:
+        ```xml
+        <android.support.design.widget.CoordinatorLayout
+            android:id="@+id/newsfragment_coordinatorLayout_id"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/news_fragment_recycler_id"
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:padding="2dp"/>
+        
+        </android.support.design.widget.CoordinatorLayout>
+        ```
+         
+    
