@@ -230,5 +230,51 @@ Read more on Material Drawer Library here -> [Click me](https://github.com/mikep
         
         </android.support.design.widget.CoordinatorLayout>
         ```
+      
+      + Chat Item Layout
+      
+        This will hole the **Thread** for the chat items.
          
-    
+             <android.support.v7.widget.RecyclerView
+                 android:id="@+id/chatsItem_RecyclerView_id"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:layout_above="@+id/linearLayout"/>
+         
+             <LinearLayout
+                 android:id="@+id/chatsItem_linearLayout_id"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_alignParentBottom="true"
+                 android:layout_alignParentLeft="true"
+                 android:layout_alignParentStart="true"
+                 android:orientation="horizontal">
+         
+                 <EditText
+                     android:id="@+id/chatsItem_messageEditTxt_id"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="center_vertical"
+                     android:layout_weight="1"/>
+         
+                 <Button
+                     android:id="@+id/chatsitem_sendButton_id"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="bottom"
+                     android:enabled="false"
+                     android:text="SEND"/>
+         
+             </LinearLayout>
+         
+             <ProgressBar
+                 android:id="@+id/chatsitem_progressBar_id"
+                 style="?android:attr/progressBarStyleLarge"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_centerHorizontal="true"
+                 android:layout_centerVertical="true"/>
+         > The chat stream will be in a RecyvlerView with each chat item having the layout below
+         
+         
+      + Chat Items in Chat item layout  
