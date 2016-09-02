@@ -12,8 +12,11 @@ This project uses the following libraries:
     This gives the user a Circular ImageView of their profile photo. An example image:
     [!circle_image](https://camo.githubusercontent.com/e17a2a83e3e205a822d27172cb3736d4f441344d/68747470733a2f2f7261772e6769746875622e636f6d2f68646f64656e686f662f436972636c65496d616765566965772f6d61737465722f73637265656e73686f742e706e67)
 
-+ ____
-   
++ __Material Drawer Library__
+
+
+---
+
 ## Sign in Options
 
 The application allows uses the following sign in options:
@@ -24,8 +27,8 @@ Users can sign in with their email and password. These credentials will be verif
 
 ### Google Sign In
 
-
 ### Twitter Sign In
+
 
 ### Facebook Sign In
     
@@ -158,4 +161,4 @@ public void onCreate(Bundle savedInstanceState){
 ### Github Sign In
 
 
-
+## Main Activity

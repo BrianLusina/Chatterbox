@@ -7,16 +7,16 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.view.GravityCompat;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.InputFilter;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
+
+import com.chatterbox.chatterbox.drawerfragments.ChatsFragment;
 import com.chatterbox.chatterbox.Constants;
 import com.chatterbox.chatterbox.R;
 import com.chatterbox.chatterbox.SignInActivity;
@@ -41,7 +41,6 @@ import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.MiniDrawer;
-import com.mikepenz.materialdrawer.interfaces.ICrossfader;
 import com.mikepenz.materialdrawer.model.ExpandableDrawerItem;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
@@ -51,8 +50,6 @@ import com.mikepenz.materialdrawer.model.SectionDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import com.mikepenz.materialdrawer.model.interfaces.Nameable;
-import com.mikepenz.materialdrawer.util.DrawerUIUtils;
-import com.mikepenz.materialize.util.UIUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -166,7 +163,7 @@ public class HomeActivity extends AppCompatActivity{
 //                .withDrawerWidthDp(72)
                 .withAccountHeader(headerResult)
                 .addDrawerItems(
-                        new PrimaryDrawerItem().withName("Home").withIcon(FontAwesome.Icon.faw_home).withTag("Home").withIdentifier(0),
+                        new PrimaryDrawerItem().withName("Chats").withIcon(FontAwesome.Icon.faw_smile_o).withTag("Home").withIdentifier(0),
 
                         new PrimaryDrawerItem().withName("Notifications").withIcon(FontAwesome.Icon.faw_bell).withTag("Notifications").withIdentifier(1),
 
@@ -182,18 +179,25 @@ public class HomeActivity extends AppCompatActivity{
                         /**/
                         new SectionDrawerItem().withName("Section"),
 
-                        new SecondaryDrawerItem().withName("Help").withSelectedIconColor(Color.RED).withIconTintingEnabled(true).withIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_help).actionBar().paddingDp(5).colorRes(R.color.material_drawer_dark_primary_text)).withTag("Help").withIdentifier(5)
+                        new SecondaryDrawerItem().withName("Help").withSelectedIconColor(Color.RED).withIconTintingEnabled(true).withIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_help).actionBar().paddingDp(5).colorRes(R.color.material_drawer_dark_primary_text)).withTag("Help").withIdentifier(5),
+
+                        new SecondaryDrawerItem().withName("Open Source").withSelectedIconColor(Color.RED).withIconTintingEnabled(true).withIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_github).actionBar().paddingDp(5).colorRes(R.color.material_drawer_dark_primary_text)).withTag("Open Source").withIdentifier(6)
                 ).addStickyDrawerItems(
-                    new SecondaryDrawerItem().withName("Settings").withIcon(FontAwesome.Icon.faw_cogs).withIdentifier(6),
-                    new SecondaryDrawerItem().withName("About").withIcon(FontAwesome.Icon.faw_exclamation)
+                    new SecondaryDrawerItem().withName("Settings").withIcon(FontAwesome.Icon.faw_cogs).withIdentifier(7),
+                    new SecondaryDrawerItem().withName("About").withIcon(FontAwesome.Icon.faw_exclamation).withIdentifier(8)
                 ).withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
                         if(drawerItem instanceof Nameable){
+                            String name = ((Nameable) drawerItem).getName().getText(HomeActivity.this);
+                            getSupportActionBar().setTitle(name);
+                            Fragment fragment = null;
+                            String title;
                             switch ((int) drawerItem.getIdentifier()){
                                 /*chat fragment*/
                                 case 0:
-
+                                    fragment = ChatsFragment.newInstance();
+                                    title=getString(R.string.title_chats);
                                     break;
 
                             }
