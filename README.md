@@ -338,3 +338,9 @@ Read more on Material Drawer Library here -> [Click me](https://github.com/mikep
                       android:layout_weight="0"/>
               </LinearLayout>
               
+## MODELS
+
+The models used are as follows:
+
++ MessageModel: This contains the properties of each message
++ ChatsModel: Contains properties of the items for the ChatsFragment.
