@@ -225,7 +225,8 @@ public class HomeActivity extends AppCompatActivity{
                                     case 4:
 
                                         break;
-                                    /*display open source*/
+
+                                    /*TODO: display open source*/
                                     case 5:
                                         new LibsBuilder().withActivityStyle(Libs.ActivityStyle
                                                 .LIGHT_DARK_TOOLBAR)
