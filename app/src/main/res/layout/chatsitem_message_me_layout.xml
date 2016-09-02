@@ -38,8 +38,8 @@
             android:paddingBottom="5dp"
             android:layout_marginRight="2dp"
             android:layout_marginEnd="2dp"
-            android:layout_toLeftOf="@id/user_reply_status"
-            android:layout_toStartOf="@id/user_reply_status"
+            android:layout_toLeftOf="@id/chatsitem_me_reply_status_id"
+            android:layout_toStartOf="@id/chatsitem_me_reply_status_id"
             android:text="17:10" />
 
         <TextView
@@ -47,9 +47,10 @@
             style="@style/chat_text_message_style"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:layout_toLeftOf="@id/chatsItem_me_time_text"
+            android:layout_toLeftOf="@id/chatsItem_me_time_text_id"
+            android:layout_toStartOf="@id/chatsItem_me_time_text_id"
             android:autoLink="web"
-            android:text="Rahul Agrawal is a good boy but he does not know what he wants." />
+            android:text="Brian lusina is awesome today." />
 
 
     </com.chatterbox.chatterbox.widgets.ChatLayout>
