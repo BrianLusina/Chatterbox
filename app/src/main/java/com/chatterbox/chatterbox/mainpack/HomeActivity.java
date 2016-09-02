@@ -5,18 +5,33 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.InputFilter;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import com.chatterbox.chatterbox.Constants;
 import com.chatterbox.chatterbox.R;
+import com.chatterbox.chatterbox.SignInActivity;
 import com.chatterbox.chatterbox.login_signup.LogSignActivity;
+import com.google.android.gms.appinvite.AppInviteInvitation;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.crash.FirebaseCrash;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 import com.mikepenz.crossfadedrawerlayout.view.CrossfadeDrawerLayout;
 import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
@@ -39,6 +54,9 @@ import com.mikepenz.materialdrawer.model.interfaces.Nameable;
 import com.mikepenz.materialdrawer.util.DrawerUIUtils;
 import com.mikepenz.materialize.util.UIUtils;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Project: ChatterBox
  * Package: com.chatterbox.chatterbox.mainpack
@@ -54,12 +72,14 @@ public class HomeActivity extends AppCompatActivity{
     private Drawer drawer = null;
     private MiniDrawer miniDrawer = null;
     private CrossfadeDrawerLayout crossfadeDrawerLayout = null;
-
+    private FirebaseRemoteConfig mFirebaseRemoteConfig;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
     private String mUsername;
     private Uri mPhotoUrl;
     private String mEmail;
+    private GoogleApiClient mGoogleApiClient;
+
     private SharedPreferences mSharedPreferences;
 
     @Override
@@ -108,6 +128,31 @@ public class HomeActivity extends AppCompatActivity{
                 )
                 .withSavedInstance(savedInstanceState)
                 .build();
+
+        // Initialize Firebase Measurement.
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+
+        // Initialize Firebase Remote Config.
+        mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
+
+        // Define Firebase Remote Config Settings.
+        FirebaseRemoteConfigSettings firebaseRemoteConfigSettings =
+                new FirebaseRemoteConfigSettings.Builder()
+                        .setDeveloperModeEnabled(true)
+                        .build();
+
+        // Define default config values. Defaults are used when fetched config values are not
+        // available. Eg: if an error occurred fetching values from the server.
+        Map<String, Object> defaultConfigMap = new HashMap<>();
+        defaultConfigMap.put("friendly_msg_length", 10L);
+
+        // Apply config settings and default values.
+        mFirebaseRemoteConfig.setConfigSettings(firebaseRemoteConfigSettings);
+        mFirebaseRemoteConfig.setDefaults(defaultConfigMap);
+
+        // Fetch remote config.
+        fetchConfig();
+
 
         crossfadeDrawerLayout = new CrossfadeDrawerLayout(this);
         // create the account drawer
@@ -267,4 +312,114 @@ public class HomeActivity extends AppCompatActivity{
             super.onBackPressed();
         }
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d(MAINACTIVITY_TAG, "onActivityResult: requestCode=" + requestCode + ", resultCode=" + resultCode);
+
+        if (requestCode == Constants.REQUEST_INVITE) {
+            if (resultCode == RESULT_OK) {
+                // Use Firebase Measurement to log that invitation was sent.
+                Bundle payload = new Bundle();
+                payload.putString(FirebaseAnalytics.Param.VALUE, "inv_sent");
+
+                // Check how many invitations were sent and log.
+                String[] ids = AppInviteInvitation.getInvitationIds(resultCode, data);
+                Log.d(HOMEACTIVITY_TAG, "Invitations sent: " + ids.length);
+            } else {
+                // Use Firebase Measurement to log that invitation was not sent
+                Bundle payload = new Bundle();
+                payload.putString(FirebaseAnalytics.Param.VALUE, "inv_not_sent");
+                mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SHARE, payload);
+
+                // Sending failed or it was canceled, show failure message to the user
+                Log.d(HOMEACTIVITY_TAG, "Failed to send invitation.");
+            }
+        }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.invite_menu:
+                sendInvitation();
+                return true;
+            case R.id.crash_menu:
+                FirebaseCrash.logcat(Log.ERROR, HOMEACTIVITY_TAG, "crash caused");
+                causeCrash();
+                return true;
+            case R.id.sign_out_menu:
+                mFirebaseAuth.signOut();
+                Auth.GoogleSignInApi.signOut(mGoogleApiClient);
+                mFirebaseUser = null;
+                mUsername = Constants.ANONYMOUS;
+                mPhotoUrl = null;
+                startActivity(new Intent(this, SignInActivity.class));
+                return true;
+            case R.id.fresh_config_menu:
+                fetchConfig();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    /*cause a fake crash*/
+    private void causeCrash() {
+        throw new NullPointerException("Fake null pointer exception");
+    }
+
+    /*send app invite*/
+    private void sendInvitation() {
+        Intent intent = new AppInviteInvitation.IntentBuilder(getString(R.string.invitation_title))
+                .setMessage(getString(R.string.invitation_message))
+                .setCallToActionText(getString(R.string.invitation_cta))
+                .build();
+        startActivityForResult(intent, Constants.REQUEST_INVITE);
+    }
+
+    /**Fetch the config to determine the allowed length of messages.*/
+    public void fetchConfig() {
+        long cacheExpiration = 3600; // 1 hour in seconds
+        // If developer mode is enabled reduce cacheExpiration to 0 so that each fetch goes to the
+        // server. This should not be used in release builds.
+        if (mFirebaseRemoteConfig.getInfo().getConfigSettings().isDeveloperModeEnabled()) {
+            cacheExpiration = 0;
+        }
+        mFirebaseRemoteConfig.fetch(cacheExpiration)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        // Make the fetched config available via FirebaseRemoteConfig get<type> calls.
+                        mFirebaseRemoteConfig.activateFetched();
+                        applyRetrievedLengthLimit();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // There has been an error fetching the config
+                        Log.w(HOMEACTIVITY_TAG, "Error fetching config: " + e.getMessage());
+                        applyRetrievedLengthLimit();
+                    }
+                });
+    }
+
+    /**
+     * Apply retrieved length limit to edit text field. This result may be fresh from the server or it may be from cached values.
+     */
+    private void applyRetrievedLengthLimit() {
+        Long friendly_msg_length = mFirebaseRemoteConfig.getLong("friendly_msg_length");
+        mMessageEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(friendly_msg_length.intValue())});
+        Log.d(HOMEACTIVITY_TAG, "FML is: " + friendly_msg_length);
+    }
+
 }
