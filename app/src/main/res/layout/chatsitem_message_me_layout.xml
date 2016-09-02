@@ -8,11 +8,15 @@
 
     <com.chatterbox.chatterbox.widgets.ChatLayout
         android:layout_marginLeft="20dp"
-        android:layout_width="wrap_content" android:id="@+id/bubble" android:layout_alignParentRight="true" android:layout_alignParentEnd="true"
-        android:layout_height="wrap_content" android:background="@drawable/balloon_outgoing_normal">
+        android:layout_width="wrap_content"
+        android:id="@+id/chatsitem_me_bubble_id"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_height="wrap_content"
+        android:background="@drawable/balloon_outgoing_normal">
 
         <ImageView
-            android:id="@+id/user_reply_status"
+            android:id="@+id/chatsitem_me_reply_status_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/message_text"
@@ -25,12 +29,11 @@
             android:visibility="visible" />
 
         <TextView
-            android:id="@+id/time_text"
+            android:id="@+id/chatsItem_me_time_text_id"
             style="@style/chat_timings"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:layout_alignBottom="@id/message_text"
-
             android:textColor="@color/gray"
             android:paddingBottom="5dp"
             android:layout_marginRight="2dp"
@@ -43,13 +46,10 @@
             android:id="@id/message_text"
             style="@style/chat_text_message_style"
             android:layout_height="wrap_content"
-
             android:layout_width="wrap_content"
-            android:layout_toLeftOf="@id/time_text"
-
+            android:layout_toLeftOf="@id/chatsItem_me_time_text"
             android:autoLink="web"
             android:text="Rahul Agrawal is a good boy but he does not know what he wants." />
-
 
 
     </com.chatterbox.chatterbox.widgets.ChatLayout>
