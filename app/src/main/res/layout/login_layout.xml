@@ -110,12 +110,14 @@
             android:visibility="visible" />
 
         <!--Facebook login-->
+<!--
         <com.facebook.login.widget.LoginButton
             android:id="@+id/facebook_login_button"
             android:layout_width="220dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_margin="10dp" />
+-->
 
     </LinearLayout>
     </LinearLayout>
