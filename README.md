@@ -277,4 +277,41 @@ Read more on Material Drawer Library here -> [Click me](https://github.com/mikep
          > The chat stream will be in a RecyvlerView with each chat item having the layout below
          
          
-      + Chat Items in Chat item layout  
+      + Chat Items in Chat item layout
+           The Chat items will be wrapped in a LinearLayout which will contain A CircleImageView for the Chatter image and 2 TextViews to display the sender of the message and the reply
+        A sample:
+            
+            <de.hdodenhof.circleimageview.CircleImageView
+                  android:layout_width="36dp"
+                  android:layout_height="36dp"
+                  android:id="@+id/messengerImageView"
+                  android:src="@drawable/ic_account_circle_black_36dp"/>
+      
+              <LinearLayout
+                  android:orientation="vertical"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:gravity="center_vertical"
+                  android:layout_marginLeft="10dp">
+                  <LinearLayout
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:background="@drawable/balloon_incoming_normal">
+                      <TextView
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:textAppearance="?android:attr/textAppearanceSmall"
+                          android:id="@+id/messageTextView"
+                          android:textColor="@color/black"
+                          android:maxWidth="280dp"
+                          android:layout_weight="0"/>
+                  </LinearLayout>
+      
+                  <TextView
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:textAppearance="?android:attr/textAppearanceSmall"
+                      android:id="@+id/messengerTextView"
+                      android:layout_weight="0"/>
+              </LinearLayout>
+              
