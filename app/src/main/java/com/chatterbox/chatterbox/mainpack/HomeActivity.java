@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -192,14 +194,21 @@ public class HomeActivity extends AppCompatActivity{
                             String name = ((Nameable) drawerItem).getName().getText(HomeActivity.this);
                             getSupportActionBar().setTitle(name);
                             Fragment fragment = null;
-                            String title;
+                            String title = "";
                             switch ((int) drawerItem.getIdentifier()){
                                 /*chat fragment*/
                                 case 0:
                                     fragment = ChatsFragment.newInstance();
-                                    title=getString(R.string.title_chats);
+                                    title = getString(R.string.title_chats);
                                     break;
-
+                            }
+                            /**swap the fragments appropriately*/
+                            if(fragment != null){
+                                FragmentManager fragmentManager = getSupportFragmentManager();
+                                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                                fragmentTransaction.replace(R.id.container_body, fragment);
+                                fragmentTransaction.commit();
+                                getSupportActionBar().setTitle(title);
                             }
                         }
                         //we do not consume the event and want the Drawer to continue with the event chain
