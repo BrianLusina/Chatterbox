@@ -25,6 +25,13 @@ import com.chatterbox.chatterbox.R;
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.answers.Answers;
 import com.crashlytics.android.answers.CustomEvent;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 import com.github.johnpersano.supertoasts.library.Style;
 import com.github.johnpersano.supertoasts.library.SuperToast;
 import com.google.android.gms.auth.api.Auth;
@@ -63,6 +70,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
     /*FIELDS*/
     private SignInButton mSignInButton_google;
     private TwitterLoginButton twitterLoginButton;
+    private LoginButton facebookLoginBtn;
 
     private AutoCompleteTextView mEmail;
     private EditText passwordField;
@@ -73,6 +81,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
     private FirebaseAuth mFirebaseAuth;
     //responds to changes in user's sign in state
     private FirebaseAuth.AuthStateListener mAuthListener;
+
+    private CallbackManager callbackManager;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -88,7 +98,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         configureGoogleSignIn();
-
+        configureFacebookSignIn();
         /*instantiate Firebase*/
         mFirebaseAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -112,6 +122,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
             }
         };
     }
+
 
     @Nullable
     @Override
@@ -146,6 +157,11 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
         mEmailTextInputLayout = (TextInputLayout)rootView.findViewById(R.id.useremail_txtinputlayout_id);
         mPasswordTxtInputLayout = (TextInputLayout)rootView.findViewById(R.id.userpassword_txtinputlayout_id);
         twitterLoginButton = (TwitterLoginButton)rootView.findViewById(R.id.twitter_login_button);
+        facebookLoginBtn = (LoginButton)rootView.findViewById(R.id.facebook_login_button);
+
+        //initalize FaceBook login
+        initializeFacebookLogin();
+
         //initialize Twitter login
         intializeTwitterLogin();
 
@@ -155,6 +171,29 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
         login_reset_btb.setOnClickListener(this);
         mEmail.addTextChangedListener(new MyTextWatcher(mEmail));
         passwordField.addTextChangedListener(new MyTextWatcher(passwordField));
+    }
+
+    /**Initializes the Facebook login*/
+    private void initializeFacebookLogin() {
+        facebookLoginBtn.setReadPermissions("email");
+        facebookLoginBtn.setFragment(this);
+        // Callback registration
+        facebookLoginBtn.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                // App code
+            }
+
+            @Override
+            public void onCancel() {
+                // App code
+            }
+
+            @Override
+            public void onError(FacebookException exception) {
+                // App code
+            }
+        });
     }
 
     /**Sign in with Twitter*/
@@ -226,6 +265,29 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
                 .enableAutoManage(getActivity(),this)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, googleSignInOptions)
                 .build();
+    }
+
+    /**calls FacebookSdk.sdkInitialize to initialize the SDK, and then call CallbackManager.Factory.create to create a callback manager to handle login responses.*/
+    private void configureFacebookSignIn() {
+        FacebookSdk.sdkInitialize(getContext());
+        callbackManager = CallbackManager.Factory.create();
+        initializeFacebookLogin();
+        LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+
+            }
+        });
     }
 
     public void handleFirebaseAuthResult(AuthResult authResult){

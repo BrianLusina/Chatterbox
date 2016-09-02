@@ -47,9 +47,104 @@ Users can sign in with their email and password. These credentials will be verif
 The LoginButton is a UI element that wraps functionality available in the LoginManager. So when someone clicks on the button, the login is initiated with the permissions set in the LoginManager. The button follows the login state, and displays the correct text based on someone's authentication state.
 
 ```xml
-
-
+<com.facebook.login.widget.LoginButton
+    android:id="@+id/facebook_login_button"
+    android:layout_width="220dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:layout_margin="10dp" />
 ```
+> Add this to your XML layout
+
+Then set up the button in your UI by adding it to a fragment and update your activity to use your fragment.
+You can customize the properties of Login button and register a callback in your onCreateView() method.
+Properties you can customize includes `LoginBehavior`, `DefaultAudience`, `ToolTipPopup.Style` and `permissions` on the LoginButton.
+An example:
+
+```java
+@Override
+public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    View rootView = inflater.inflate(R.layout.splash, container, false);
+    
+    // your other awesome code...
+    facebookLoginBtn = (LoginButton)rootView.findViewById(R.id.facebook_login_button);
+    initializeFacebookLogin();
+    //...
+    });    
+    
+    /**Initializes the Facebook login*/
+    private void initializeFacebookLogin() {
+        facebookLoginBtn.setReadPermissions("email");
+        // If using in a fragment
+        facebookloginBtn.setFragment(this);
+        // Callback registration
+        facebookloginBtn.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                // App code
+            }
+
+            @Override
+            public void onCancel() {
+                // App code
+            }
+
+            @Override
+            public void onError(FacebookException exception) {
+                // App code
+            }
+        }
+}
+```
+
+You then need to call `FacebookSdk.sdkInitialize` to initialize the SDK, and then call `CallbackManager.Factory.create` to create a callback manager to handle login responses. Here's an example of adding the callback in a **fragment**
+
+```java
+    private CallbackManager callbackManager;
+    
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        //...other code
+        configureFacebookSignIn();
+    }
+        
+    private void configureFacebookSignIn() {
+        FacebookSdk.sdkInitialize(getContext());
+        callbackManager = CallbackManager.Factory.create();
+    }    
+```
+
+### Register a callback
+
+``` java
+@Override
+public void onCreate(Bundle savedInstanceState){
+    super.onCreate(savedInstanceState);
+ 
+    configureFacbookSignIn();
+    FacebookSdk.sdkInitialize(getContext());
+    callbackManager = CallbackManager.Factory.create();
+    initializeFacebookLogin();
+    LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+        @Override
+        public void onSuccess(LoginResult loginResult) {
+
+        }
+
+        @Override
+        public void onCancel() {
+
+        }
+
+        @Override
+        public void onError(FacebookException error) {
+
+        }
+    });
+}
+```
+
 
 ### Github Sign In
 
