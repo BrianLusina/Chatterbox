@@ -47,6 +47,8 @@
     <string name="chatsfrag_last_message">Message</string>
     <string name="chatsfrag_whochat_message">Receiver</string>
     <string name="chatsfrag_timestamp">15:30</string>
+    <string name="snackbar_warning_no_internet_conn">No internet connection</string>
+    <string name="snackbar_no_internet_conn_retry">Retry</string>
 
 
 </resources>

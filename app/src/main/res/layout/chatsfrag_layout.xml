@@ -1,5 +1,5 @@
 <android.support.design.widget.CoordinatorLayout
-    android:id="@+id/newsfragment_coordinatorLayout_id"
+    android:id="@+id/chatsfrag_coordinatorLayout_id"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
