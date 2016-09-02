@@ -1,6 +1,5 @@
 package com.chatterbox.chatterbox.drawerfragments;
 
-import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -14,12 +13,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.OvershootInterpolator;
 
 import com.chatterbox.chatterbox.R;
 import com.chatterbox.chatterbox.adapters.ChatsFragAdapter;
 import com.chatterbox.chatterbox.models.ChatsModel;
-import com.mikepenz.itemanimators.AlphaInAnimator;
+import com.chatterbox.chatterbox.touchlisteners.RecyclerItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,6 +75,17 @@ public class ChatsFragment extends Fragment{
         ConnectivityManager connMan = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMan.getActiveNetworkInfo();
         return networkInfo !=null;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+
+            }
+        }));
     }
 
     @Nullable
