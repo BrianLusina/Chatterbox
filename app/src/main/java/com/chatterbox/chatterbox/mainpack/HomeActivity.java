@@ -43,6 +43,7 @@ import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.MiniDrawer;
+import com.mikepenz.materialdrawer.model.DividerDrawerItem;
 import com.mikepenz.materialdrawer.model.ExpandableDrawerItem;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
@@ -117,6 +118,7 @@ public class HomeActivity extends AppCompatActivity{
                         new ProfileSettingDrawerItem()
                                 .withName("Manage Account")
                                 .withIcon(GoogleMaterial.Icon.gmd_settings)
+                                .withIdentifier(1)
 /*                        new ProfileSettingDrawerItem()
                                 .withName("Add Account")
                                 .withDescription("Add new GitHub Account")
@@ -125,7 +127,13 @@ public class HomeActivity extends AppCompatActivity{
                                         .colorRes(R.color.material_drawer_dark_primary_text))
                                 .withIdentifier(Constants.PROFILE_SETTING)
                                 */
-                )
+                ).withOnAccountHeaderSelectionViewClickListener(new AccountHeader.OnAccountHeaderSelectionViewClickListener() {
+                    @Override
+                    public boolean onClick(View view, IProfile profile) {
+
+                        return false;
+                    }
+                })
                 .withSavedInstance(savedInstanceState)
                 .build();
 
@@ -153,7 +161,6 @@ public class HomeActivity extends AppCompatActivity{
         // Fetch remote config.
         fetchConfig();
 
-
         crossfadeDrawerLayout = new CrossfadeDrawerLayout(this);
         // create the account drawer
         drawer = new DrawerBuilder()
@@ -167,9 +174,9 @@ public class HomeActivity extends AppCompatActivity{
                 .addDrawerItems(
                         new PrimaryDrawerItem().withName("Chats").withIcon(FontAwesome.Icon.faw_smile_o).withTag("Home").withIdentifier(0),
 
-                        new PrimaryDrawerItem().withName("Notifications").withIcon(FontAwesome.Icon.faw_bell).withTag("Notifications").withIdentifier(1),
+                        new PrimaryDrawerItem().withName("Friends").withIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_account).actionBar().paddingDp(5).colorRes(R.color.material_drawer_dark_primary_text)).withTag("Friends").withIdentifier(1),
 
-                        new PrimaryDrawerItem().withName("Friends").withIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_account).actionBar().paddingDp(5).colorRes(R.color.material_drawer_dark_primary_text)).withTag("Friends").withIdentifier(2),
+                        new PrimaryDrawerItem().withName("Notifications").withIcon(FontAwesome.Icon.faw_bell).withTag("Notifications").withIdentifier(2),
 
                         new ExpandableDrawerItem().withName("My Rooms").withIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_plus_box).actionBar().paddingDp(5).colorRes(R.color.material_drawer_dark_primary_text)).withTag("Rooms").withSelectable(false).withSubItems(
                             new SecondaryDrawerItem().withName("Add Room").withLevel(2).withIcon(GoogleMaterial.Icon.gmd_8tracks).withIdentifier(3000),
@@ -179,7 +186,7 @@ public class HomeActivity extends AppCompatActivity{
                         new PrimaryDrawerItem().withName("Images").withIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_image).actionBar().paddingDp(5).colorRes(R.color.material_drawer_dark_primary_text)).withTag("Images").withIdentifier(4),
 
                         /**/
-                        new SectionDrawerItem().withName("Section"),
+                        new DividerDrawerItem(),
 
                         new SecondaryDrawerItem().withName("Help").withSelectedIconColor(Color.RED).withIconTintingEnabled(true).withIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_help).actionBar().paddingDp(5).colorRes(R.color.material_drawer_dark_primary_text)).withTag("Help").withIdentifier(5),
 
@@ -215,7 +222,6 @@ public class HomeActivity extends AppCompatActivity{
                     }
                 })
                 .withGenerateMiniDrawer(true)
-//                .withShowDrawerOnFirstLaunch(true)
                 .withSavedInstance(savedInstanceState)
                 .build();
 
@@ -261,44 +267,6 @@ public class HomeActivity extends AppCompatActivity{
             }
         });*/
 
-    }
-
-    /**
-     * small helper method to reuse the logic to build the AccountHeader
-     * this will be used to replace the header of the drawer with a compact/normal header
-     *
-     * @param b
-     * @param savedInstanceState
-     */
-    private void buildHeader(boolean b, Bundle savedInstanceState) {
-        // Create the AccountHeader
-        headerResult = new AccountHeaderBuilder()
-                .withActivity(this)
-                .withHeaderBackground(R.drawable.home_drawer_header_view)
-                .withCompactStyle(b)
-//                .addProfiles(profile)
-                .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
-                    @Override
-                    public boolean onProfileChanged(View view, IProfile profile, boolean current) {
-                        //if the clicked item has the identifier 1 add a new profile ;)
-                        if (profile instanceof IDrawerItem && ((IDrawerItem) profile)
-                                .getIdentifier() == Constants.PROFILE_SETTING) {
-                            IProfile newProfile = new ProfileDrawerItem()
-                                    .withNameShown(true)
-                                    .withName(mUsername)
-                                    .withEmail(mEmail)
-                                    .withIcon(mPhotoUrl);
-                            if (headerResult.getProfiles() != null) {
-                              headerResult.addProfile(newProfile, headerResult.getProfiles().size() - 2);
-                            } else {
-                                headerResult.addProfiles(newProfile);
-                            }
-                        }
-                        return false;
-                    }
-                })
-                .withSavedInstance(savedInstanceState)
-                .build();
     }
 
     private void initViews() {

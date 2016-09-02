@@ -9,11 +9,34 @@ Simple Android chat app build on Firebase SDK.
 This project uses the following libraries:
 
 + __Circle Image View__
+    
     This gives the user a Circular ImageView of their profile photo. An example image:
     [!circle_image](https://camo.githubusercontent.com/e17a2a83e3e205a822d27172cb3736d4f441344d/68747470733a2f2f7261772e6769746875622e636f6d2f68646f64656e686f662f436972636c65496d616765566965772f6d61737465722f73637265656e73686f742e706e67)
 
 + __Material Drawer Library__
+    
+    Enables the creation of a MaterialDrawer
+    
++ __SuperToasts__
+    
+    Remove the custom Toast Notification for Android with a custom styleable Toast Library
+    
++ __AppIntros__
+    
+    Enable APp introductions for first time users. No XML layouts required just Java. Easy to implment and integrate with SharedPreferences.
+    
++ __Crashlytics__
 
+    Fabric Library that tracks any app crashes and sends them to Fabric Console. Developer gets notified by notifications from an Android application or simply loggin in to the Fabric console online.
+     
++ __Twitter SDK__
+    
+    Allows easy Twitter sign in and hanldes the Authentication with Twitter so that you do not have to .Just acall a few methods and callbacks to obtain an authtoken, then easily authenticate user. Also provided with Fabric SDK
+
++ __Firebase SDK__
+    
+    Comes with the whole toolkit necessary to authenticate users with the firebase SDK and database
+    
 
 ---
 
