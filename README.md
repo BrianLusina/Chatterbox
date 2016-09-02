@@ -164,7 +164,44 @@ public void onCreate(Bundle savedInstanceState){
 ## Home Activity
 
 This is the '*landing*' page of the application. It has a drawer that will enable user to switch between various panes in the application. The application will use fragments except for Settings, Open Source, Manage Account, Help and About drawer items. The drawer is created courtesy of [Mike Penz Material Drawer Library](https://github.com/mikepenz/MaterialDrawer). No XML layout needed for the drawer. The drawer is created purely in `JAVA` :coffee:.
- Read more on Material Drawer Library here -> [Click me](https://github.com/mikepenz/MaterialDrawer).
- 
+
+The layout used here is:
+``` xml
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="com.chatterbox.chatterbox.mainpack.HomeActivity">
+
+    <!--Toolbar-->
+    <include
+        layout="@layout/toolbar_layout"/>
+
+    <FrameLayout
+        android:id="@+id/container_body"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/home_floating_action_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@android:drawable/ic_input_add" />
+
+</android.support.design.widget.CoordinatorLayout>
+```
+> The takeaway from this is the `FrameLayout` element which will contain each fragment
+
+Then Create each individual fragment layout as needed.
+
+Read more on Material Drawer Library here -> [Click me](https://github.com/mikepenz/MaterialDrawer).
+
+  
 ## Chats Fragment
 
