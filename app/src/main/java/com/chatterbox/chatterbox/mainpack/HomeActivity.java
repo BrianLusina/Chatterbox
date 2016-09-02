@@ -192,9 +192,8 @@ public class HomeActivity extends AppCompatActivity{
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
                         if(drawerItem instanceof Nameable){
                             String name = ((Nameable) drawerItem).getName().getText(HomeActivity.this);
-                            getSupportActionBar().setTitle(name);
                             Fragment fragment = null;
-                            String title = "";
+                            String title = name;
                             switch ((int) drawerItem.getIdentifier()){
                                 /*chat fragment*/
                                 case 0:

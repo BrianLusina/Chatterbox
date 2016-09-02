@@ -161,4 +161,10 @@ public void onCreate(Bundle savedInstanceState){
 ### Github Sign In
 
 
-## Main Activity
+## Home Activity
+
+This is the '*landing*' page of the application. It has a drawer that will enable user to switch between various panes in the application. The application will use fragments except for Settings, Open Source, Manage Account, Help and About drawer items. The drawer is created courtesy of [Mike Penz Material Drawer Library](https://github.com/mikepenz/MaterialDrawer). No XML layout needed for the drawer. The drawer is created purely in `JAVA` :coffee:.
+ Read more on Material Drawer Library here -> [Click me](https://github.com/mikepenz/MaterialDrawer).
+ 
+## Chats Fragment
+
