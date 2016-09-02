@@ -121,7 +121,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         initViews();
         initFirebaseDatabase();
     }
-    
 
     /** Initialize ProgressBar and RecyclerView.*/
     public void initViews(){

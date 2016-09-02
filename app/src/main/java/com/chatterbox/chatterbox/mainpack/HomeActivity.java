@@ -79,6 +79,7 @@ public class HomeActivity extends AppCompatActivity{
     private Uri mPhotoUrl;
     private String mEmail;
     private GoogleApiClient mGoogleApiClient;
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     private SharedPreferences mSharedPreferences;
 
@@ -316,7 +317,7 @@ public class HomeActivity extends AppCompatActivity{
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.d(MAINACTIVITY_TAG, "onActivityResult: requestCode=" + requestCode + ", resultCode=" + resultCode);
+        Log.d(HOMEACTIVITY_TAG, "onActivityResult: requestCode=" + requestCode + ", resultCode=" + resultCode);
 
         if (requestCode == Constants.REQUEST_INVITE) {
             if (resultCode == RESULT_OK) {
@@ -337,7 +338,7 @@ public class HomeActivity extends AppCompatActivity{
                 Log.d(HOMEACTIVITY_TAG, "Failed to send invitation.");
             }
         }
-
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
