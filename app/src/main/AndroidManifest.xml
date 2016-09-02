@@ -18,8 +18,18 @@
             android:name="io.fabric.ApiKey"
             android:value="41f11c4d0f34030da023daca96924eaff1547a35" />
 
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id"/>
+
         <!--app introduction-->
         <activity android:name=".introduction.IntroduceMe"/>
+
+        <activity android:name="com.facebook.FacebookActivity"
+            android:configChanges=
+                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:label="@string/app_name" />
 
 <!--
         &lt;!&ndash;splash screen&ndash;&gt;
