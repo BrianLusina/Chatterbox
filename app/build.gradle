@@ -102,7 +102,6 @@ dependencies {
     // used to generate the Open Source section
     compile('com.mikepenz:aboutlibraries:5.7.1@aar') {
         transitive = true
-        exclude module: "fastadapter"
     }
 
     /*App Intros*/

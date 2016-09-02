@@ -385,8 +385,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
             }
         }
         twitterLoginButton.onActivityResult(requestCode, resultCode, data);
-        /*FACEBOOK*/
-        callbackManager.onActivityResult(requestCode, resultCode, data);
+        /*todo:FACEBOOK login*/
+        //callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
     /**reset the user password*/
@@ -403,22 +403,20 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
 
             String email = mEmail.getText().toString().trim();
             String password = passwordField.getText().toString();
+            Log.d(LOGINFRAGMENT_TAG, "Email: " + email + " Pass: " + password);
             mFirebaseAuth.signInWithEmailAndPassword(email, password)
                     //TODO:Change display messages to the user
                     .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             Log.d(LOGINFRAGMENT_TAG, "SignInWithEmail:onComplete:" + task.isSuccessful());
-                            // If sign in fails, display a message to the user. If sign in succeeds
-                            // the auth state listener will be notified and logic to handle the
-                            // signed in user can be handled in the listener.
                             if (!task.isSuccessful()) {
                                 Log.w(LOGINFRAGMENT_TAG, "signInWithEmail:failed", task.getException());
                                 superToast.setText("Authentication failed. "+ task.getException());
                                 superToast.setDuration(Style.DURATION_SHORT);
                                 superToast.show();
                             } else {
-                                Intent intent = new Intent(getActivity(), MainActivity.class);
+                                Intent intent = new Intent(getActivity(), HomeActivity.class);
                                 startActivity(intent);
                                 onDetach();
                             }

@@ -188,9 +188,8 @@ public class HomeActivity extends AppCompatActivity{
                         /**/
                         new DividerDrawerItem(),
 
-                        new SecondaryDrawerItem().withName("Help").withSelectedIconColor(Color.RED).withIconTintingEnabled(true).withIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_help).actionBar().paddingDp(5).colorRes(R.color.material_drawer_dark_primary_text)).withTag("Help").withIdentifier(5),
-
-                        new SecondaryDrawerItem().withName("Open Source").withSelectedIconColor(Color.RED).withIconTintingEnabled(true).withIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_github).actionBar().paddingDp(5).colorRes(R.color.material_drawer_dark_primary_text)).withTag("Open Source").withIdentifier(6)
+                        new SecondaryDrawerItem().withName("Help").withSelectedIconColor(Color.RED).withIconTintingEnabled(true).withIcon(FontAwesome.Icon.faw_question_circle).withTag("Help").withIdentifier(5),
+                        new SecondaryDrawerItem().withName("Open Source").withSelectedIconColor(Color.RED).withIconTintingEnabled(true).withIcon(FontAwesome.Icon.faw_github).withTag("Open Source").withIdentifier(6)
                 ).addStickyDrawerItems(
                     new SecondaryDrawerItem().withName("Settings").withIcon(FontAwesome.Icon.faw_cogs).withIdentifier(7),
                     new SecondaryDrawerItem().withName("About").withIcon(FontAwesome.Icon.faw_exclamation).withIdentifier(8)
@@ -204,6 +203,11 @@ public class HomeActivity extends AppCompatActivity{
                             switch ((int) drawerItem.getIdentifier()){
                                 /*chat fragment*/
                                 case 0:
+                                    fragment = ChatsFragment.newInstance();
+                                    title = getString(R.string.title_chats);
+                                    break;
+
+                                default:
                                     fragment = ChatsFragment.newInstance();
                                     title = getString(R.string.title_chats);
                                     break;
@@ -224,6 +228,16 @@ public class HomeActivity extends AppCompatActivity{
                 .withGenerateMiniDrawer(true)
                 .withSavedInstance(savedInstanceState)
                 .build();
+
+        //set the default screen to FvHome
+        Fragment fragment = ChatsFragment.newInstance();
+
+        if (fragment != null) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.container_body, fragment);
+            fragmentTransaction.commit();
+        }
 
         //get the CrossfadeDrawerLayout which will be used as alternative DrawerLayout for the Drawer
         /*crossfadeDrawerLayout = (CrossfadeDrawerLayout) drawer.getDrawerLayout();
