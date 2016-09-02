@@ -345,6 +345,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
             }
         }
         twitterLoginButton.onActivityResult(requestCode, resultCode, data);
+        /*FACEBOOK*/
+        callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
     /**reset the user password*/

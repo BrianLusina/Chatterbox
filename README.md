@@ -144,7 +144,16 @@ public void onCreate(Bundle savedInstanceState){
     });
 }
 ```
+> If login succeeds, the LoginResult parameter has the new AccessToken, and the most recently granted or declined permissions.You don't need a registerCallback for login to succeed, you can choose to follow current access token changes with the AccessTokenTracker class.
 
+``` java
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+```
+> Every activity and fragment that you integrate with the FacebookSDK Login or Share should forward onActivityResult to the callbackManager
 
 ### Github Sign In
 
