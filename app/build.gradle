@@ -55,32 +55,20 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.4.0'
-    compile 'com.android.support:design:23.1.1'
-    compile 'com.android.support:support-annotations:23.3.0'
-    compile 'com.android.support:support-v4:23.2.1'
 
     //Recycler View
-    compile 'com.android.support:recyclerview-v7:23.3.+'
+    
 
     /*circle image view*/
-    compile 'de.hdodenhof:circleimageview:2.1.0'
-
+    
     /*Glide*/
-    compile 'com.github.bumptech.glide:glide:3.7.0'
-
-    compile 'com.mikepenz:google-material-typeface:2.2.0.1@aar'
-    compile 'com.mikepenz:fontawesome-typeface:4.6.0.3@aar'
-    compile 'com.mikepenz:octicons-typeface:3.0.0.1@aar'
-
+    
+    
     // Google
-    compile 'com.google.android.gms:play-services-auth:9.2.1'
-
+    
     /*super toasts to the rescue*/
-    compile 'com.github.johnpersano:supertoasts:2.0'
-
-    /*Using Material Viewpager*/
-    compile ('com.github.florent37:materialviewpager:1.2.0@aar'){
+    
+    /*Using Material Viewpager*/compile ('com.github.florent37:materialviewpager:1.2.0@aar' ){
         transitive = true
     }
 
@@ -90,14 +78,11 @@ dependencies {
     }
 
     //used to provide different itemAnimators for the RecyclerView
-    compile 'com.mikepenz:itemanimators:0.2.4@aar'
-
+    
     // used to provide the MiniDrawer to normal Drawer crossfade effect via a SlidingPane layout
-    compile 'com.mikepenz:crossfader:1.3.7@aar'
-
+    
     // used to provide the two step crossfade DrawerLayout. Which allows to have a mini layout which transforms to a normal layout within the drawer
-    compile('com.mikepenz:crossfadedrawerlayout:0.3.4@aar')
-
+    
 
     // used to generate the Open Source section
     compile('com.mikepenz:aboutlibraries:5.7.1@aar') {
@@ -105,28 +90,18 @@ dependencies {
     }
 
     /*App Intros*/
-    compile 'com.github.paolorotolo:appintro:4.0.0'
     /*PagerSlidingTab strip*/
 /*
     compile 'com.astuetz:pagerslidingtabstrip:1.0.1'
 */
 
     /*CUSTOM CRASH */
-    compile 'cat.ereza:customactivityoncrash:1.5.0'
     /*firebase auth dependency, to allow users to sign in*/
-    compile 'com.google.firebase:firebase-auth:9.2.1'
-
+    
     // Firebase
-    compile 'com.google.firebase:firebase-database:9.2.1'
     compile 'com.google.firebase:firebase-auth:9.2.1'
-    compile 'com.google.firebase:firebase-config:9.2.1'
-    compile 'com.google.android.gms:play-services-appinvite:9.2.1'
-    compile 'com.google.firebase:firebase-messaging:9.2.1'
-    compile 'com.google.android.gms:play-services-ads:9.2.1'
-    compile 'com.google.firebase:firebase-crash:9.2.1'
     // Firebase UI
-    compile 'com.firebaseui:firebase-ui-database:0.4.0'
-
+    
     // Testing dependencies
 //    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
 //    androidTestCompile 'com.android.support.test:runner:0.5'
@@ -143,6 +118,31 @@ dependencies {
         transitive = true;
     }
 
+    compile
+    'com.android.support:appcompat-v7:23.4.0'compile 'com.android.support:design:23.4.0'
+    compile 'com.android.support:support-annotations:23.4.0'
+    compile 'com.android.support:support-v4:23.4.0'
+    compile 'com.android.support:recyclerview-v7:23.4.0'
+    compile 'de.hdodenhof:circleimageview:2.1.0'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'com.mikepenz:google-material-typeface:2.2.0.1@aar'
+    compile 'com.mikepenz:fontawesome-typeface:4.6.0.3@aar'
+    compile 'com.mikepenz:octicons-typeface:3.0.0.1@aar'
+    compile 'com.google.android.gms:play-services-auth:9.2.1'
+    compile 'com.github.johnpersano:supertoasts:2.0'
+    compile 'com.mikepenz:itemanimators:0.2.4@aar'
+    compile 'com.mikepenz:crossfader:1.3.7@aar'
+    compile 'com.mikepenz:crossfadedrawerlayout:0.3.4@aar'
+    compile 'com.github.paolorotolo:appintro:4.0.0'
+    compile 'cat.ereza:customactivityoncrash:1.5.0'
+    compile 'com.google.firebase:firebase-auth:9.2.1'
+    compile 'com.google.firebase:firebase-database:9.2.1'
+    compile 'com.google.firebase:firebase-config:9.2.1'
+    compile 'com.google.android.gms:play-services-appinvite:9.2.1'
+    compile 'com.google.firebase:firebase-messaging:9.2.1'
+    compile 'com.google.android.gms:play-services-ads:9.4.0'
+    compile 'com.google.firebase:firebase-crash:9.2.1'
+    compile 'com.firebaseui:firebase-ui-database:0.4.0'
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'
 }
 apply plugin: 'com.google.gms.google-services'

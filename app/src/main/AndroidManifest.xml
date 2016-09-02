@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.chatterbox.chatterbox">
@@ -13,18 +14,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
-
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="41f11c4d0f34030da023daca96924eaff1547a35" />
-
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id"/>
+            android:value="@string/facebook_app_id" />
 
-        <!--app introduction-->
-        <activity android:name=".introduction.IntroduceMe"/>
-<!--
+        <!-- app introduction -->
+        <activity android:name=".introduction.IntroduceMe" />
+        <!--
         &lt;!&ndash;splash screen&ndash;&gt;
         <activity android:name=".introduction.SplashScreen">
             <intent-filter>
@@ -32,39 +31,41 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
--->
-        <!--LOGIN SIGN UP FRAGMENTS-->
+        -->
+        <!-- LOGIN SIGN UP FRAGMENTS -->
         <activity
             android:name=".login_signup.LogSignActivity"
             android:configChanges="screenSize|orientation">
-                <intent-filter>
-                    <action android:name="android.intent.action.MAIN"/>
-                    <category android:name="android.intent.category.LAUNCHER"/>
-                </intent-filter>
-        </activity>
-
-        <!--sign in activity-->
-        <activity android:name=".SignInActivity" />
-
-        <!--Home activity-->
-        <activity
-            android:name=".mainpack.HomeActivity"
-            android:configChanges="orientation|screenSize"/>
-
-        <!--main activity-->
-        <activity android:name=".mainpack.MainActivity">
             <intent-filter>
-                <action android:name="com.chatterbox.chatterbox.MAINACTIVITY"/>
-                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <!--Reset User password-->
+        <!-- sign in activity -->
+        <activity android:name=".SignInActivity" />
+
+        <!-- Home activity -->
+        <activity
+            android:name=".mainpack.HomeActivity"
+            android:configChanges="orientation|screenSize" />
+
+        <!-- main activity -->
+        <activity android:name=".mainpack.MainActivity">
+            <intent-filter>
+                <action android:name="com.chatterbox.chatterbox.MAINACTIVITY" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <!-- Reset User password -->
         <activity
             android:name=".login_signup.ResetPasswordActivity"
-            android:configChanges="orientation|screenSize"/>
+            android:configChanges="orientation|screenSize" />
 
-        <!--SERVICES-->
+        <!-- SERVICES -->
         <service
             android:name=".services.ChatterBoxMessagingService"
             android:exported="false">
@@ -72,7 +73,6 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
         <service
             android:name=".services.ChatterBoxInstanceIdService"
             android:exported="false">
@@ -81,6 +81,9 @@
             </intent-filter>
         </service>
 
+        <activity
+            android:name=".settings.SettingsActivity"
+            android:label="@string/title_activity_settings"></activity>
     </application>
 
 </manifest>
