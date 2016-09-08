@@ -1,27 +1,21 @@
-package com.chatterbox.chatterbox.login_signup;
+package com.chatterbox.chatterbox.views;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 
 import com.astuetz.PagerSlidingTabStrip;
 import com.chatterbox.chatterbox.Constants;
 import com.chatterbox.chatterbox.R;
-import com.chatterbox.chatterbox.introduction.IntroduceMe;
+import com.chatterbox.chatterbox.views.introduction.IntroduceMe;
+import com.chatterbox.chatterbox.adapters.ViewPagerAdapter;
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.answers.Answers;
 import com.facebook.CallbackManager;
-import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.twitter.sdk.android.Twitter;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
 

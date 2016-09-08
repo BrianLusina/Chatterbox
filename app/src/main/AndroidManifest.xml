@@ -22,7 +22,7 @@
             android:value="@string/facebook_app_id" />
 
         <!-- app introduction -->
-        <activity android:name=".introduction.IntroduceMe" />
+        <activity android:name=".views.introduction.IntroduceMe" />
         <!--
         &lt;!&ndash;splash screen&ndash;&gt;
         <activity android:name=".introduction.SplashScreen">
@@ -34,7 +34,7 @@
         -->
         <!-- LOGIN SIGN UP FRAGMENTS -->
         <activity
-            android:name=".login_signup.LogSignActivity"
+            android:name=".views.LogSignActivity"
             android:configChanges="screenSize|orientation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -44,15 +44,14 @@
         </activity>
 
         <!-- sign in activity -->
-        <activity android:name=".SignInActivity" />
 
         <!-- Home activity -->
         <activity
-            android:name=".mainpack.HomeActivity"
+            android:name=".views.HomeActivity"
             android:configChanges="orientation|screenSize" />
 
         <!-- main activity -->
-        <activity android:name=".mainpack.MainActivity">
+        <activity android:name=".views.MainActivity">
             <intent-filter>
                 <action android:name="com.chatterbox.chatterbox.MAINACTIVITY" />
 
@@ -62,7 +61,7 @@
 
         <!-- Reset User password -->
         <activity
-            android:name=".login_signup.ResetPasswordActivity"
+            android:name=".views.ResetPasswordActivity"
             android:configChanges="orientation|screenSize" />
 
         <!-- SERVICES -->

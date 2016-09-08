@@ -1,4 +1,4 @@
-package com.chatterbox.chatterbox.login_signup;
+package com.chatterbox.chatterbox.views;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,18 +19,12 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import com.chatterbox.chatterbox.Constants;
-import com.chatterbox.chatterbox.mainpack.HomeActivity;
-import com.chatterbox.chatterbox.mainpack.MainActivity;
 import com.chatterbox.chatterbox.R;
 import com.crashlytics.android.Crashlytics;
-import com.crashlytics.android.answers.Answers;
-import com.crashlytics.android.answers.CustomEvent;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
-import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.github.johnpersano.supertoasts.library.Style;

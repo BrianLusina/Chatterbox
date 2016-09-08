@@ -1,4 +1,4 @@
-package com.chatterbox.chatterbox.login_signup;
+package com.chatterbox.chatterbox.views;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,7 +19,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 
-import com.chatterbox.chatterbox.mainpack.MainActivity;
 import com.chatterbox.chatterbox.R;
 import com.github.johnpersano.supertoasts.library.Style;
 import com.github.johnpersano.supertoasts.library.SuperToast;

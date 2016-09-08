@@ -1,19 +1,17 @@
-package com.chatterbox.chatterbox.introduction;
+package com.chatterbox.chatterbox.views.introduction;
 
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
 import com.chatterbox.chatterbox.R;
-import com.chatterbox.chatterbox.login_signup.LogSignActivity;
 import com.github.paolorotolo.appintro.AppIntro;
 import com.github.paolorotolo.appintro.AppIntroFragment;
 
 /**
  * Project: ChatterBox
- * Package: com.chatterbox.chatterbox.introduction
+ * Package: com.chatterbox.chatterbox.views.introduction
  * Created by lusinabrian on 31/08/16 at 14:47
  * <p/>
  * Description: App introduction

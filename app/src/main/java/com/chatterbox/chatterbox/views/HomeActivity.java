@@ -1,4 +1,4 @@
-package com.chatterbox.chatterbox.mainpack;
+package com.chatterbox.chatterbox.views;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -18,11 +18,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.chatterbox.chatterbox.drawerfragments.ChatsFragment;
+import com.chatterbox.chatterbox.views.drawerfragments.ChatsFragment;
 import com.chatterbox.chatterbox.Constants;
 import com.chatterbox.chatterbox.R;
-import com.chatterbox.chatterbox.SignInActivity;
-import com.chatterbox.chatterbox.login_signup.LogSignActivity;
 import com.chatterbox.chatterbox.settings.SettingsActivity;
 import com.google.android.gms.appinvite.AppInviteInvitation;
 import com.google.android.gms.auth.api.Auth;
@@ -45,14 +43,12 @@ import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
-import com.mikepenz.materialdrawer.MiniDrawer;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
 import com.mikepenz.materialdrawer.model.ExpandableDrawerItem;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileSettingDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
-import com.mikepenz.materialdrawer.model.SectionDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import com.mikepenz.materialdrawer.model.interfaces.Nameable;
@@ -398,7 +394,7 @@ public class HomeActivity extends AppCompatActivity{
                 mFirebaseUser = null;
                 mUsername = Constants.ANONYMOUS;
                 mPhotoUrl = null;
-                startActivity(new Intent(this, SignInActivity.class));
+                startActivity(new Intent(this, LogSignActivity.class));
                 return true;
             case R.id.fresh_config_menu:
                 fetchConfig();

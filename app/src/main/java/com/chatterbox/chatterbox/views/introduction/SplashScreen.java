@@ -1,4 +1,4 @@
-package com.chatterbox.chatterbox.introduction;
+package com.chatterbox.chatterbox.views.introduction;
 
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chatterbox.chatterbox.R;
-import com.chatterbox.chatterbox.login_signup.LogSignActivity;
+import com.chatterbox.chatterbox.views.LogSignActivity;
 
 /**
  * Project: ChatterBox

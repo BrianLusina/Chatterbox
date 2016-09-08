@@ -1,4 +1,4 @@
-package com.chatterbox.chatterbox.login_signup;
+package com.chatterbox.chatterbox.adapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

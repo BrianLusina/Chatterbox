@@ -1,4 +1,4 @@
-package com.chatterbox.chatterbox.drawerfragments;
+package com.chatterbox.chatterbox.views.drawerfragments;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,7 +18,7 @@ import android.view.ViewGroup;
 
 import com.chatterbox.chatterbox.R;
 import com.chatterbox.chatterbox.adapters.ChatsFragAdapter;
-import com.chatterbox.chatterbox.mainpack.MainActivity;
+import com.chatterbox.chatterbox.views.MainActivity;
 import com.chatterbox.chatterbox.models.ChatsModel;
 import com.chatterbox.chatterbox.touchlisteners.RecyclerItemClickListener;
 
