@@ -18,8 +18,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.chatterbox.chatterbox.Contracts;
 import com.chatterbox.chatterbox.views.drawerfragments.ChatsFragment;
-import com.chatterbox.chatterbox.Constants;
 import com.chatterbox.chatterbox.R;
 import com.chatterbox.chatterbox.settings.SettingsActivity;
 import com.google.android.gms.appinvite.AppInviteInvitation;
@@ -124,7 +124,7 @@ public class HomeActivity extends AppCompatActivity{
                                 .withIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_plus).actionBar()
                                         .paddingDp(5)
                                         .colorRes(R.color.material_drawer_dark_primary_text))
-                                .withIdentifier(Constants.PROFILE_SETTING)
+                                .withIdentifier(Contracts.PROFILE_SETTING)
                                 */
                 ).withOnAccountHeaderSelectionViewClickListener(new AccountHeader.OnAccountHeaderSelectionViewClickListener() {
                     @Override
@@ -350,7 +350,7 @@ public class HomeActivity extends AppCompatActivity{
         super.onActivityResult(requestCode, resultCode, data);
         Log.d(HOMEACTIVITY_TAG, "onActivityResult: requestCode=" + requestCode + ", resultCode=" + resultCode);
 
-        if (requestCode == Constants.REQUEST_INVITE) {
+        if (requestCode == Contracts.REQUEST_INVITE) {
             if (resultCode == RESULT_OK) {
                 // Use Firebase Measurement to log that invitation was sent.
                 Bundle payload = new Bundle();
@@ -392,7 +392,7 @@ public class HomeActivity extends AppCompatActivity{
                 mFirebaseAuth.signOut();
                 Auth.GoogleSignInApi.signOut(mGoogleApiClient);
                 mFirebaseUser = null;
-                mUsername = Constants.ANONYMOUS;
+                mUsername = Contracts.ANONYMOUS;
                 mPhotoUrl = null;
                 startActivity(new Intent(this, LogSignActivity.class));
                 return true;
@@ -415,7 +415,7 @@ public class HomeActivity extends AppCompatActivity{
                 .setMessage(getString(R.string.invitation_message))
                 .setCallToActionText(getString(R.string.invitation_cta))
                 .build();
-        startActivityForResult(intent, Constants.REQUEST_INVITE);
+        startActivityForResult(intent, Contracts.REQUEST_INVITE);
     }
 
     /**Fetch the config to determine the allowed length of messages.*/

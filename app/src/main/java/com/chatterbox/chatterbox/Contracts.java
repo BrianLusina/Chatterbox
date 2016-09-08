@@ -7,7 +7,7 @@ package com.chatterbox.chatterbox;
  * <p/>
  * Description: Contain all constant fields necessary for application
  */
-public class Constants {
+public class Contracts {
 
     public static final String INSTANCE_ID_TOKEN_RETRIEVED = "iid_token_retrieved";
     public static final String FRIENDLY_MSG_LENGTH = "friendly_msg_length";

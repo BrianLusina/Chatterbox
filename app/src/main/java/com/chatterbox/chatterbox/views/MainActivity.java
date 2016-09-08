@@ -18,7 +18,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 
 import com.bumptech.glide.Glide;
-import com.chatterbox.chatterbox.Constants;
+import com.chatterbox.chatterbox.Contracts;
 import com.chatterbox.chatterbox.adapters.ChatViewHolder;
 import com.chatterbox.chatterbox.models.MessageModel;
 import com.chatterbox.chatterbox.R;
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         // Set default username is anonymous.
-        mUsername = Constants.ANONYMOUS;
+        mUsername = Contracts.ANONYMOUS;
 
         // Initialize Firebase Auth
         mFirebaseAuth = FirebaseAuth.getInstance();
@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 MessageModel.class,
                 R.layout.item_message,
                 ChatViewHolder.class,
-                mFirebaseDatabaseReference.child(Constants.MESSAGES_CHILD)) {
+                mFirebaseDatabaseReference.child(Contracts.MESSAGES_CHILD)) {
 
             @Override
             protected void populateViewHolder(ChatViewHolder viewHolder, MessageModel friendlyMessage, int position) {
@@ -153,7 +153,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
         mMessageEditText = (EditText) findViewById(R.id.messageEditText);
         /*mMessageEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(mSharedPreferences
-                .getInt(Constants.FRIENDLY_MSG_LENGTH, DEFAULT_MSG_LENGTH_LIMIT))});
+                .getInt(Contracts.FRIENDLY_MSG_LENGTH, DEFAULT_MSG_LENGTH_LIMIT))});
         */
         mMessageEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -179,9 +179,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             @Override
             public void onClick(View view) {
                 MessageModel friendlyMessage = new MessageModel(mUsername, mPhotoUrl, mMessageEditText.getText().toString());
-                mFirebaseDatabaseReference.child(Constants.MESSAGES_CHILD).push().setValue(friendlyMessage);
+                mFirebaseDatabaseReference.child(Contracts.MESSAGES_CHILD).push().setValue(friendlyMessage);
                 mMessageEditText.setText("");
-                mFirebaseAnalytics.logEvent(Constants.MESSAGE_SENT_EVENT, null);
+                mFirebaseAnalytics.logEvent(Contracts.MESSAGE_SENT_EVENT, null);
             }
         });
 

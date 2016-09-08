@@ -9,7 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.astuetz.PagerSlidingTabStrip;
-import com.chatterbox.chatterbox.Constants;
+import com.chatterbox.chatterbox.Contracts;
 import com.chatterbox.chatterbox.R;
 import com.chatterbox.chatterbox.views.introduction.IntroduceMe;
 import com.chatterbox.chatterbox.adapters.ViewPagerAdapter;
@@ -39,7 +39,7 @@ public class LogSignActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Configure Twitter SDK
-        TwitterAuthConfig authConfig = new TwitterAuthConfig(Constants.TWITTER_CONSUMER_KEY, Constants.TWITTER_CONSUMER_SECRET);
+        TwitterAuthConfig authConfig = new TwitterAuthConfig(Contracts.TWITTER_CONSUMER_KEY, Contracts.TWITTER_CONSUMER_SECRET);
         Fabric.with(this, new Twitter(authConfig));
 //        FacebookSdk.sdkInitialize(getApplicationContext());
 //        AppEventsLogger.activateApp(this);
