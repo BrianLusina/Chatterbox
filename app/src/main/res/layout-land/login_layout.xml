@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+<com.github.ksoichiro.android.observablescrollview.ObservableScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/loginlayout_observablescrollview"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:orientation="vertical">
 
 <LinearLayout android:id="@+id/login_form_id"
     android:layout_width="match_parent"
@@ -121,3 +126,4 @@
     </LinearLayout>
     </LinearLayout>
 </LinearLayout>
+</com.github.ksoichiro.android.observablescrollview.ObservableScrollView>
