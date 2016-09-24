@@ -20,6 +20,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import com.chatterbox.chatterbox.models.Contracts;
 import com.chatterbox.chatterbox.R;
+import com.chatterbox.chatterbox.presenters.login.LoginPresenter;
+import com.chatterbox.chatterbox.presenters.login.LoginPresenterImpl;
 import com.chatterbox.chatterbox.views.HomeActivity;
 import com.chatterbox.chatterbox.views.MainActivity;
 import com.chatterbox.chatterbox.views.ResetPasswordActivity;
@@ -76,6 +78,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
     private GoogleApiClient mGoogleApiClient;
     private TwitterApiClient mTwitterApiClient;
     private FirebaseAuth mFirebaseAuth;
+    private LoginPresenterImpl loginPresenterImpl;
 
     //responds to changes in user's sign in state
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -204,12 +207,15 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
                 // The TwitterSession is also available through:
                 TwitterSession session = result.data;
                 Log.d(LOGINFRAGMENT_TAG, "Twitter Login: success");
-                firebaseWithTwitter(session);
-                // TODO: Remove toast and use the TwitterSession's userID
-                String msg = "@" + session.getUserName() + " logged in! (#" + session.getUserId() + ")";
-                superToast.setText(msg);
-                superToast.setDuration(Style.DURATION_SHORT);
-                superToast.show();
+                //firebaseWithTwitter(session);
+                loginPresenterImpl = new LoginPresenterImpl();
+                // if the return is a success, start the next activity
+                if(loginPresenterImpl.handleFirebaseWithTwitter(session, mFirebaseAuth, getActivity())){
+                    startActivity(new Intent(getActivity(), HomeActivity.class));
+                    onDetach();
+                }else{
+                    loginPresenterImpl.displayErrorMessage(true, getActivity());
+                }
             }
             @Override
             public void failure(TwitterException exception) {

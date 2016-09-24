@@ -28,6 +28,10 @@ import static com.chatterbox.chatterbox.views.login.LoginFragment.LOGINFRAGMENT_
 public class LoginPresenterImpl implements LoginPresenter {
     private ProgressDialog progressDialog;
 
+    //constructor
+    public LoginPresenterImpl(){}
+
+
     /**Handles the Firebase with Twitter Login,
      * @param session Twitter Session retrieved from {@link com.chatterbox.chatterbox.views.login.LoginFragment}
      * Twitter Callback. If the callback is successful, the session is passed to this method and handled appropriately
