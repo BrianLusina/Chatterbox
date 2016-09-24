@@ -30,7 +30,6 @@ import io.fabric.sdk.android.Fabric;
  */
 public class LogSignActivity extends AppCompatActivity{
     private static final String LOGSIGNACTIVITY_TAG = LogSignActivity.class.getSimpleName();
-    private Toolbar toolbar;
     private ViewPager mViewPager;
     private PagerSlidingTabStrip pagerSlidingTabStrip;
     private CallbackManager callbackManager;
@@ -47,8 +46,6 @@ public class LogSignActivity extends AppCompatActivity{
 
         setContentView(R.layout.userlogin_activity);
         initViews();
-
-        setSupportActionBar(toolbar);
 
         /*LAUNCHES APP INTRO*/
         Thread thread = new Thread(){
@@ -97,7 +94,6 @@ public class LogSignActivity extends AppCompatActivity{
     /**Initialize the UI contols*/
     private void initViews() {
         mViewPager = (ViewPager) findViewById(R.id.userlogin_viewpager_id);
-        toolbar = (Toolbar)findViewById(R.id.main_toolbar_id);
 
         /*SETS THE viewpager adapter*/
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
@@ -127,16 +123,4 @@ public class LogSignActivity extends AppCompatActivity{
             }
         });
     }
-
-
-/*    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        if(fragmentManager != null){
-            fragmentManager.findFragmentByTag("LoginFragment").onActivityResult(requestCode, resultCode, data);
-        }else{
-            Log.d(LOGSIGNACTIVITY_TAG,"Fragment is null");
-        }
-    }*/
 }
