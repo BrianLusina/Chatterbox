@@ -19,7 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.chatterbox.chatterbox.models.Contracts;
-import com.chatterbox.chatterbox.views.drawerfragments.ChatsFragment;
+import com.chatterbox.chatterbox.views.chats.ChatsFragment;
 import com.chatterbox.chatterbox.R;
 import com.chatterbox.chatterbox.views.settings.SettingsActivity;
 import com.google.android.gms.appinvite.AppInviteInvitation;

@@ -1,4 +1,4 @@
-package com.chatterbox.chatterbox.views;
+package com.chatterbox.chatterbox.views.login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,6 +20,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import com.chatterbox.chatterbox.models.Contracts;
 import com.chatterbox.chatterbox.R;
+import com.chatterbox.chatterbox.views.HomeActivity;
+import com.chatterbox.chatterbox.views.MainActivity;
+import com.chatterbox.chatterbox.views.ResetPasswordActivity;
 import com.crashlytics.android.Crashlytics;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;

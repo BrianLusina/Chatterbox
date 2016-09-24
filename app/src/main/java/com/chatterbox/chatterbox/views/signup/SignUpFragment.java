@@ -1,4 +1,4 @@
-package com.chatterbox.chatterbox.views;
+package com.chatterbox.chatterbox.views.signup;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,6 +20,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 
 import com.chatterbox.chatterbox.R;
+import com.chatterbox.chatterbox.views.MainActivity;
 import com.github.johnpersano.supertoasts.library.Style;
 import com.github.johnpersano.supertoasts.library.SuperToast;
 import com.google.android.gms.tasks.OnCompleteListener;

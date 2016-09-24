@@ -12,6 +12,8 @@ import com.chatterbox.chatterbox.models.Contracts;
 import com.chatterbox.chatterbox.R;
 import com.chatterbox.chatterbox.views.introduction.IntroduceMe;
 import com.chatterbox.chatterbox.models.adapters.ViewPagerAdapter;
+import com.chatterbox.chatterbox.views.login.LoginFragment;
+import com.chatterbox.chatterbox.views.signup.SignUpFragment;
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.answers.Answers;
 import com.facebook.CallbackManager;

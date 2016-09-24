@@ -1,4 +1,4 @@
-package com.chatterbox.chatterbox.views.drawerfragments;
+package com.chatterbox.chatterbox.views.chats;
 
 import android.content.Context;
 import android.content.Intent;
