@@ -1,5 +1,7 @@
 package com.chatterbox.chatterbox.presenters.login;
 
+import android.content.Context;
+
 /**
  Chatterbox-app
  ${PACKAGE_NAME}
@@ -12,10 +14,12 @@ public interface LoginPresenter {
     /**Cancel the user login in case client experiences network failures*/
     void cancelLogin();
 
-    /**Display the login dialog*/
-    void displayDialog();
+    /**Display the login dialog to show login progress
+     * @param display whether to display the dialog or not
+     * @param context in which context to display the dialog*/
+    void displayDialog(boolean display, Context context);
 
     /**Incase of any errors display errors to the user in case of any login failure*/
-    void displayErrorMessage();
-    
+    void displayErrorMessage(boolean show);
+
 }
