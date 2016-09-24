@@ -35,7 +35,7 @@ public class LoginPresenterImpl implements LoginPresenter {
      * @param context The context in which this method will be called. By default it will be the LoginFragment
      * @return boolean value which is then set to trigger either an error messege if False of start the next activity*/
     public boolean handleFirebaseWithTwitter(TwitterSession session, FirebaseAuth firebaseAuth, final Context context){
-        boolean success = false;
+        final boolean[] success = {false};
         Log.d(LOGINFRAGMENT_TAG, "FirebaseTwitter. session: "+session + "firebaseAuth " + firebaseAuth + " Context:" +context);
         // display the dialog
         displayDialog(true,context);
@@ -52,15 +52,17 @@ public class LoginPresenterImpl implements LoginPresenter {
                         Log.d(LOGINFRAGMENT_TAG, "Sign in with Credential: onComplete:" + task.isSuccessful());
                         //if sign in is not successful
                         if(!task.isSuccessful()){
-                            Log.w(LOGINFRAGMENT_TAG, "Sign in with TwitterCredential", task.getException());
-                            SuperToast superToast = new SuperToast(context);
-                            superToast.setDuration(Style.DURATION_SHORT);
-                            superToast.setAnimations(Style.ANIMATIONS_FLY);
-                            superToast.setText("Authentication failed, Please try again");
-                            superToast.show();
+                            success[0] = !task.isSuccessful();
+                            displayDialog(false, context);
+                            displayErrorMessage(true, context);
+                            Log.w(LOGINFRAGMENT_TAG, "SignIn:TwitterCredential:Fail", task.getException());
+                        }else{
+                            success[0] = task.isSuccessful();
+                            displayDialog(false, context);
                         }
                     }
                 });
+        return success[0];
     }
 
     @Override
@@ -84,7 +86,11 @@ public class LoginPresenterImpl implements LoginPresenter {
     }
 
     @Override
-    public void displayErrorMessage(boolean display) {
-
+    public void displayErrorMessage(boolean display, Context context) {
+        SuperToast superToast = new SuperToast(context);
+        superToast.setDuration(Style.DURATION_SHORT);
+        superToast.setAnimations(Style.ANIMATIONS_FLY);
+        superToast.setText("Authentication failed, Please try again");
+        superToast.show();
     }
 }

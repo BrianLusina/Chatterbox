@@ -20,6 +20,6 @@ public interface LoginPresenter {
     void displayDialog(boolean display, Context context);
 
     /**Incase of any errors display errors to the user in case of any login failure*/
-    void displayErrorMessage(boolean show);
+    void displayErrorMessage(boolean show, Context context);
 
 }
