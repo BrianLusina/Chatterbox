@@ -65,7 +65,7 @@ import java.util.HashMap;
  * Description:
  */
 public class LoginFragment extends Fragment implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener{
-    private static final String LOGINFRAGMENT_TAG = LoginFragment.class.getSimpleName();
+    public static final String LOGINFRAGMENT_TAG = LoginFragment.class.getSimpleName();
     private SignInButton mSignInButton_google;
     private TwitterLoginButton twitterLoginButton;
     private LoginButton facebookLoginBtn;
