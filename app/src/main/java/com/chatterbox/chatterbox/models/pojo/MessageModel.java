@@ -1,24 +1,25 @@
-package com.chatterbox.chatterbox.models;
+package com.chatterbox.chatterbox.models.pojo;
 
 /**
  * Project: ChatterBox
- * Package: com.chatterbox.chatterbox.models
- * Created by lusinabrian on 02/09/16 at 16:37
+ * Package: com.chatterbox.chatterbox
+ * Created by lusinabrian on 15/08/16 at 15:39
  * <p/>
- * Description: Contains the model contract of the Chats that will appear in the ChatsFragment
+ * Description: Properties of the message model displaying incoming messages
  */
-public class ChatsModel {
-    private String id, name, photoUrl,text, time;
+public class MessageModel {
+    private String id, name, photoUrl,text;
 
-    public ChatsModel(){}
+    /*constructor*/
+    public MessageModel(){}
 
-    public ChatsModel(String name, String photoUrl, String text, String time) {
+    public MessageModel(String name, String photoUrl, String text) {
         this.name = name;
         this.photoUrl = photoUrl;
         this.text = text;
-        this.time = time;
     }
 
+    /*GETTERS AND SETTERS*/
     public String getId() {
         return id;
     }
@@ -51,11 +52,5 @@ public class ChatsModel {
         this.text = text;
     }
 
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
+    /*CLASS END*/
 }

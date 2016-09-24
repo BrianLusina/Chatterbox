@@ -1,4 +1,4 @@
-package com.chatterbox.chatterbox.interfaces;
+package com.chatterbox.chatterbox.presenters.interfaces;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

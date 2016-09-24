@@ -17,10 +17,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.chatterbox.chatterbox.R;
-import com.chatterbox.chatterbox.adapters.ChatsFragAdapter;
+import com.chatterbox.chatterbox.models.adapters.ChatsFragAdapter;
 import com.chatterbox.chatterbox.views.MainActivity;
-import com.chatterbox.chatterbox.models.ChatsModel;
-import com.chatterbox.chatterbox.interfaces.RecyclerItemClickListener;
+import com.chatterbox.chatterbox.models.pojo.ChatsModel;
+import com.chatterbox.chatterbox.presenters.interfaces.RecyclerItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;

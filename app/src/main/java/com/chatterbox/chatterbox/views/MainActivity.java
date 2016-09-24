@@ -18,9 +18,9 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 
 import com.bumptech.glide.Glide;
-import com.chatterbox.chatterbox.Contracts;
-import com.chatterbox.chatterbox.adapters.ChatViewHolder;
-import com.chatterbox.chatterbox.models.MessageModel;
+import com.chatterbox.chatterbox.models.Contracts;
+import com.chatterbox.chatterbox.models.adapters.ChatViewHolder;
+import com.chatterbox.chatterbox.models.pojo.MessageModel;
 import com.chatterbox.chatterbox.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.ads.AdView;

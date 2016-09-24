@@ -6,13 +6,12 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 
 import com.astuetz.PagerSlidingTabStrip;
-import com.chatterbox.chatterbox.Contracts;
+import com.chatterbox.chatterbox.models.Contracts;
 import com.chatterbox.chatterbox.R;
 import com.chatterbox.chatterbox.views.introduction.IntroduceMe;
-import com.chatterbox.chatterbox.adapters.ViewPagerAdapter;
+import com.chatterbox.chatterbox.models.adapters.ViewPagerAdapter;
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.answers.Answers;
 import com.facebook.CallbackManager;

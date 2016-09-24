@@ -18,10 +18,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.chatterbox.chatterbox.Contracts;
+import com.chatterbox.chatterbox.models.Contracts;
 import com.chatterbox.chatterbox.views.drawerfragments.ChatsFragment;
 import com.chatterbox.chatterbox.R;
-import com.chatterbox.chatterbox.settings.SettingsActivity;
+import com.chatterbox.chatterbox.views.settings.SettingsActivity;
 import com.google.android.gms.appinvite.AppInviteInvitation;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.common.api.GoogleApiClient;

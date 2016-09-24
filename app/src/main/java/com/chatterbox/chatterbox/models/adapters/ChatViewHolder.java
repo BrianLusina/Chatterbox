@@ -1,4 +1,4 @@
-package com.chatterbox.chatterbox.adapters;
+package com.chatterbox.chatterbox.models.adapters;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -10,7 +10,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Project: ChatterBox
- * Package: com.chatterbox.chatterbox.adapters
+ * Package: com.chatterbox.chatterbox.models.adapters
  * Created by lusinabrian on 02/09/16 at 17:52
  * <p/>
  * Description: Adapter for chat items in each individual Chat

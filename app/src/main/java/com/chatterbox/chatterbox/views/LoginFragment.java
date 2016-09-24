@@ -18,7 +18,7 @@ import android.view.WindowManager;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import com.chatterbox.chatterbox.Contracts;
+import com.chatterbox.chatterbox.models.Contracts;
 import com.chatterbox.chatterbox.R;
 import com.crashlytics.android.Crashlytics;
 import com.facebook.AccessToken;

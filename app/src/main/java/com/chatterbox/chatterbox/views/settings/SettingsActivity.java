@@ -1,4 +1,4 @@
-package com.chatterbox.chatterbox.settings;
+package com.chatterbox.chatterbox.views.settings;
 
 
 import android.annotation.TargetApi;

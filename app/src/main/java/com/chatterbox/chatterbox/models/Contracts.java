@@ -1,4 +1,6 @@
-package com.chatterbox.chatterbox;
+package com.chatterbox.chatterbox.models;
+
+import com.chatterbox.chatterbox.BuildConfig;
 
 /**
  * Project: ChatterBox
