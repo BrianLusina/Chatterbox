@@ -20,7 +20,7 @@ import com.chatterbox.chatterbox.R;
 import com.chatterbox.chatterbox.models.adapters.ChatsFragAdapter;
 import com.chatterbox.chatterbox.views.MainActivity;
 import com.chatterbox.chatterbox.models.pojo.ChatsModel;
-import com.chatterbox.chatterbox.presenters.interfaces.RecyclerItemClickListener;
+import com.chatterbox.chatterbox.presenters.RecyclerItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
