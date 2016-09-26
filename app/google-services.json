@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "891499375461-uu5cavgugj8epcuaemidrl0jb1ivbpqc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.chatterbox.chatterbox",
+            "certificate_hash": "25E187BE40B16C3C09ECD1B3E3D26A6651938BCD"
+          }
+        },
+        {
           "client_id": "891499375461-mt93ip73n9gdc4uvob5vplbam7fdcg2s.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
