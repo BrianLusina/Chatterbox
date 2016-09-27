@@ -1,18 +1,63 @@
-<android.support.constraint.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/chatsfrag_coordinatorLayout_id"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/chatsfrag_coordinatorLayout_id"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/chatsfragment_recyclerview_id"
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clipToPadding="false"
-        android:padding="2dp"
-        tools:listitem="@layout/chatsfrag_item_layout"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</android.support.constraint.ConstraintLayout>
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/chatsfragment_recyclerview_id"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:padding="2dp"
+            tools:listitem="@layout/chatsfrag_item_layout"/>
+
+        <!--TODO: add recent chats to FAB-->
+        <com.getbase.floatingactionbutton.FloatingActionsMenu
+            android:id="@+id/home_fabmenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_addButtonColorNormal="@color/dark_blue"
+            fab:fab_addButtonColorPressed="@color/light_blue_2"
+            fab:fab_addButtonSize="normal"
+            fab:fab_addButtonPlusIconColor="@color/white"
+            fab:fab_addButtonStrokeVisible="false"
+            fab:fab_expandDirection="up"
+            fab:fab_labelStyle="@style/fab_labels_style"
+            app:layout_anchor="@id/chatsfragment_recyclerview_id"
+            android:src="@android:drawable/ic_input_add"
+            android:layout_gravity="bottom|end"
+            app:layout_anchorGravity="bottom|right|end">
+
+            <!--New Chat Photo-->
+            <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/home_fab_new_chat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                fab:fab_addButtonColorNormal="@color/dark_blue"
+                fab:fab_addButtonColorPressed="@color/light_blue_2"
+                fab:fab_title="@string/fab_new_chat"
+                fab:fab_size="mini"/>
+
+            <!--New Group-->
+            <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/home_fab_new_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                fab:fab_addButtonColorNormal="@color/dark_blue"
+                fab:fab_addButtonColorPressed="@color/light_blue_2"
+                fab:fab_title="@string/new_group"
+                fab:fab_size="mini"/>
+
+        </com.getbase.floatingactionbutton.FloatingActionsMenu>
+
+    </android.support.design.widget.CoordinatorLayout>
+</LinearLayout>
