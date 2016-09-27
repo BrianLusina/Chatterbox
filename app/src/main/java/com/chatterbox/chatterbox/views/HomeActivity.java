@@ -62,7 +62,6 @@ import java.util.Map;
  * Created by lusinabrian on 30/08/16 at 20:20
  */
 public class HomeActivity extends AppCompatActivity{
-    private FloatingActionButton floatingActionButton;
     private Toolbar toolbar;
     private static final String HOMEACTIVITY_TAG = HomeActivity.class.getSimpleName();
 
@@ -322,7 +321,6 @@ public class HomeActivity extends AppCompatActivity{
 
     private void initViews() {
         toolbar = (Toolbar) findViewById(R.id.main_toolbar_id);
-        floatingActionButton = (FloatingActionButton)findViewById(R.id.home_floating_action_btn);
     }
 
 
