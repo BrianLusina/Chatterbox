@@ -21,6 +21,8 @@ import com.chatterbox.chatterbox.models.adapters.ChatsFragAdapter;
 import com.chatterbox.chatterbox.views.MainActivity;
 import com.chatterbox.chatterbox.models.pojo.ChatsModel;
 import com.chatterbox.chatterbox.presenters.RecyclerItemClickListener;
+import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,9 +33,11 @@ import java.util.List;
  * Created by lusinabrian on 02/09/16 at 12:01
  * Description:
  */
-public class ChatsFragment extends Fragment{
+public class ChatsFragment extends Fragment implements View.OnClickListener {
     private RecyclerView recyclerView;
     private ChatsModel chatsModel;
+    private FloatingActionsMenu floatingActionsMenu;
+    private FloatingActionButton fabNewChat, fabNewGroup;
     private ChatsFragAdapter chatsFragAdapter;
     private List<ChatsModel> chatsModelList;
     private CoordinatorLayout coordinatorLayout;
@@ -101,7 +105,12 @@ public class ChatsFragment extends Fragment{
         View rootView = inflater.inflate(R.layout.chatsfrag_layout, container,false);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.chatsfragment_recyclerview_id);
         coordinatorLayout = (CoordinatorLayout) rootView.findViewById(R.id.chatsfrag_coordinatorLayout_id);
+        floatingActionsMenu = (FloatingActionsMenu)rootView.findViewById(R.id.chats_fabmenu);
+        fabNewChat = (FloatingActionButton)rootView.findViewById(R.id.chats_fab_new_chat);
+        fabNewGroup = (FloatingActionButton)rootView.findViewById(R.id.chats_fab_new_group);
 
+        fabNewGroup.setOnClickListener(this);
+        fabNewChat.setOnClickListener(this);
         LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLinearLayoutManager);
         recyclerView.setHasFixedSize(true);
@@ -178,18 +187,20 @@ public class ChatsFragment extends Fragment{
         chatsModel = new ChatsModel("The Lusina", "The Lusina", "Message", "Wednesday");
         chatsModelList.add(chatsModel);
 
-        chatsModel = new ChatsModel("The Lusina", "The Lusina", "Message", "Wednesday");
-        chatsModelList.add(chatsModel);
-
-        chatsModel = new ChatsModel("The Lusina", "The Lusina", "Message", "Wednesday");
-        chatsModelList.add(chatsModel);
-
-        chatsModel = new ChatsModel("The Lusina", "The Lusina", "Message", "Wednesday");
-        chatsModelList.add(chatsModel);
-        chatsModel = new ChatsModel("The Lusina", "The Lusina", "Message", "Wednesday");
-        chatsModelList.add(chatsModel);
-
         Log.d(CHATSFRAG_TAG, chatsModel.toString());
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.chats_fab_new_chat:
+                //display activity for new chat
+                break;
+            case R.id.chats_fab_new_group:
+                //display dialog for new group
+                
+                break;
+        }
     }
 /*END*/
 }

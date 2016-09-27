@@ -22,7 +22,7 @@
 
         <!--TODO: add recent chats to FAB-->
         <com.getbase.floatingactionbutton.FloatingActionsMenu
-            android:id="@+id/home_fabmenu"
+            android:id="@+id/chats_fabmenu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             fab:fab_addButtonColorNormal="@color/dark_blue"
@@ -39,7 +39,7 @@
 
             <!--New Chat Photo-->
             <com.getbase.floatingactionbutton.FloatingActionButton
-                android:id="@+id/home_fab_new_chat"
+                android:id="@+id/chats_fab_new_chat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 fab:fab_addButtonColorNormal="@color/dark_blue"
@@ -49,7 +49,7 @@
 
             <!--New Group-->
             <com.getbase.floatingactionbutton.FloatingActionButton
-                android:id="@+id/home_fab_new_group"
+                android:id="@+id/chats_fab_new_group"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 fab:fab_addButtonColorNormal="@color/dark_blue"
