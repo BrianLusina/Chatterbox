@@ -198,7 +198,7 @@ public class ChatsFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.chats_fab_new_group:
                 //display dialog for new group
-                
+
                 break;
         }
     }
