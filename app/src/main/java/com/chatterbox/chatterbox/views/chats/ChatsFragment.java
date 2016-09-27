@@ -29,7 +29,6 @@ import java.util.List;
  * Project: ChatterBox
  * Package: com.chatterbox.chatterbox
  * Created by lusinabrian on 02/09/16 at 12:01
- * <p/>
  * Description:
  */
 public class ChatsFragment extends Fragment{
