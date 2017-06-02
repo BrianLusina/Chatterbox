@@ -12,7 +12,6 @@ import com.chatterbox.chatterbox.data.db.DbHelper;
 import com.chatterbox.chatterbox.data.db.DbHelperImpl;
 import com.chatterbox.chatterbox.data.prefs.PrefsHelper;
 import com.chatterbox.chatterbox.data.prefs.PrefsHelperImpl;
-import com.chatterbox.chatterbox.di.ActivityContext;
 import com.chatterbox.chatterbox.di.ApiInfo;
 import com.chatterbox.chatterbox.di.ApplicationContext;
 import com.chatterbox.chatterbox.di.DatabaseInfo;
