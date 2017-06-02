@@ -50,6 +50,10 @@ ext{
     appintroVersion = "4.0.0"
     customactivityoncrashVersion = "1.5.0"
 
+    // dagger
+    daggerVersion = "2.11-rc2"
+    butterknifeVersion ="8.6.0"
+
     // material view pager
     materialViewPagerVersion = "1.2.0@aar"
     

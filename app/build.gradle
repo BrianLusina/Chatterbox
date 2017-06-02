@@ -1,5 +1,6 @@
 apply plugin: "com.android.application"
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 apply plugin: "io.fabric"
 
 repositories {
@@ -79,8 +80,19 @@ dependencies {
     implementation "com.google.firebase:firebase-crash:$firebaseVersion"
     implementation "com.firebaseui:firebase-ui-database:$firebaseDbUiVersion"
 
-
     // 3rd party libraries
+
+    // Dagger
+    // dependency injection
+    compile "com.google.dagger:dagger:$daggerVersion"
+    annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
+    provided 'javax.annotation:jsr250-api:1.0'
+    compile 'javax.inject:javax.inject:1'
+
+    // view binding
+    compile "com.jakewharton:butterknife:$butterknifeVersion"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$butterknifeVersion"
+    kapt "com.jakewharton:butterknife-compiler:$butterknifeVersion"
 
     implementation "com.facebook.android:facebook-android-sdk:$facebookSdkVersion"
 

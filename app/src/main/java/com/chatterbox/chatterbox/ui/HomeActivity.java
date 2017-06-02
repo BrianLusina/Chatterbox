@@ -57,8 +57,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Project: ChatterBox
- * Package: com.chatterbox.chatterbox.mainpack
  * Created by lusinabrian on 30/08/16 at 20:20
  */
 public class HomeActivity extends AppCompatActivity{
