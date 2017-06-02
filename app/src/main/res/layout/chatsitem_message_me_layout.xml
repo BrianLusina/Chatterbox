@@ -6,7 +6,7 @@
     android:paddingBottom="5dp"
     android:paddingTop="5dp">
 
-    <com.chatterbox.chatterbox.widgets.ChatLayout
+    <com.chatterbox.chatterbox.ui.views.ChatLayout
         android:layout_marginLeft="20dp"
         android:layout_width="wrap_content"
         android:id="@+id/chatsitem_me_bubble_id"
@@ -53,5 +53,5 @@
             android:text="Brian lusina is awesome today." />
 
 
-    </com.chatterbox.chatterbox.widgets.ChatLayout>
+    </com.chatterbox.chatterbox.ui.views.ChatLayout>
 </RelativeLayout>

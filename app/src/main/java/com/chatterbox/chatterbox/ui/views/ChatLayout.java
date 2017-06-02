@@ -1,4 +1,4 @@
-package com.chatterbox.chatterbox.widgets;
+package com.chatterbox.chatterbox.ui.views;
 
 import android.content.Context;
 import android.content.res.Resources;
