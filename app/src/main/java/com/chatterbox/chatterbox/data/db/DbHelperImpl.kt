@@ -1,5 +1,6 @@
 package com.chatterbox.chatterbox.data.db
 
+import javax.inject.Inject
 import javax.inject.Singleton
 
 /**
@@ -8,5 +9,7 @@ import javax.inject.Singleton
  */
 
 @Singleton
-class DbHelperImpl : DbHelper{
+class DbHelperImpl @Inject
+internal constructor(dbOpenHelper: DbOpenHelper) : DbHelper{
+
 }

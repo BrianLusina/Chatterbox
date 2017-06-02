@@ -1,5 +1,6 @@
 package com.chatterbox.chatterbox.data.api
 
+import javax.inject.Inject
 import javax.inject.Singleton
 
 /**
@@ -8,5 +9,5 @@ import javax.inject.Singleton
  */
 
 @Singleton
-class ApiHelperImpl : ApiHelper{
+class ApiHelperImpl @Inject constructor(): ApiHelper{
 }
