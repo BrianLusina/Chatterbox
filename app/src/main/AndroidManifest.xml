@@ -25,6 +25,17 @@
 
         <!-- app introduction -->
         <activity android:name=".ui.introduction.IntroduceMe" />
+
+        <activity
+            android:name=".ui.auth.AuthActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar.FullScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <!--
         &lt;!&ndash;splash screen&ndash;&gt;
         <activity android:name=".introduction.SplashScreen">
@@ -34,18 +45,19 @@
             </intent-filter>
         </activity>
         -->
+
         <!-- LOGIN SIGN UP FRAGMENTS -->
         <activity
-            android:name=".ui.login.LogSignActivity"
+            android:name=".ui.auth.login.LogSignActivity"
             android:configChanges="screenSize|orientation">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
         </activity>
 
         <!-- sign in activity -->
+
 
         <!-- Home activity -->
         <activity
@@ -84,7 +96,8 @@
 
         <activity
             android:name=".ui.settings.SettingsActivity"
-            android:label="@string/title_activity_settings"></activity>
+            android:label="@string/title_activity_settings" />
+
     </application>
 
 </manifest>

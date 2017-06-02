@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chatterbox.chatterbox.R;
-import com.chatterbox.chatterbox.ui.login.LogSignActivity;
+import com.chatterbox.chatterbox.ui.auth.login.LogSignActivity;
 
 /**
  * Project: ChatterBox

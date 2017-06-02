@@ -1,4 +1,4 @@
-package com.chatterbox.chatterbox.ui.login;
+package com.chatterbox.chatterbox.ui.auth.login;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -16,7 +16,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.TwitterAuthProvider;
 import com.twitter.sdk.android.core.TwitterSession;
 
-import static com.chatterbox.chatterbox.ui.login.LoginFragment.LOGINFRAGMENT_TAG;
+import static com.chatterbox.chatterbox.ui.auth.login.LoginFragment.LOGINFRAGMENT_TAG;
 
 /**
  Chatterbox-app
@@ -33,7 +33,7 @@ public class LoginPresenterImpl implements LoginPresenter {
 
 
     /**Handles the Firebase with Twitter Login,
-     * @param session Twitter Session retrieved from {@link com.chatterbox.chatterbox.ui.login.LoginFragment}
+     * @param session Twitter Session retrieved from {@link com.chatterbox.chatterbox.ui.auth.login.LoginFragment}
      * Twitter Callback. If the callback is successful, the session is passed to this method and handled appropriately
      * @param firebaseAuth handles the siginin in with credential received from Twitter.
      * @param context The context in which this method will be called. By default it will be the LoginFragment

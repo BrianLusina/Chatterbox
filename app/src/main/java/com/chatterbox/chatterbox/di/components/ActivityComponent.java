@@ -2,6 +2,7 @@ package com.chatterbox.chatterbox.di.components;
 
 import com.chatterbox.chatterbox.di.PerActivity;
 import com.chatterbox.chatterbox.di.modules.ActivityModule;
+import com.chatterbox.chatterbox.ui.auth.AuthActivity;
 import com.chatterbox.chatterbox.ui.introduction.SplashScreen;
 
 import dagger.Component;
@@ -16,5 +17,5 @@ import dagger.Component;
 public interface ActivityComponent {
     void inject(SplashScreen splashScreen);
 
-    void inject();
+    void inject(AuthActivity authActivity);
 }

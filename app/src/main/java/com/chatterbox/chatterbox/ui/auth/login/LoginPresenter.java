@@ -1,4 +1,4 @@
-package com.chatterbox.chatterbox.ui.login;
+package com.chatterbox.chatterbox.ui.auth.login;
 
 import android.content.Context;
 
@@ -6,7 +6,7 @@ import android.content.Context;
  Chatterbox-app
  ${PACKAGE_NAME}
  * Created by lusinabrian on 24/09/16.
- Class Description: Interface for {@link com.chatterbox.chatterbox.ui.login.LoginFragment}
+ Class Description: Interface for {@link com.chatterbox.chatterbox.ui.auth.login.LoginFragment}
  that will be implemented
  */
 

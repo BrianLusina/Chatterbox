@@ -22,7 +22,7 @@ import com.chatterbox.chatterbox.data.models.Contracts;
 import com.chatterbox.chatterbox.ui.adapters.ChatViewHolder;
 import com.chatterbox.chatterbox.data.models.MessageModel;
 import com.chatterbox.chatterbox.R;
-import com.chatterbox.chatterbox.ui.login.LogSignActivity;
+import com.chatterbox.chatterbox.ui.auth.login.LogSignActivity;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.auth.api.Auth;

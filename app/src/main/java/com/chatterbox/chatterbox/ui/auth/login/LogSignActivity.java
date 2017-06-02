@@ -1,4 +1,4 @@
-package com.chatterbox.chatterbox.ui.login;
+package com.chatterbox.chatterbox.ui.auth.login;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,7 +12,7 @@ import com.chatterbox.chatterbox.data.models.Contracts;
 import com.chatterbox.chatterbox.R;
 import com.chatterbox.chatterbox.ui.introduction.IntroduceMe;
 import com.chatterbox.chatterbox.ui.adapters.ViewPagerAdapter;
-import com.chatterbox.chatterbox.ui.signup.SignUpFragment;
+import com.chatterbox.chatterbox.ui.auth.signup.SignUpFragment;
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.answers.Answers;
 import com.facebook.CallbackManager;

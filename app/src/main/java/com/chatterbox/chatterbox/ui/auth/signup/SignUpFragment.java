@@ -1,4 +1,4 @@
-package com.chatterbox.chatterbox.ui.signup;
+package com.chatterbox.chatterbox.ui.auth.signup;
 
 import android.content.Intent;
 import android.os.Bundle;

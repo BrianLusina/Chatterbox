@@ -12,7 +12,7 @@ import com.chatterbox.chatterbox.BuildConfig
 import com.chatterbox.chatterbox.R
 import com.chatterbox.chatterbox.ui.MainActivity
 import com.chatterbox.chatterbox.R.mipmap.ic_launcher
-
+import com.chatterbox.chatterbox.di.components.DaggerAppComponent
 
 
 /**
@@ -29,8 +29,8 @@ class ChatterBoxApp : Application(){
     override fun onCreate() {
         super.onCreate()
 
-//        mAppComponent = DaggerAppComponent.builder()
-//                .appModule(AppModule(this)).build()
+        mAppComponent = DaggerAppComponent.builder()
+                .appModule(AppModule(this)).build()
 
         mAppComponent.inject(this)
 
