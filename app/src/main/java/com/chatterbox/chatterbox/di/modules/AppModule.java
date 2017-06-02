@@ -7,6 +7,8 @@ import com.chatterbox.chatterbox.data.DataManager;
 import com.chatterbox.chatterbox.data.DataManagerImpl;
 import com.chatterbox.chatterbox.data.api.ApiHelper;
 import com.chatterbox.chatterbox.data.api.ApiHelperImpl;
+import com.chatterbox.chatterbox.data.prefs.PrefsHelper;
+import com.chatterbox.chatterbox.data.prefs.PrefsHelperImpl;
 import com.chatterbox.chatterbox.di.ActivityContext;
 import com.chatterbox.chatterbox.di.ApplicationContext;
 
@@ -53,5 +55,11 @@ public class AppModule {
     @Singleton
     ApiHelper provideApiHelper(ApiHelperImpl apiHelper){
         return apiHelper;
+    }
+
+    @Provides
+    @Singleton
+    PrefsHelper providePrefsHelper(PrefsHelperImpl prefsHelper){
+        return prefsHelper;
     }
 }

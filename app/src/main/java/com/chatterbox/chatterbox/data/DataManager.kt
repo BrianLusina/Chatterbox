@@ -1,6 +1,7 @@
 package com.chatterbox.chatterbox.data
 
 import com.chatterbox.chatterbox.data.api.ApiHelper
+import com.chatterbox.chatterbox.data.prefs.PrefsHelper
 
 /**
  * @author lusinabrian on 02/06/17.
@@ -11,5 +12,5 @@ import com.chatterbox.chatterbox.data.api.ApiHelper
  * This interface will extend all other interfaces and [DataManagerImpl] will handle the
  * implementation
  */
-interface DataManager : ApiHelper{
+interface DataManager : ApiHelper, PrefsHelper{
 }
