@@ -1,6 +1,6 @@
 apply plugin: "com.android.application"
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
+// apply plugin: 'kotlin-kapt'
 apply plugin: "io.fabric"
 
 repositories {
@@ -68,6 +68,9 @@ dependencies {
     implementation "com.android.support:support-v4:$supportLibVersion"
     implementation "com.android.support:recyclerview-v7:$supportLibVersion"
 
+    // kotlin manenos ;D
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+
     implementation "com.google.android.gms:play-services-auth:$googlePlayServices"
 
     // firebase dependencies
@@ -84,15 +87,20 @@ dependencies {
 
     // Dagger
     // dependency injection
-    compile "com.google.dagger:dagger:$daggerVersion"
+    implementation "com.google.dagger:dagger:$daggerVersion"
     annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
-    provided 'javax.annotation:jsr250-api:1.0'
-    compile 'javax.inject:javax.inject:1'
+    compileOnly 'javax.annotation:jsr250-api:1.0'
+    implementation 'javax.inject:javax.inject:1'
+
+    // reactive
+    implementation "io.reactivex.rxjava2:rxjava:$rxjava2Version"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxandroidVersion"
+    implementation "io.reactivex.rxjava2:rxkotlin:$rxKotlinVersion"
 
     // view binding
-    compile "com.jakewharton:butterknife:$butterknifeVersion"
+    implementation "com.jakewharton:butterknife:$butterknifeVersion"
     annotationProcessor "com.jakewharton:butterknife-compiler:$butterknifeVersion"
-    kapt "com.jakewharton:butterknife-compiler:$butterknifeVersion"
+    // kapt "com.jakewharton:butterknife-compiler:$butterknifeVersion"
 
     implementation "com.facebook.android:facebook-android-sdk:$facebookSdkVersion"
 
@@ -119,13 +127,13 @@ dependencies {
     implementation "com.mikepenz:crossfadedrawerlayout:$mikePenzCrossFadedDrawer"
 
     // crashlytics
-    compile("com.crashlytics.sdk.android:crashlytics:$crashlyticsVersion") {
+    implementation("com.crashlytics.sdk.android:crashlytics:$crashlyticsVersion") {
         transitive = true
     }
-    compile("com.crashlytics.sdk.android:answers:$crashlyticsAnswersVersion") {
+    implementation("com.crashlytics.sdk.android:answers:$crashlyticsAnswersVersion") {
         transitive = true
     }
-    compile("com.twitter.sdk.android:twitter:$twitterSdkVersion") {
+    implementation("com.twitter.sdk.android:twitter:$twitterSdkVersion") {
         transitive = true
     }
     // circle image view
@@ -151,7 +159,6 @@ dependencies {
 
     // unit tests
     testImplementation "junit:junit:$jUnitVersion"
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 }
 
 apply plugin: "com.google.gms.google-services"

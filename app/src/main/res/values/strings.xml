@@ -111,6 +111,7 @@
     <string name="pref_title_vibrate">Vibrate</string>
     <string name="fab_new_chat">New Chat</string>
     <string name="new_group">New Group</string>
+    <string name="snackbar_api_error">Error encountered, uh-oh</string>
 
 
 </resources>

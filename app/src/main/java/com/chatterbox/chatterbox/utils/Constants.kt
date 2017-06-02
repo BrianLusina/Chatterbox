@@ -12,4 +12,8 @@ object Constants {
 
     @JvmField
     val CHATTERBOX_DB_NAME = "chatterbox.db"
+
+    @JvmField
+    val TIMESTAMP_FORMAT = "yyyyMMdd_HHmmss"
+
 }
