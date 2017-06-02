@@ -4,6 +4,9 @@
 
     <string name="facebook_app_id">169819973428395</string>
 
+    <string name="activity_auth_signup_txtView">Register</string>
+    <string name="activity_auth_login_txt_view">Login</string>
+
     <string name="sign_in_header_txt">Chatter away&#8230;!</string>
 
     <!--ellipsis &#8230;-->
