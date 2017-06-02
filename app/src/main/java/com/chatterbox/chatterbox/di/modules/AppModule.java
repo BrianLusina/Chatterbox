@@ -3,6 +3,7 @@ package com.chatterbox.chatterbox.di.modules;
 import android.app.Application;
 import android.content.Context;
 
+import com.chatterbox.chatterbox.BuildConfig;
 import com.chatterbox.chatterbox.data.DataManager;
 import com.chatterbox.chatterbox.data.DataManagerImpl;
 import com.chatterbox.chatterbox.data.api.ApiHelper;
@@ -12,7 +13,11 @@ import com.chatterbox.chatterbox.data.db.DbHelperImpl;
 import com.chatterbox.chatterbox.data.prefs.PrefsHelper;
 import com.chatterbox.chatterbox.data.prefs.PrefsHelperImpl;
 import com.chatterbox.chatterbox.di.ActivityContext;
+import com.chatterbox.chatterbox.di.ApiInfo;
 import com.chatterbox.chatterbox.di.ApplicationContext;
+import com.chatterbox.chatterbox.di.DatabaseInfo;
+import com.chatterbox.chatterbox.di.PreferenceInfo;
+import com.chatterbox.chatterbox.utils.Constants;
 
 import javax.inject.Singleton;
 
@@ -45,6 +50,36 @@ public class AppModule {
     @Provides
     Application provideApplication(){
         return mApplication;
+    }
+
+    @Provides
+    @ApiInfo
+    String provideFacebookAppId(){
+        return BuildConfig.FACEBOOK_APP_ID;
+    }
+
+    @Provides
+    @ApiInfo
+    String provideTwitterConsumerSecret(){
+        return BuildConfig.TWITTER_SECRET;
+    }
+
+    @Provides
+    @ApiInfo
+    String provideTwitterConsumerKey(){
+        return BuildConfig.TWITTER_CONSUMER_KEY;
+    }
+
+    @Provides
+    @PreferenceInfo
+    String providePreferenceFileName(){
+        return Constants.CHATTERBOX_PREF_KEY;
+    }
+
+    @Provides
+    @DatabaseInfo
+    String provideDatabaseName(){
+        return Constants.CHATTERBOX_DB_NAME;
     }
 
     @Provides
