@@ -16,7 +16,7 @@
 
         <!--Login-->
         <LinearLayout
-            android:id="@+id/llLogin"
+            android:id="@+id/loginLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
@@ -46,9 +46,9 @@
 
         </LinearLayout>
 
-        <!--Sign up layout-->
+        <!--Register layout-->
         <LinearLayout
-            android:id="@+id/llSignUp"
+            android:id="@+id/registerLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"

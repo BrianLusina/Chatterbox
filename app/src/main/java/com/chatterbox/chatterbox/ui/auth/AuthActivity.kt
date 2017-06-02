@@ -38,14 +38,14 @@ class AuthActivity : BaseActivity(), AuthView {
 
     override fun setUp() {
 
-        registerInvokerTxtView = findViewById(R.id.tvSignupInvoker) as TextView
-        loginInvokerTxtView = findViewById(R.id.tvSigninInvoker) as TextView
+        registerInvokerTxtView = findViewById(R.id.registerInvokerTxtView) as TextView
+        loginInvokerTxtView = findViewById(R.id.loginInvokerTxtView) as TextView
 
-        registerBtn = findViewById(R.id.btnSignup) as Button
-        loginBtn = findViewById(R.id.btnSignin) as Button
+        registerBtn = findViewById(R.id.registerBtn) as Button
+        loginBtn = findViewById(R.id.loginBtn) as Button
 
-        registerLayout = findViewById(R.id.llSignUp) as LinearLayout
-        loginLayout = findViewById(R.id.llLogin) as LinearLayout
+        registerLayout = findViewById(R.id.registerLayout) as LinearLayout
+        loginLayout = findViewById(R.id.loginLayout) as LinearLayout
 
         registerInvokerTxtView.setOnClickListener {
             isLoginScreen = false
