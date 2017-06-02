@@ -19,7 +19,6 @@ import butterknife.Unbinder
 import com.chatterbox.chatterbox.R
 import com.chatterbox.chatterbox.app.ChatterBoxApp
 import com.chatterbox.chatterbox.di.components.ActivityComponent
-import com.chatterbox.chatterbox.di.components.DaggerActivityComponent
 import com.chatterbox.chatterbox.di.modules.ActivityModule
 import com.chatterbox.chatterbox.utils.CommonUtils
 import com.chatterbox.chatterbox.utils.NetworkUtils
@@ -37,10 +36,10 @@ abstract class BaseActivity : AppCompatActivity(), BaseView, BaseFragment.Callba
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        activityComponent = DaggerActivityComponent.builder()
-                .activityModule(ActivityModule(this))
-                .appComponent((application as ChatterBoxApp).getComponent())
-                .build()
+//        activityComponent = DaggerActivityComponent.builder()
+//                .activityModule(ActivityModule(this))
+//                .appComponent((application as ChatterBoxApp).getComponent())
+//                .build()
     }
 
     override fun attachBaseContext(newBase: Context?) {

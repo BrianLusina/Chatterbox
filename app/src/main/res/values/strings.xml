@@ -4,8 +4,14 @@
 
     <string name="facebook_app_id">169819973428395</string>
 
+
+    <!--Auth screen string values-->
     <string name="activity_auth_signup_txtView">Register</string>
     <string name="activity_auth_login_txt_view">Login</string>
+    <string name="auth_screen_email_hint">Email</string>
+    <string name="auth_screen_password_hint">Password</string>
+    <string name="login_screen_btnLogin_hint">Login</string>
+    <string name="register_screen_btnRegister_hint">Register</string>
 
     <string name="sign_in_header_txt">Chatter away&#8230;!</string>
 

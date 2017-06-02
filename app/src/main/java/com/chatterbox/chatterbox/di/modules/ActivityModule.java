@@ -4,6 +4,10 @@ import android.app.Activity;
 import android.content.Context;
 
 import com.chatterbox.chatterbox.di.ActivityContext;
+import com.chatterbox.chatterbox.di.PerActivity;
+import com.chatterbox.chatterbox.ui.auth.AuthPresenter;
+import com.chatterbox.chatterbox.ui.auth.AuthPresenterImpl;
+import com.chatterbox.chatterbox.ui.auth.AuthView;
 
 import dagger.Module;
 import dagger.Provides;
@@ -34,7 +38,13 @@ public class ActivityModule {
     }
 
     @Provides
-    CompositeDisposable provideCompositeDisposible(){
+    CompositeDisposable provideCompositeDisposable(){
         return new CompositeDisposable();
+    }
+
+    @Provides
+    @PerActivity
+    AuthPresenter<AuthView> provideAuthPresenter(AuthPresenterImpl<AuthView> authPresenter){
+        return authPresenter;
     }
 }

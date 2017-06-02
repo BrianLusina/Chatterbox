@@ -26,7 +26,7 @@
             app:layout_widthPercent="85%">
 
             <com.irinnovative.onepagesigninsignup.VerticalTextView
-                android:id="@+id/tvSigninInvoker"
+                android:id="@+id/loginInvokerTxtView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
@@ -59,7 +59,7 @@
             app:layout_widthPercent="15%">
 
             <com.chatterbox.chatterbox.ui.views.VerticalTextView
-                android:id="@+id/tvSignupInvoker"
+                android:id="@+id/registerInvokerTxtView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
@@ -81,6 +81,7 @@
         </LinearLayout>
     </android.support.percent.PercentRelativeLayout>
 
+    <!--External service log ins-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -89,7 +90,10 @@
         android:layout_marginLeft="100dp"
         android:layout_marginRight="100dp"
         android:orientation="horizontal">
+        <!--Google-->
+        <!--todo: add google-->
 
+        <!--fb-->
         <ImageView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -97,6 +101,7 @@
             android:contentDescription="@null"
             android:src="@drawable/ic_facebook" />
 
+        <!--twitter-->
         <ImageView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -104,6 +109,7 @@
             android:contentDescription="@null"
             android:src="@drawable/ic_twitter" />
 
+        <!--linkedIn-->
         <ImageView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
