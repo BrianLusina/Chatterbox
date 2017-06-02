@@ -1,5 +1,7 @@
 package com.chatterbox.chatterbox.data
 
+import com.chatterbox.chatterbox.data.api.ApiHelper
+
 /**
  * @author lusinabrian on 02/06/17.
  * @Notes Interface layer that will be accesed by all presenter layers in the application
@@ -9,5 +11,5 @@ package com.chatterbox.chatterbox.data
  * This interface will extend all other interfaces and [DataManagerImpl] will handle the
  * implementation
  */
-interface DataManager {
+interface DataManager : ApiHelper{
 }

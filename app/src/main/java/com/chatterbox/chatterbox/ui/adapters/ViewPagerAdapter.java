@@ -1,4 +1,4 @@
-package com.chatterbox.chatterbox.data.adapters;
+package com.chatterbox.chatterbox.ui.adapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

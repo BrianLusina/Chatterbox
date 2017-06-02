@@ -5,6 +5,8 @@ import android.content.Context;
 
 import com.chatterbox.chatterbox.data.DataManager;
 import com.chatterbox.chatterbox.data.DataManagerImpl;
+import com.chatterbox.chatterbox.data.api.ApiHelper;
+import com.chatterbox.chatterbox.data.api.ApiHelperImpl;
 import com.chatterbox.chatterbox.di.ActivityContext;
 import com.chatterbox.chatterbox.di.ApplicationContext;
 
@@ -47,5 +49,9 @@ public class AppModule {
         return dataManager;
     }
 
-
+    @Provides
+    @Singleton
+    ApiHelper provideApiHelper(ApiHelperImpl apiHelper){
+        return apiHelper;
+    }
 }

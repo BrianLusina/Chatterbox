@@ -17,7 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.chatterbox.chatterbox.R;
-import com.chatterbox.chatterbox.data.adapters.ChatsFragAdapter;
+import com.chatterbox.chatterbox.ui.adapters.ChatsFragAdapter;
 import com.chatterbox.chatterbox.ui.MainActivity;
 import com.chatterbox.chatterbox.data.models.ChatsModel;
 import com.chatterbox.chatterbox.utils.RecyclerItemClickListener;

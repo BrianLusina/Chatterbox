@@ -1,4 +1,4 @@
-package com.chatterbox.chatterbox.data.adapters;
+package com.chatterbox.chatterbox.ui.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -16,7 +16,7 @@ import java.util.List;
 
 /**
  * Project: ChatterBox
- * Package: com.chatterbox.chatterbox.data.adapters
+ * Package: com.chatterbox.chatterbox.ui.adapters
  * Created by lusinabrian on 02/09/16 at 16:16
  * <p/>
  * Description: Adapter that populates the ChatsFragmentRecyclerView

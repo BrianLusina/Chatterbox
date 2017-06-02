@@ -19,7 +19,7 @@ import android.widget.ProgressBar;
 
 import com.bumptech.glide.Glide;
 import com.chatterbox.chatterbox.data.models.Contracts;
-import com.chatterbox.chatterbox.data.adapters.ChatViewHolder;
+import com.chatterbox.chatterbox.ui.adapters.ChatViewHolder;
 import com.chatterbox.chatterbox.data.models.MessageModel;
 import com.chatterbox.chatterbox.R;
 import com.chatterbox.chatterbox.ui.login.LogSignActivity;
