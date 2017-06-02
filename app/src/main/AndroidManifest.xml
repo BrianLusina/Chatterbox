@@ -22,7 +22,7 @@
             android:value="@string/facebook_app_id" />
 
         <!-- app introduction -->
-        <activity android:name=".views.introduction.IntroduceMe" />
+        <activity android:name=".ui.introduction.IntroduceMe" />
         <!--
         &lt;!&ndash;splash screen&ndash;&gt;
         <activity android:name=".introduction.SplashScreen">
@@ -34,7 +34,7 @@
         -->
         <!-- LOGIN SIGN UP FRAGMENTS -->
         <activity
-            android:name=".views.LogSignActivity"
+            android:name=".ui.login.LogSignActivity"
             android:configChanges="screenSize|orientation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -47,11 +47,11 @@
 
         <!-- Home activity -->
         <activity
-            android:name=".views.HomeActivity"
+            android:name=".ui.HomeActivity"
             android:configChanges="orientation|screenSize" />
 
         <!-- main activity -->
-        <activity android:name=".views.MainActivity">
+        <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="com.chatterbox.chatterbox.MAINACTIVITY" />
 
@@ -61,19 +61,19 @@
 
         <!-- Reset User password -->
         <activity
-            android:name=".views.ResetPasswordActivity"
+            android:name=".ui.ResetPasswordActivity"
             android:configChanges="orientation|screenSize" />
 
         <!-- SERVICES -->
         <service
-            android:name=".presenters.services.ChatterBoxMessagingService"
+            android:name=".services.ChatterBoxMessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
         <service
-            android:name=".presenters.services.ChatterBoxInstanceIdService"
+            android:name=".services.ChatterBoxInstanceIdService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
@@ -81,7 +81,7 @@
         </service>
 
         <activity
-            android:name=".views.settings.SettingsActivity"
+            android:name=".ui.settings.SettingsActivity"
             android:label="@string/title_activity_settings"></activity>
     </application>
 
