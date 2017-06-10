@@ -30,6 +30,24 @@ class DataManagerImpl
 @Inject
 constructor(@param:ApplicationContext private val mContext: Context, private val mDbHelper: DbHelper, private val mPreferenceHelper: PrefsHelper, private val mApiHelper: ApiHelper): DataManager{
 
+    override fun updateApiHeader(userId: Long?, accessToken: String) {
+
+    }
+
+    override fun setUserAsLoggedOut() {
+        updateUserInfo(
+                accessToken = null,
+                userId = null,
+                loggedInMode = LoggedInMode.LOGGED_IN_MODE_LOGGED_OUT,
+                userName = null,
+                email = null,
+                profilePicPath = null
+        )
+    }
+
+    override fun updateUserInfo(accessToken: String?, userId: Long?, loggedInMode: LoggedInMode, userName: String?, email: String?, profilePicPath: String?) {
+    }
+
     override fun getFirstStart(): Boolean {
         return mPreferenceHelper.getFirstStart()
     }

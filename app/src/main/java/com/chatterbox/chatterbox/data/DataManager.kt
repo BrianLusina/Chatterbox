@@ -14,4 +14,16 @@ import com.chatterbox.chatterbox.data.prefs.PrefsHelper
  * implementation
  */
 interface DataManager : ApiHelper, PrefsHelper, DbHelper{
+
+    fun updateApiHeader(userId: Long?, accessToken: String)
+
+    fun setUserAsLoggedOut()
+
+    fun updateUserInfo(
+            accessToken: String?,
+            userId: Long?,
+            loggedInMode: LoggedInMode,
+            userName: String?,
+            email: String?,
+            profilePicPath: String?)
 }
