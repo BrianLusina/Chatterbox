@@ -10,7 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.astuetz.PagerSlidingTabStrip;
 import com.chatterbox.chatterbox.data.models.Contracts;
 import com.chatterbox.chatterbox.R;
-import com.chatterbox.chatterbox.ui.introduction.IntroduceMe;
+import com.chatterbox.chatterbox.ui.entry.IntroduceMe;
 import com.chatterbox.chatterbox.ui.adapters.ViewPagerAdapter;
 import com.chatterbox.chatterbox.ui.auth.signup.SignUpFragment;
 import com.crashlytics.android.Crashlytics;

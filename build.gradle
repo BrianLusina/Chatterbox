@@ -7,7 +7,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.0-alpha2'
+        classpath 'com.android.tools.build:gradle:3.0.0-alpha3'
         classpath 'com.google.gms:google-services:3.0.0'
         classpath 'io.fabric.tools:gradle:1.+'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
@@ -31,6 +31,8 @@ ext{
     buildToolsVersion = "25.0.3"
     minSdkVersion = 16
     targetSdkVersion = 25
+    versionCode = 1
+    versionName = "1.1.0"
 
     // android dependencies
     constaintLayoutVersion = "1.0.2"

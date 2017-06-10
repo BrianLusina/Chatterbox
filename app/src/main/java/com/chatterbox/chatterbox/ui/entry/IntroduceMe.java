@@ -1,4 +1,4 @@
-package com.chatterbox.chatterbox.ui.introduction;
+package com.chatterbox.chatterbox.ui.entry;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;

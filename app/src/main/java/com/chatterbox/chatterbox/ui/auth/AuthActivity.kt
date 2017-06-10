@@ -4,12 +4,12 @@ import android.os.Bundle
 import android.widget.Button
 import butterknife.ButterKnife
 import com.chatterbox.chatterbox.R
-import com.chatterbox.chatterbox.ui.base.BaseActivity
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.view.animation.AnimationUtils
 import android.support.percent.PercentRelativeLayout
 import android.view.View
+import com.chatterbox.chatterbox.ui.base.BaseActivity
 
 class AuthActivity : BaseActivity(), AuthView {
     private var isLoginScreen = true
@@ -70,7 +70,6 @@ class AuthActivity : BaseActivity(), AuthView {
         val infoLogin = paramsLogin.percentLayoutInfo
         infoLogin.widthPercent = 0.15f
         loginLayout.requestLayout()
-
 
         val paramsSignup = registerLayout.layoutParams as PercentRelativeLayout.LayoutParams
         val infoSignup = paramsSignup.percentLayoutInfo

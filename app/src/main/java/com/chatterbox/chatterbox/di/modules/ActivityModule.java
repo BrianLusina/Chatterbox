@@ -8,6 +8,9 @@ import com.chatterbox.chatterbox.di.PerActivity;
 import com.chatterbox.chatterbox.ui.auth.AuthPresenter;
 import com.chatterbox.chatterbox.ui.auth.AuthPresenterImpl;
 import com.chatterbox.chatterbox.ui.auth.AuthView;
+import com.chatterbox.chatterbox.ui.entry.splash.SplashPresenter;
+import com.chatterbox.chatterbox.ui.entry.splash.SplashPresenterImpl;
+import com.chatterbox.chatterbox.ui.entry.splash.SplashView;
 
 import dagger.Module;
 import dagger.Provides;
@@ -40,6 +43,12 @@ public class ActivityModule {
     @Provides
     CompositeDisposable provideCompositeDisposable(){
         return new CompositeDisposable();
+    }
+
+    @Provides
+    @PerActivity
+    SplashPresenter<SplashView> provideSplashPresenter(SplashPresenterImpl<SplashView> splashPresenter){
+        return splashPresenter;
     }
 
     @Provides

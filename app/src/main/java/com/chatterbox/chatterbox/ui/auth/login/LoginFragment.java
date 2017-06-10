@@ -22,7 +22,7 @@ import com.chatterbox.chatterbox.data.models.Contracts;
 import com.chatterbox.chatterbox.R;
 import com.chatterbox.chatterbox.ui.HomeActivity;
 import com.chatterbox.chatterbox.ui.MainActivity;
-import com.chatterbox.chatterbox.ui.ResetPasswordActivity;
+import com.chatterbox.chatterbox.ui.auth.ResetPasswordActivity;
 import com.crashlytics.android.Crashlytics;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
