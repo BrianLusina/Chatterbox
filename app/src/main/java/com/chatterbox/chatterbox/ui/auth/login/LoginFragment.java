@@ -18,7 +18,7 @@ import android.view.WindowManager;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import com.chatterbox.chatterbox.data.models.Contracts;
+
 import com.chatterbox.chatterbox.R;
 import com.chatterbox.chatterbox.ui.HomeActivity;
 import com.chatterbox.chatterbox.ui.MainActivity;

@@ -17,7 +17,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.chatterbox.chatterbox.data.models.Contracts;
 import com.chatterbox.chatterbox.ui.chats.ChatsFragment;
 import com.chatterbox.chatterbox.R;
 import com.chatterbox.chatterbox.ui.auth.login.LogSignActivity;

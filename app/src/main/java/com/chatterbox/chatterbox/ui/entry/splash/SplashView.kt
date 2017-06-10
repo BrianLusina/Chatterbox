@@ -7,4 +7,9 @@ import com.chatterbox.chatterbox.ui.base.BaseView
  * @Notes
  */
 interface SplashView : BaseView {
+
+    fun openAuthActivity() : Unit
+
+    fun openIntroductionActivity() : Unit
+
 }

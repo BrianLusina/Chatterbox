@@ -11,4 +11,7 @@ import com.chatterbox.chatterbox.ui.base.BaseView
 
 @PerActivity
 interface SplashPresenter<V : SplashView> : BasePresenter<V>{
+
+    fun onViewInitialized() : Unit
+
 }

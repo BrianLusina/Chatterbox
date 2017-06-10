@@ -15,6 +15,24 @@ class SplashPresenterImpl<V: SplashView> @Inject constructor(mDataManager: DataM
         super.onAttach(mBaseView)
     }
 
+    override fun onViewInitialized() {
+        decideNextActivity()
+    }
+
+    /**
+     * Decides which activity to open up first
+     * if first start, open introduction activity
+     * if second start, open auth activity
+     * */
+    fun decideNextActivity(){
+        if(mDataManager.getFirstStart()){
+            mDataManager.setFirstStart(false)
+            baseView?.openIntroductionActivity()
+        }else{
+            baseView?.openAuthActivity()
+        }
+    }
+
     override fun onDetach() {
         super.onDetach()
     }

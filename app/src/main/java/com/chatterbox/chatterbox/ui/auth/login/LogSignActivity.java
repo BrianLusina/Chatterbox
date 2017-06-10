@@ -8,7 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.astuetz.PagerSlidingTabStrip;
-import com.chatterbox.chatterbox.data.models.Contracts;
+import com.chatterbox.chatterbox.BuildConfig;
 import com.chatterbox.chatterbox.R;
 import com.chatterbox.chatterbox.ui.entry.IntroduceMe;
 import com.chatterbox.chatterbox.ui.adapters.ViewPagerAdapter;
@@ -22,6 +22,8 @@ import com.twitter.sdk.android.core.TwitterAuthConfig;
 import cat.ereza.customactivityoncrash.CustomActivityOnCrash;
 import io.fabric.sdk.android.Fabric;
 
+import static com.chatterbox.chatterbox.BuildConfig.TWITTER_CONSUMER_KEY;
+
 /**
  * Project: ChatterBox
  * Package: com.chatterbox.chatterbox.login_signup
@@ -29,7 +31,6 @@ import io.fabric.sdk.android.Fabric;
  * Description: Activity with signin and login fragments
  */
 public class LogSignActivity extends AppCompatActivity{
-    private static final String LOGSIGNACTIVITY_TAG = LogSignActivity.class.getSimpleName();
     private ViewPager mViewPager;
     private PagerSlidingTabStrip pagerSlidingTabStrip;
     private CallbackManager callbackManager;
@@ -37,10 +38,14 @@ public class LogSignActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         // Configure Twitter SDK
-        TwitterAuthConfig authConfig = new TwitterAuthConfig(Contracts.TWITTER_CONSUMER_KEY, Contracts.TWITTER_CONSUMER_SECRET);
+        TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_CONSUMER_KEY,
+                BuildConfig.TWITTER_SECRET);
+
         Fabric.with(this, new Twitter(authConfig));
-//        FacebookSdk.sdkInitialize(getApplicationContext());
+
+        //        FacebookSdk.sdkInitialize(getApplicationContext());
 //        AppEventsLogger.activateApp(this);
 //        callbackManager = CallbackManager.Factory.create();
 

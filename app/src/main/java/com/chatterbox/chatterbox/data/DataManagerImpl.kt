@@ -30,4 +30,11 @@ class DataManagerImpl
 @Inject
 constructor(@param:ApplicationContext private val mContext: Context, private val mDbHelper: DbHelper, private val mPreferenceHelper: PrefsHelper, private val mApiHelper: ApiHelper): DataManager{
 
+    override fun getFirstStart(): Boolean {
+        return mPreferenceHelper.getFirstStart()
+    }
+
+    override fun setFirstStart(firstStart: Boolean) {
+        return mPreferenceHelper.setFirstStart(firstStart)
+    }
 }

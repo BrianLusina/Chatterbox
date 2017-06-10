@@ -16,6 +16,7 @@ import com.chatterbox.chatterbox.R
 import com.chatterbox.chatterbox.ui.auth.AuthActivity
 import com.chatterbox.chatterbox.ui.auth.login.LogSignActivity
 import com.chatterbox.chatterbox.ui.base.BaseActivity
+import com.chatterbox.chatterbox.ui.entry.IntroduceMe
 import javax.inject.Inject
 
 /**
@@ -59,38 +60,33 @@ class SplashScreen : BaseActivity(), Animation.AnimationListener, SplashView {
         appName = findViewById(R.id.appname_splash) as TextView
         appTag = findViewById(R.id.apptag_splash) as TextView
 
-        //set the fonts
-        val fontPath = "fonts/roboto_rediumitalic.ttf"
-        val typeface = Typeface.createFromAsset(assets, fontPath)
+        splashPresenter.onViewInitialized()
 
-        appName.typeface = typeface
-
-        /*add animation to application tag*/
-        appTag.animation = animFadeIn
-
-        //load animations
-        animFadeIn = AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in)
-        //add animation listener
-        animFadeIn.setAnimationListener(this)
-
-        /*Sets the timer*/
-        val timer = object : Thread() {
-            override fun run() {
-                try {
-                    Thread.sleep(3000)
-                    /*open sign in screen*/
-                    val openMain = Intent(this@SplashScreen, AuthActivity::class.java)
-                    startActivity(openMain)
-                } catch (ie: InterruptedException) {
-                    ie.printStackTrace()
-                    Log.d(ie.toString(), TAG)
-                }
-
-            }
-        }
-        timer.start()
+//        //set the fonts
+//        val fontPath = "fonts/roboto_rediumitalic.ttf"
+//        val typeface = Typeface.createFromAsset(assets, fontPath)
+//
+//        appName.typeface = typeface
+//
+//        /*add animation to application tag*/
+//        appTag.animation = animFadeIn
+//
+//        //load animations
+//        animFadeIn = AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in)
+//        //add animation listener
+//        animFadeIn.setAnimationListener(this)
     }
-    
+
+    override fun openAuthActivity() {
+        val openMain = Intent(this, AuthActivity::class.java)
+        startActivity(openMain)
+    }
+
+    override fun openIntroductionActivity() {
+        val openMain = Intent(this, IntroduceMe::class.java)
+        startActivity(openMain)
+    }
+
     /*kill this splash screen to save memory*/
     override fun onPause() {
         super.onPause()
