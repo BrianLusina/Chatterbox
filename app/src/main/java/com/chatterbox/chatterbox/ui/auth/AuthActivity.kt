@@ -67,6 +67,12 @@ class AuthActivity : BaseActivity(), AuthView, View.OnClickListener {
         setUp()
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        twitterLoginButton.onActivityResult(requestCode, resultCode, data)
+    }
+
     override fun setUp() {
 
         registerInvokerTxtView = findViewById(R.id.registerInvokerTxtView) as TextView
@@ -171,6 +177,7 @@ class AuthActivity : BaseActivity(), AuthView, View.OnClickListener {
 
             R.id.auth_fbLogin_imageBtn -> authPresenter.onFacebookLoginClick()
         }
-
     }
+
+
 }

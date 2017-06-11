@@ -1,5 +1,6 @@
 package com.chatterbox.chatterbox.ui.auth
 
+import android.content.Intent
 import com.chatterbox.chatterbox.ui.base.BaseView
 
 /**
