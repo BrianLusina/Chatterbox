@@ -27,9 +27,9 @@ class SplashPresenterImpl<V: SplashView> @Inject constructor(mDataManager: DataM
     fun decideNextActivity(){
         if(mDataManager.getFirstStart()){
             mDataManager.setFirstStart(false)
-            baseView?.openIntroductionActivity()
+            baseView.openIntroductionActivity()
         }else{
-            baseView?.openAuthActivity()
+            baseView.openAuthActivity()
         }
     }
 

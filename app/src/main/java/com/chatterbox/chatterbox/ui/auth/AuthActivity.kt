@@ -52,7 +52,7 @@ class AuthActivity : BaseActivity(), AuthView, View.OnClickListener {
     lateinit var firebaseAuth : FirebaseAuth
 
     @Inject
-    lateinit var firebaseUser : FirebaseUser
+    lateinit var mFirebaseUser : FirebaseUser
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -160,13 +160,17 @@ class AuthActivity : BaseActivity(), AuthView, View.OnClickListener {
         startActivity(Intent(this, HomeActivity::class.java))
     }
 
+    override fun updateFirebaseUser(firebaseUser: FirebaseUser) {
+        mFirebaseUser = firebaseUser
+    }
+
     override fun onClick(v: View?) {
         when(v?.id){
             R.id.auth_twitterLogin_imgBtn -> {
 
                 twitterLoginButton.callback = object : Callback<TwitterSession>() {
                     override  fun success(result: Result<TwitterSession>) {
-                        authPresenter.onTwitterLoginClick(result.data)
+                        authPresenter.onTwitterLoginClick(firebaseAuth, result.data)
                     }
 
                     override fun failure(exception: TwitterException) {

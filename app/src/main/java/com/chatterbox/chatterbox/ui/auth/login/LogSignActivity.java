@@ -16,7 +16,6 @@ import com.chatterbox.chatterbox.ui.auth.signup.SignUpFragment;
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.answers.Answers;
 import com.facebook.CallbackManager;
-import com.twitter.sdk.android.Twitter;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
 
 import cat.ereza.customactivityoncrash.CustomActivityOnCrash;

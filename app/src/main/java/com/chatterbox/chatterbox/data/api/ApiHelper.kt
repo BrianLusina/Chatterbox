@@ -1,6 +1,7 @@
 package com.chatterbox.chatterbox.data.api
 
 import com.google.firebase.auth.AuthCredential
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
 /**
@@ -14,5 +15,5 @@ interface ApiHelper {
      * @param twitterAuthCredential TwitterAuthCredential used to get credentials From Twitter
      * which will then be passed on To firebase for authenticating user
      * */
-    fun doLoginWithTwitter(twitterAuthCredential: AuthCredential) : Pair<Boolean, FirebaseUser>
+    fun doLoginWithTwitter(firebaseAuth: FirebaseAuth, twitterAuthCredential: AuthCredential) : Pair<Boolean, FirebaseUser>
 }

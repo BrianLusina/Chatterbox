@@ -24,6 +24,7 @@ object Constants {
     @JvmField
     val RC_SIGN_IN = 9001
 
+    @JvmField
     val MESSAGES_CHILD = "messages"
 
     @JvmField
@@ -32,6 +33,8 @@ object Constants {
 
     @JvmField
     val ANONYMOUS = "anonymous"
+
+    @JvmField
     val MESSAGE_SENT_EVENT = "message_sent"
 
     val PROFILE_SETTING = 1

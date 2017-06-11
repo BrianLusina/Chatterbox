@@ -3,6 +3,8 @@ package com.chatterbox.chatterbox.data
 import com.chatterbox.chatterbox.data.api.ApiHelper
 import com.chatterbox.chatterbox.data.db.DbHelper
 import com.chatterbox.chatterbox.data.prefs.PrefsHelper
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 
 /**
  * @author lusinabrian on 02/06/17.
@@ -26,4 +28,10 @@ interface DataManager : ApiHelper, PrefsHelper, DbHelper{
             userName: String?,
             email: String?,
             profilePicPath: String?)
+
+    /**
+     * Updates firebase user from firebase auth
+     * @return [FirebaseUser] currently logged in firebase user
+     * */
+    fun updateFirebaseUser(firebaseUser: FirebaseUser) : FirebaseUser
 }

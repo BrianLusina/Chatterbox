@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 
 import com.chatterbox.chatterbox.di.ActivityContext;
+import com.chatterbox.chatterbox.di.ApplicationContext;
 import com.chatterbox.chatterbox.di.PerActivity;
 import com.chatterbox.chatterbox.ui.auth.AuthPresenter;
 import com.chatterbox.chatterbox.ui.auth.AuthPresenterImpl;
@@ -11,6 +12,10 @@ import com.chatterbox.chatterbox.ui.auth.AuthView;
 import com.chatterbox.chatterbox.ui.entry.splash.SplashPresenter;
 import com.chatterbox.chatterbox.ui.entry.splash.SplashPresenterImpl;
 import com.chatterbox.chatterbox.ui.entry.splash.SplashView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
@@ -43,6 +48,16 @@ public class ActivityModule {
     @Provides
     CompositeDisposable provideCompositeDisposable(){
         return new CompositeDisposable();
+    }
+
+    @Provides
+    FirebaseAuth provideFirebaseAuth(){
+        return FirebaseAuth.getInstance();
+    }
+
+    @Provides
+    FirebaseUser provideFirebaseUser(FirebaseAuth firebaseAuth) {
+        return firebaseAuth.getCurrentUser();
     }
 
     @Provides

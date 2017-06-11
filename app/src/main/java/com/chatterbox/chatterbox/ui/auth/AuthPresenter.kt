@@ -2,6 +2,8 @@ package com.chatterbox.chatterbox.ui.auth
 
 import com.chatterbox.chatterbox.di.PerActivity
 import com.chatterbox.chatterbox.ui.base.BasePresenter
+import com.google.firebase.auth.FirebaseAuth
+
 import com.twitter.sdk.android.core.TwitterSession
 
 /**
@@ -18,7 +20,7 @@ interface AuthPresenter<V : AuthView> : BasePresenter<V> {
      * View
      * @param twitterSession TwitterSession that will be passed in from TwitterLoginButton SDK
      * */
-    fun onTwitterLoginClick(twitterSession: TwitterSession) : Unit
+    fun onTwitterLoginClick(firebaseAuth: FirebaseAuth, twitterSession: TwitterSession) : Unit
 
     /**
      * Callback for logging in with Facebook

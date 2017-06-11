@@ -7,10 +7,11 @@ import com.chatterbox.chatterbox.data.DataManager;
 import com.chatterbox.chatterbox.di.components.AppComponent;
 import com.chatterbox.chatterbox.di.components.DaggerAppComponent;
 import com.chatterbox.chatterbox.di.modules.AppModule;
-import com.chatterbox.chatterbox.ui.MainActivity;
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.answers.Answers;
-import com.twitter.sdk.android.Twitter;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.twitter.sdk.android.core.Twitter;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
 
 import javax.inject.Inject;
@@ -38,6 +39,12 @@ public class ChatterBoxApp extends Application{
 
     @Inject
     Answers answers;
+
+    @Inject
+    FirebaseAuth firebaseAuth;
+
+    @Inject
+    FirebaseUser firebaseUser;
 
     @Override
     public void onCreate() {
@@ -84,6 +91,6 @@ public class ChatterBoxApp extends Application{
         Fabric.with(this, answers);
 
         // initialize AuthConfig
-        Fabric.with(this, new Twitter(authConfig));
+        //Fabric.with(this, new Twitter(authConfig));
     }
 }

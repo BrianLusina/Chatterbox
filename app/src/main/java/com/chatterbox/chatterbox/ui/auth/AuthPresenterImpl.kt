@@ -1,13 +1,13 @@
 package com.chatterbox.chatterbox.ui.auth
 
 import com.chatterbox.chatterbox.data.DataManager
-import com.chatterbox.chatterbox.ui.base.BasePresenter
 import com.chatterbox.chatterbox.ui.base.BasePresenterImpl
 import com.twitter.sdk.android.core.TwitterSession
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 import com.google.firebase.auth.TwitterAuthProvider
 import com.chatterbox.chatterbox.data.LoggedInMode
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
 
@@ -24,13 +24,14 @@ class AuthPresenterImpl<V : AuthView>
         super.onAttach(mBaseView)
     }
 
-    override fun onTwitterLoginClick(twitterSession: TwitterSession) {
+    override fun onTwitterLoginClick(firebaseAuth: FirebaseAuth,twitterSession: TwitterSession) {
+
         val credential = TwitterAuthProvider.getCredential(
                 twitterSession.authToken.token,
                 twitterSession.authToken.secret)
 
         // get the login success and firebase user
-        val (loginSuccess, FirebaseUser) = mDataManager.doLoginWithTwitter(credential)
+        val (loginSuccess, FirebaseUser) = mDataManager.doLoginWithTwitter(firebaseAuth,credential)
 
         loginUserCallback(loginSuccess, loggedInMode = LoggedInMode.LOGGED_IN_MODE_TWITTER,
                 firebaseUser = FirebaseUser)
@@ -64,7 +65,11 @@ class AuthPresenterImpl<V : AuthView>
                     profilePicPath = firebaseUser.photoUrl.toString()
             )
 
-            baseView?.openMainActivity()
+            // update firebase user
+            baseView.updateFirebaseUser(mDataManager.updateFirebaseUser(firebaseUser))
+
+            // open main activity
+            baseView.openMainActivity()
         }else{
             // display error to user
         }

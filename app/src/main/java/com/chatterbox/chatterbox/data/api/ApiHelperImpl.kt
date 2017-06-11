@@ -21,23 +21,20 @@ import com.google.firebase.auth.AuthResult
 @Singleton
 class ApiHelperImpl @Inject constructor(): ApiHelper{
 
-    @Inject
-    lateinit var firebaseAuth : FirebaseAuth
-
-    @Inject
-    lateinit var firebaseUser : FirebaseUser
-
-    override fun doLoginWithTwitter(twitterAuthCredential: AuthCredential) : Pair<Boolean, FirebaseUser>{
+    override fun doLoginWithTwitter(firebaseAuth: FirebaseAuth, twitterAuthCredential: AuthCredential) : Pair<Boolean, FirebaseUser>{
         var loginSuccess : Boolean = false
+        var firebaseUser : FirebaseUser = firebaseAuth.currentUser as FirebaseUser
+
         firebaseAuth.signInWithCredential(twitterAuthCredential).addOnCompleteListener(
                 { task ->
                     if (task.isSuccessful) {
-                        firebaseUser = firebaseAuth.currentUser!!
+                        firebaseUser = firebaseAuth.currentUser as FirebaseUser
                         loginSuccess = true
                     } else {
                         loginSuccess = false
                     }
                 })
+
         return Pair(loginSuccess, firebaseUser)
     }
 }
