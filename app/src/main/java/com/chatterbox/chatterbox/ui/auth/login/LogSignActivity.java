@@ -39,63 +39,14 @@ public class LogSignActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Configure Twitter SDK
-        TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_CONSUMER_KEY,
-                BuildConfig.TWITTER_SECRET);
-
-        Fabric.with(this, new Twitter(authConfig));
-
         //        FacebookSdk.sdkInitialize(getApplicationContext());
 //        AppEventsLogger.activateApp(this);
 //        callbackManager = CallbackManager.Factory.create();
 
         setContentView(R.layout.userlogin_activity);
         initViews();
-
-        /*LAUNCHES APP INTRO*/
-        Thread thread = new Thread(){
-            /**
-             * Calls the <code>run()</code> method of the Runnable object the receiver
-             * holds. If no Runnable is set, does nothing.
-             * @see Thread#start
-             */
-            @Override
-            public void run() {
-                super.run();
-                SharedPreferences getPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-
-                //create a new boolean and preference and set it to true
-                boolean isFirstStart = getPrefs.getBoolean("firstStart", true);
-
-                //if activity has never started before
-                if(isFirstStart){
-                    //launch this activity
-                    Intent intent = new Intent(LogSignActivity.this, IntroduceMe.class);
-                    startActivity(intent);
-
-                    //make a new shared preferences editor
-                    SharedPreferences.Editor editor = getPrefs.edit();
-
-                    //  Edit preference to make it false because we don't want this to run again
-                    editor.putBoolean("firstStart", false);
-
-                    //apply the changes
-                    editor.apply();
-                }
-            }
-        };
-        thread.start();
-
-        CustomActivityOnCrash.install(this);
-        CustomActivityOnCrash.setEnableAppRestart(true);
-        CustomActivityOnCrash.setRestartActivityClass(LogSignActivity.class);
-        Fabric.with(this, new Crashlytics());
-        /*initialize Answers*/
-        Fabric.with(this, new Answers());
-
-        //TODO: Set to false when publishing app
-        CustomActivityOnCrash.setShowErrorDetails(true);
     }
+
     /**Initialize the UI contols*/
     private void initViews() {
         mViewPager = (ViewPager) findViewById(R.id.userlogin_viewpager_id);

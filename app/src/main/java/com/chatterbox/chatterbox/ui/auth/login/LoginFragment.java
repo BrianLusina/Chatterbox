@@ -23,6 +23,7 @@ import com.chatterbox.chatterbox.R;
 import com.chatterbox.chatterbox.ui.HomeActivity;
 import com.chatterbox.chatterbox.ui.MainActivity;
 import com.chatterbox.chatterbox.ui.auth.ResetPasswordActivity;
+import com.chatterbox.chatterbox.utils.Constants;
 import com.crashlytics.android.Crashlytics;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -366,7 +367,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
     /**Method that signs in the user*/
     private void signIn_google(){
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
-        startActivityForResult(signInIntent, Contracts.RC_SIGN_IN);
+        startActivityForResult(signInIntent, Constants.RC_SIGN_IN);
     }
 
 
@@ -374,7 +375,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-        if(requestCode == Contracts.RC_SIGN_IN){
+        if(requestCode == Constants.RC_SIGN_IN){
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             if (result.isSuccess()) {
                 // Google Sign In was successful, authenticate with Firebase

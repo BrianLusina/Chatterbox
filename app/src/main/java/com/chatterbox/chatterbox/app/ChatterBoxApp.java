@@ -9,6 +9,9 @@ import com.chatterbox.chatterbox.di.components.DaggerAppComponent;
 import com.chatterbox.chatterbox.di.modules.AppModule;
 import com.chatterbox.chatterbox.ui.MainActivity;
 import com.crashlytics.android.Crashlytics;
+import com.crashlytics.android.answers.Answers;
+import com.twitter.sdk.android.Twitter;
+import com.twitter.sdk.android.core.TwitterAuthConfig;
 
 import javax.inject.Inject;
 
@@ -26,6 +29,9 @@ public class ChatterBoxApp extends Application{
 
     @Inject
     DataManager mDataManager;
+
+    @Inject
+    TwitterAuthConfig authConfig;
 
     @Override
     public void onCreate() {
@@ -68,5 +74,10 @@ public class ChatterBoxApp extends Application{
 
         // report to Fabric!
         Fabric.with(this, new Crashlytics());
+        /*initialize Answers*/
+        Fabric.with(this, new Answers());
+
+        // initialize AuthConfig
+        Fabric.with(this, new Twitter(authConfig));
     }
 }
