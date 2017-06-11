@@ -6,4 +6,10 @@ package com.chatterbox.chatterbox.data.api
  */
 interface ApiHelper {
 
+    /**
+     * Logs in a user with Twitter
+     * */
+//    fun doLoginWithTwitter(): Unit {
+//
+//    }
 }
