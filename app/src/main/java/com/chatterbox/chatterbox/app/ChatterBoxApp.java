@@ -33,6 +33,12 @@ public class ChatterBoxApp extends Application{
     @Inject
     TwitterAuthConfig authConfig;
 
+    @Inject
+    Crashlytics crashlytics;
+
+    @Inject
+    Answers answers;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -73,9 +79,9 @@ public class ChatterBoxApp extends Application{
         CustomActivityOnCrash.setEnableAppRestart(true);
 
         // report to Fabric!
-        Fabric.with(this, new Crashlytics());
+        Fabric.with(this, crashlytics);
         /*initialize Answers*/
-        Fabric.with(this, new Answers());
+        Fabric.with(this, answers);
 
         // initialize AuthConfig
         Fabric.with(this, new Twitter(authConfig));
