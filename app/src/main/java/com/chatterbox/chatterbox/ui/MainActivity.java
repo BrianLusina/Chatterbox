@@ -18,11 +18,11 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 
 import com.bumptech.glide.Glide;
-import com.chatterbox.chatterbox.data.models.Contracts;
 import com.chatterbox.chatterbox.ui.adapters.ChatViewHolder;
 import com.chatterbox.chatterbox.data.models.MessageModel;
 import com.chatterbox.chatterbox.R;
 import com.chatterbox.chatterbox.ui.auth.login.LogSignActivity;
+import com.chatterbox.chatterbox.utils.Constants;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.auth.api.Auth;
@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         // Set default username is anonymous.
-        mUsername = Contracts.ANONYMOUS;
+        mUsername = Constants.ANONYMOUS;
 
         // Initialize Firebase Auth
         mFirebaseAuth = FirebaseAuth.getInstance();
@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 MessageModel.class,
                 R.layout.item_message,
                 ChatViewHolder.class,
-                mFirebaseDatabaseReference.child(Contracts.MESSAGES_CHILD)) {
+                mFirebaseDatabaseReference.child(Constants.MESSAGES_CHILD)) {
 
             @Override
             protected void populateViewHolder(ChatViewHolder viewHolder, MessageModel friendlyMessage, int position) {
@@ -180,9 +180,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             @Override
             public void onClick(View view) {
                 MessageModel friendlyMessage = new MessageModel(mUsername, mPhotoUrl, mMessageEditText.getText().toString());
-                mFirebaseDatabaseReference.child(Contracts.MESSAGES_CHILD).push().setValue(friendlyMessage);
+                mFirebaseDatabaseReference.child(Constants.MESSAGES_CHILD).push().setValue(friendlyMessage);
                 mMessageEditText.setText("");
-                mFirebaseAnalytics.logEvent(Contracts.MESSAGE_SENT_EVENT, null);
+                mFirebaseAnalytics.logEvent(Constants.MESSAGE_SENT_EVENT, null);
             }
         });
 

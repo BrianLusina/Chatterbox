@@ -5,4 +5,14 @@ package com.chatterbox.chatterbox.data.prefs
  * @Notes Interface for preferences layer
  */
 interface PrefsHelper {
+
+    /**
+     * Gets the first start. if this is the first start of this application will return True
+     * */
+    fun getFirstStart(): Boolean
+
+    /**
+     * Sets the first start of the user on this application
+     * */
+    fun setFirstStart(firstStart: Boolean) : Unit
 }

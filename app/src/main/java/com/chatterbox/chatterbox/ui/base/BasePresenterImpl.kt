@@ -9,14 +9,13 @@ import javax.inject.Inject
  * @Notes Presenter implementation, Each implementation of a presenter layer must inherit from
  * this class
  */
-abstract class BasePresenterImpl<V : BaseView> @Inject constructor(val mDataManager: DataManager, val mCompositeDisposable: CompositeDisposable): BasePresenter<V>{
+open class BasePresenterImpl<V : BaseView> @Inject constructor(val mDataManager: DataManager, val mCompositeDisposable: CompositeDisposable): BasePresenter<V>{
     /**
      * Gets the base view
      * @return [BaseView]
      */
 
-    var baseView: V? = null
-        private set
+    lateinit var baseView: V
 
     override fun onAttach(mBaseView: V) {
         this.baseView = mBaseView
@@ -24,13 +23,12 @@ abstract class BasePresenterImpl<V : BaseView> @Inject constructor(val mDataMana
 
     override fun onDetach() {
         mCompositeDisposable.dispose()
-        baseView = null
     }
 
     /**
      * Checks if the view has been attached */
     val isViewAttached: Boolean
-        get() = baseView != null
+        get() = true
 
     /**
      * Checks if the view has been attached
