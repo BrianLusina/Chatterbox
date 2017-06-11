@@ -5,6 +5,9 @@ import com.chatterbox.chatterbox.data.api.ApiHelper
 import com.chatterbox.chatterbox.data.db.DbHelper
 import com.chatterbox.chatterbox.data.prefs.PrefsHelper
 import com.chatterbox.chatterbox.di.ApplicationContext
+import com.google.firebase.auth.AuthCredential
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.TwitterAuthCredential
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -54,5 +57,9 @@ constructor(@param:ApplicationContext private val mContext: Context, private val
 
     override fun setFirstStart(firstStart: Boolean) {
         return mPreferenceHelper.setFirstStart(firstStart)
+    }
+
+    override fun doLoginWithTwitter(twitterAuthCredential: AuthCredential) : Pair<Boolean, FirebaseUser>{
+        return mApiHelper.doLoginWithTwitter(twitterAuthCredential)
     }
 }

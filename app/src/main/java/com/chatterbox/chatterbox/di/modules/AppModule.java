@@ -20,6 +20,7 @@ import com.chatterbox.chatterbox.utils.Constants;
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.answers.Answers;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
 
 import javax.inject.Inject;
@@ -116,6 +117,12 @@ public class AppModule {
     @Singleton
     FirebaseAuth provideFirebaseAuth(){
         return FirebaseAuth.getInstance();
+    }
+
+    @Provides
+    @Singleton
+    FirebaseUser provideFirebaseUser(FirebaseAuth firebaseAuth) {
+        return firebaseAuth.getCurrentUser();
     }
 
     @Provides

@@ -21,7 +21,10 @@ import com.twitter.sdk.android.core.TwitterSession
 import com.twitter.sdk.android.core.identity.TwitterLoginButton
 import com.twitter.sdk.android.core.TwitterException
 import android.R.attr.data
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.twitter.sdk.android.core.Result
+import javax.inject.Inject
 
 
 class AuthActivity : BaseActivity(), AuthView, View.OnClickListener {
@@ -42,8 +45,14 @@ class AuthActivity : BaseActivity(), AuthView, View.OnClickListener {
     private lateinit var googleImageBtn : ImageButton
     private lateinit var googleSignInButton : SignInButton
     
-    //@Inject
+    @Inject
     lateinit var authPresenter: AuthPresenter<AuthView>
+
+    @Inject
+    lateinit var firebaseAuth : FirebaseAuth
+
+    @Inject
+    lateinit var firebaseUser : FirebaseUser
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
