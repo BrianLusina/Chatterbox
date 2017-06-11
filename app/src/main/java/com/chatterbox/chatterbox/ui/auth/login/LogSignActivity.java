@@ -8,19 +8,20 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.astuetz.PagerSlidingTabStrip;
-import com.chatterbox.chatterbox.data.models.Contracts;
+import com.chatterbox.chatterbox.BuildConfig;
 import com.chatterbox.chatterbox.R;
-import com.chatterbox.chatterbox.ui.introduction.IntroduceMe;
+import com.chatterbox.chatterbox.ui.entry.IntroduceMe;
 import com.chatterbox.chatterbox.ui.adapters.ViewPagerAdapter;
 import com.chatterbox.chatterbox.ui.auth.signup.SignUpFragment;
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.answers.Answers;
 import com.facebook.CallbackManager;
-import com.twitter.sdk.android.Twitter;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
 
 import cat.ereza.customactivityoncrash.CustomActivityOnCrash;
 import io.fabric.sdk.android.Fabric;
+
+import static com.chatterbox.chatterbox.BuildConfig.TWITTER_CONSUMER_KEY;
 
 /**
  * Project: ChatterBox
@@ -29,7 +30,6 @@ import io.fabric.sdk.android.Fabric;
  * Description: Activity with signin and login fragments
  */
 public class LogSignActivity extends AppCompatActivity{
-    private static final String LOGSIGNACTIVITY_TAG = LogSignActivity.class.getSimpleName();
     private ViewPager mViewPager;
     private PagerSlidingTabStrip pagerSlidingTabStrip;
     private CallbackManager callbackManager;
@@ -37,60 +37,15 @@ public class LogSignActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Configure Twitter SDK
-        TwitterAuthConfig authConfig = new TwitterAuthConfig(Contracts.TWITTER_CONSUMER_KEY, Contracts.TWITTER_CONSUMER_SECRET);
-        Fabric.with(this, new Twitter(authConfig));
-//        FacebookSdk.sdkInitialize(getApplicationContext());
+
+        //        FacebookSdk.sdkInitialize(getApplicationContext());
 //        AppEventsLogger.activateApp(this);
 //        callbackManager = CallbackManager.Factory.create();
 
         setContentView(R.layout.userlogin_activity);
         initViews();
-
-        /*LAUNCHES APP INTRO*/
-        Thread thread = new Thread(){
-            /**
-             * Calls the <code>run()</code> method of the Runnable object the receiver
-             * holds. If no Runnable is set, does nothing.
-             * @see Thread#start
-             */
-            @Override
-            public void run() {
-                super.run();
-                SharedPreferences getPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-
-                //create a new boolean and preference and set it to true
-                boolean isFirstStart = getPrefs.getBoolean("firstStart", true);
-
-                //if activity has never started before
-                if(isFirstStart){
-                    //launch this activity
-                    Intent intent = new Intent(LogSignActivity.this, IntroduceMe.class);
-                    startActivity(intent);
-
-                    //make a new shared preferences editor
-                    SharedPreferences.Editor editor = getPrefs.edit();
-
-                    //  Edit preference to make it false because we don't want this to run again
-                    editor.putBoolean("firstStart", false);
-
-                    //apply the changes
-                    editor.apply();
-                }
-            }
-        };
-        thread.start();
-
-        CustomActivityOnCrash.install(this);
-        CustomActivityOnCrash.setEnableAppRestart(true);
-        CustomActivityOnCrash.setRestartActivityClass(LogSignActivity.class);
-        Fabric.with(this, new Crashlytics());
-        /*initialize Answers*/
-        Fabric.with(this, new Answers());
-
-        //TODO: Set to false when publishing app
-        CustomActivityOnCrash.setShowErrorDetails(true);
     }
+
     /**Initialize the UI contols*/
     private void initViews() {
         mViewPager = (ViewPager) findViewById(R.id.userlogin_viewpager_id);

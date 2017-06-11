@@ -17,11 +17,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.chatterbox.chatterbox.data.models.Contracts;
 import com.chatterbox.chatterbox.ui.chats.ChatsFragment;
 import com.chatterbox.chatterbox.R;
 import com.chatterbox.chatterbox.ui.auth.login.LogSignActivity;
 import com.chatterbox.chatterbox.ui.settings.SettingsActivity;
+import com.chatterbox.chatterbox.utils.Constants;
 import com.google.android.gms.appinvite.AppInviteInvitation;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -346,7 +346,7 @@ public class HomeActivity extends AppCompatActivity{
         super.onActivityResult(requestCode, resultCode, data);
         Log.d(HOMEACTIVITY_TAG, "onActivityResult: requestCode=" + requestCode + ", resultCode=" + resultCode);
 
-        if (requestCode == Contracts.REQUEST_INVITE) {
+        if (requestCode == Constants.REQUEST_INVITE) {
             if (resultCode == RESULT_OK) {
                 // Use Firebase Measurement to log that invitation was sent.
                 Bundle payload = new Bundle();
@@ -388,7 +388,7 @@ public class HomeActivity extends AppCompatActivity{
                 mFirebaseAuth.signOut();
                 Auth.GoogleSignInApi.signOut(mGoogleApiClient);
                 mFirebaseUser = null;
-                mUsername = Contracts.ANONYMOUS;
+                mUsername = Constants.ANONYMOUS;
                 mPhotoUrl = null;
                 startActivity(new Intent(this, LogSignActivity.class));
                 return true;
@@ -411,7 +411,7 @@ public class HomeActivity extends AppCompatActivity{
                 .setMessage(getString(R.string.invitation_message))
                 .setCallToActionText(getString(R.string.invitation_cta))
                 .build();
-        startActivityForResult(intent, Contracts.REQUEST_INVITE);
+        startActivityForResult(intent, Constants.REQUEST_INVITE);
     }
 
     /**Fetch the config to determine the allowed length of messages.*/

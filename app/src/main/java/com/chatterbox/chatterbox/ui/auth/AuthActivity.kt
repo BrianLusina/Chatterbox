@@ -1,17 +1,33 @@
 package com.chatterbox.chatterbox.ui.auth
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import butterknife.ButterKnife
 import com.chatterbox.chatterbox.R
-import com.chatterbox.chatterbox.ui.base.BaseActivity
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.view.animation.AnimationUtils
 import android.support.percent.PercentRelativeLayout
 import android.view.View
+import android.widget.ImageButton
+import com.chatterbox.chatterbox.ui.HomeActivity
+import com.chatterbox.chatterbox.ui.MainActivity
+import com.chatterbox.chatterbox.ui.base.BaseActivity
+import com.facebook.login.widget.LoginButton
+import com.google.android.gms.common.SignInButton
+import com.twitter.sdk.android.core.Callback
+import com.twitter.sdk.android.core.TwitterSession
+import com.twitter.sdk.android.core.identity.TwitterLoginButton
+import com.twitter.sdk.android.core.TwitterException
+import android.R.attr.data
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.twitter.sdk.android.core.Result
+import javax.inject.Inject
 
-class AuthActivity : BaseActivity(), AuthView {
+
+class AuthActivity : BaseActivity(), AuthView, View.OnClickListener {
     private var isLoginScreen = true
     private lateinit var registerInvokerTxtView: TextView
     private lateinit var registerLayout: LinearLayout
@@ -20,8 +36,23 @@ class AuthActivity : BaseActivity(), AuthView {
     private lateinit var registerBtn: Button
     private lateinit var loginBtn: Button
 
-    //@Inject
+    private lateinit var fbImageBtn : ImageButton
+    private lateinit var fbLoginButton : LoginButton
+
+    private lateinit var twitterImageBtn : ImageButton
+    private lateinit var twitterLoginButton : TwitterLoginButton
+
+    private lateinit var googleImageBtn : ImageButton
+    private lateinit var googleSignInButton : SignInButton
+    
+    @Inject
     lateinit var authPresenter: AuthPresenter<AuthView>
+
+    @Inject
+    lateinit var firebaseAuth : FirebaseAuth
+
+    @Inject
+    lateinit var mFirebaseUser : FirebaseUser
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +67,12 @@ class AuthActivity : BaseActivity(), AuthView {
         setUp()
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        twitterLoginButton.onActivityResult(requestCode, resultCode, data)
+    }
+
     override fun setUp() {
 
         registerInvokerTxtView = findViewById(R.id.registerInvokerTxtView) as TextView
@@ -43,9 +80,20 @@ class AuthActivity : BaseActivity(), AuthView {
 
         registerBtn = findViewById(R.id.registerBtn) as Button
         loginBtn = findViewById(R.id.loginBtn) as Button
+        
+        fbImageBtn = findViewById(R.id.auth_fbLogin_imageBtn) as ImageButton
+        fbLoginButton =  findViewById(R.id.auth_facebook_login_button) as LoginButton
+        
+        twitterImageBtn = findViewById(R.id.auth_twitterLogin_imgBtn) as ImageButton
+        twitterLoginButton = findViewById(R.id.auth_twitter_login_button) as TwitterLoginButton
 
+        googleSignInButton = findViewById(R.id.auth_googleSign_in_button) as SignInButton
+        
         registerLayout = findViewById(R.id.registerLayout) as LinearLayout
         loginLayout = findViewById(R.id.loginLayout) as LinearLayout
+
+        twitterImageBtn.setOnClickListener(this)
+        fbImageBtn.setOnClickListener(this)
 
         registerInvokerTxtView.setOnClickListener {
             isLoginScreen = false
@@ -56,6 +104,7 @@ class AuthActivity : BaseActivity(), AuthView {
             isLoginScreen = true
             showLoginForm()
         }
+
         showLoginForm()
 
         registerBtn.setOnClickListener {
@@ -70,7 +119,6 @@ class AuthActivity : BaseActivity(), AuthView {
         val infoLogin = paramsLogin.percentLayoutInfo
         infoLogin.widthPercent = 0.15f
         loginLayout.requestLayout()
-
 
         val paramsSignup = registerLayout.layoutParams as PercentRelativeLayout.LayoutParams
         val infoSignup = paramsSignup.percentLayoutInfo
@@ -107,4 +155,33 @@ class AuthActivity : BaseActivity(), AuthView {
         val clockwise = AnimationUtils.loadAnimation(applicationContext, R.anim.rotate_left_to_right)
         loginBtn.startAnimation(clockwise)
     }
+
+    override fun openMainActivity() {
+        startActivity(Intent(this, HomeActivity::class.java))
+    }
+
+    override fun updateFirebaseUser(firebaseUser: FirebaseUser) {
+        mFirebaseUser = firebaseUser
+    }
+
+    override fun onClick(v: View?) {
+        when(v?.id){
+            R.id.auth_twitterLogin_imgBtn -> {
+
+                twitterLoginButton.callback = object : Callback<TwitterSession>() {
+                    override  fun success(result: Result<TwitterSession>) {
+                        authPresenter.onTwitterLoginClick(firebaseAuth, result.data)
+                    }
+
+                    override fun failure(exception: TwitterException) {
+                        // inform user of failure
+                    }
+                }
+            }
+
+            R.id.auth_fbLogin_imageBtn -> authPresenter.onFacebookLoginClick()
+        }
+    }
+
+
 }

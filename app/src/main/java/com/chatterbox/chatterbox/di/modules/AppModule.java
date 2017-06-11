@@ -17,11 +17,19 @@ import com.chatterbox.chatterbox.di.ApplicationContext;
 import com.chatterbox.chatterbox.di.DatabaseInfo;
 import com.chatterbox.chatterbox.di.PreferenceInfo;
 import com.chatterbox.chatterbox.utils.Constants;
+import com.crashlytics.android.Crashlytics;
+import com.crashlytics.android.answers.Answers;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.twitter.sdk.android.core.TwitterAuthConfig;
 
+import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+
+import static com.chatterbox.chatterbox.BuildConfig.TWITTER_CONSUMER_KEY;
 
 /**
  * @author lusinabrian on 02/06/17.
@@ -103,5 +111,36 @@ public class AppModule {
     @Singleton
     DbHelper provideDbHelper(DbHelperImpl dbHelper){
         return dbHelper;
+    }
+
+    @Provides
+    @Singleton
+    FirebaseAuth provideFirebaseAuth(){
+        return FirebaseAuth.getInstance();
+    }
+
+    @Provides
+    @Singleton
+    FirebaseUser provideFirebaseUser(FirebaseAuth firebaseAuth) {
+        return firebaseAuth.getCurrentUser();
+    }
+
+    @Provides
+    @Singleton
+    TwitterAuthConfig provideTwitterAuthConfig(){
+        // Configure Twitter SDK
+        return new TwitterAuthConfig(TWITTER_CONSUMER_KEY, BuildConfig.TWITTER_SECRET);
+    }
+
+    @Provides
+    @Singleton
+    Answers provideAnswersCrashlytics(){
+        return new Answers();
+    }
+
+    @Provides
+    @Inject
+    Crashlytics provideCrashlytics(){
+        return new Crashlytics();
     }
 }

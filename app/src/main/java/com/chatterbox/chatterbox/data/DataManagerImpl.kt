@@ -5,6 +5,10 @@ import com.chatterbox.chatterbox.data.api.ApiHelper
 import com.chatterbox.chatterbox.data.db.DbHelper
 import com.chatterbox.chatterbox.data.prefs.PrefsHelper
 import com.chatterbox.chatterbox.di.ApplicationContext
+import com.google.firebase.auth.AuthCredential
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.TwitterAuthCredential
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -30,4 +34,37 @@ class DataManagerImpl
 @Inject
 constructor(@param:ApplicationContext private val mContext: Context, private val mDbHelper: DbHelper, private val mPreferenceHelper: PrefsHelper, private val mApiHelper: ApiHelper): DataManager{
 
+    override fun updateFirebaseUser(firebaseUser: FirebaseUser) : FirebaseUser{
+        return firebaseUser
+    }
+
+    override fun updateApiHeader(userId: Long?, accessToken: String) {
+
+    }
+
+    override fun setUserAsLoggedOut() {
+        updateUserInfo(
+                accessToken = null,
+                userId = null,
+                loggedInMode = LoggedInMode.LOGGED_IN_MODE_LOGGED_OUT,
+                userName = null,
+                email = null,
+                profilePicPath = null
+        )
+    }
+
+    override fun updateUserInfo(accessToken: String?, userId: Long?, loggedInMode: LoggedInMode, userName: String?, email: String?, profilePicPath: String?) {
+    }
+
+    override fun getFirstStart(): Boolean {
+        return mPreferenceHelper.getFirstStart()
+    }
+
+    override fun setFirstStart(firstStart: Boolean) {
+        return mPreferenceHelper.setFirstStart(firstStart)
+    }
+
+    override fun doLoginWithTwitter(firebaseAuth: FirebaseAuth, twitterAuthCredential: AuthCredential): Pair<Boolean, FirebaseUser> {
+        return mApiHelper.doLoginWithTwitter(firebaseAuth, twitterAuthCredential)
+    }
 }
