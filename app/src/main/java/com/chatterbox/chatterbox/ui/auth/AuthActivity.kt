@@ -1,5 +1,6 @@
 package com.chatterbox.chatterbox.ui.auth
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import butterknife.ButterKnife
@@ -10,12 +11,20 @@ import android.view.animation.AnimationUtils
 import android.support.percent.PercentRelativeLayout
 import android.view.View
 import android.widget.ImageButton
+import com.chatterbox.chatterbox.ui.HomeActivity
+import com.chatterbox.chatterbox.ui.MainActivity
 import com.chatterbox.chatterbox.ui.base.BaseActivity
 import com.facebook.login.widget.LoginButton
 import com.google.android.gms.common.SignInButton
+import com.twitter.sdk.android.core.Callback
+import com.twitter.sdk.android.core.TwitterSession
 import com.twitter.sdk.android.core.identity.TwitterLoginButton
+import com.twitter.sdk.android.core.TwitterException
+import android.R.attr.data
+import com.twitter.sdk.android.core.Result
 
-class AuthActivity : BaseActivity(), AuthView {
+
+class AuthActivity : BaseActivity(), AuthView, View.OnClickListener {
     private var isLoginScreen = true
     private lateinit var registerInvokerTxtView: TextView
     private lateinit var registerLayout: LinearLayout
@@ -68,6 +77,9 @@ class AuthActivity : BaseActivity(), AuthView {
         registerLayout = findViewById(R.id.registerLayout) as LinearLayout
         loginLayout = findViewById(R.id.loginLayout) as LinearLayout
 
+        twitterImageBtn.setOnClickListener(this)
+        fbImageBtn.setOnClickListener(this)
+
         registerInvokerTxtView.setOnClickListener {
             isLoginScreen = false
             showRegisterForm()
@@ -77,6 +89,7 @@ class AuthActivity : BaseActivity(), AuthView {
             isLoginScreen = true
             showLoginForm()
         }
+
         showLoginForm()
 
         registerBtn.setOnClickListener {
@@ -126,5 +139,29 @@ class AuthActivity : BaseActivity(), AuthView {
         loginInvokerTxtView.visibility = View.GONE
         val clockwise = AnimationUtils.loadAnimation(applicationContext, R.anim.rotate_left_to_right)
         loginBtn.startAnimation(clockwise)
+    }
+
+    override fun openMainActivity() {
+        startActivity(Intent(this, HomeActivity::class.java))
+    }
+
+    override fun onClick(v: View?) {
+        when(v?.id){
+            R.id.auth_twitterLogin_imgBtn -> {
+
+                twitterLoginButton.callback = object : Callback<TwitterSession>() {
+                    override  fun success(result: Result<TwitterSession>) {
+                        authPresenter.onTwitterLoginClick(result.data)
+                    }
+
+                    override fun failure(exception: TwitterException) {
+                        // inform user of failure
+                    }
+                }
+            }
+
+            R.id.auth_fbLogin_imageBtn -> authPresenter.onFacebookLoginClick()
+        }
+
     }
 }

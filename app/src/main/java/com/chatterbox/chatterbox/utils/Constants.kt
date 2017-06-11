@@ -25,8 +25,12 @@ object Constants {
     val RC_SIGN_IN = 9001
 
     val MESSAGES_CHILD = "messages"
+
+    @JvmField
     val REQUEST_INVITE = 1
     val DEFAULT_MSG_LENGTH_LIMIT = Integer.MAX_VALUE
+
+    @JvmField
     val ANONYMOUS = "anonymous"
     val MESSAGE_SENT_EVENT = "message_sent"
 

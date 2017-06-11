@@ -7,4 +7,9 @@ import com.chatterbox.chatterbox.ui.base.BaseView
  * @Notes
  */
 interface AuthView : BaseView {
+    /**
+     * Opens main Activity whe operation of authentication is successful
+     * */
+    fun openMainActivity() : Unit
+
 }
