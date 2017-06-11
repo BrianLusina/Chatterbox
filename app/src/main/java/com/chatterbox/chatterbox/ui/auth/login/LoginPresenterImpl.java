@@ -5,7 +5,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.Log;
-
 import com.github.johnpersano.supertoasts.library.Style;
 import com.github.johnpersano.supertoasts.library.SuperToast;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -19,12 +18,9 @@ import com.twitter.sdk.android.core.TwitterSession;
 import static com.chatterbox.chatterbox.ui.auth.login.LoginFragment.LOGINFRAGMENT_TAG;
 
 /**
- Chatterbox-app
- ${PACKAGE_NAME}
- Created by lusinabrian on 24/09/16.
- Description: Default implementation of {@link LoginPresenter}
+ * Created by lusinabrian on 24/09/16.
+ * Description: Default implementation of {@link LoginPresenter}
 */
-
 public class LoginPresenterImpl implements LoginPresenter {
     private ProgressDialog progressDialog;
 

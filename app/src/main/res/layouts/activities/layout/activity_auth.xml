@@ -94,27 +94,60 @@
         <!--todo: add google-->
 
         <!--fb-->
-        <ImageView
+        <ImageButton
+            android:id="@+id/auth_fbLogin_imageBtn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:contentDescription="@null"
+            android:background="@color/colorPrimaryTrans"
             android:src="@drawable/ic_facebook" />
 
         <!--twitter-->
-        <ImageView
+        <ImageButton
+            android:id="@+id/auth_twitterLogin_imgBtn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:contentDescription="@null"
+            android:background="@color/colorPrimaryTrans"
             android:src="@drawable/ic_twitter" />
 
         <!--linkedIn-->
-        <ImageView
+        <ImageButton
+            android:id="@+id/auth_linkedInLogin_imgBtn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:contentDescription="@null"
+            android:background="@color/colorPrimaryTrans"
             android:src="@drawable/ic_linkedin" />
     </LinearLayout>
+
+<!--******************************-->
+    <!--Twitter login button will not be visible
+this is because this library is not flexible when styling, a hack is to delegate this action to the image button above and use it-->
+    <com.twitter.sdk.android.core.identity.TwitterLoginButton
+        android:id="@+id/auth_twitter_login_button"
+        android:layout_width="220dp"
+        android:layout_margin="10dp"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+    <!--Facebook login-->
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/auth_facebook_login_button"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="10dp"
+        android:visibility="gone"/>
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/auth_googleSign_in_button"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:visibility="gone" />
+
 </RelativeLayout>

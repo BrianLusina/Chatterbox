@@ -9,7 +9,11 @@ import android.widget.TextView
 import android.view.animation.AnimationUtils
 import android.support.percent.PercentRelativeLayout
 import android.view.View
+import android.widget.ImageButton
 import com.chatterbox.chatterbox.ui.base.BaseActivity
+import com.facebook.login.widget.LoginButton
+import com.google.android.gms.common.SignInButton
+import com.twitter.sdk.android.core.identity.TwitterLoginButton
 
 class AuthActivity : BaseActivity(), AuthView {
     private var isLoginScreen = true
@@ -20,6 +24,15 @@ class AuthActivity : BaseActivity(), AuthView {
     private lateinit var registerBtn: Button
     private lateinit var loginBtn: Button
 
+    private lateinit var fbImageBtn : ImageButton
+    private lateinit var fbLoginButton : LoginButton
+
+    private lateinit var twitterImageBtn : ImageButton
+    private lateinit var twitterLoginButton : TwitterLoginButton
+
+    private lateinit var googleImageBtn : ImageButton
+    private lateinit var googleSignInButton : SignInButton
+    
     //@Inject
     lateinit var authPresenter: AuthPresenter<AuthView>
 
@@ -43,7 +56,15 @@ class AuthActivity : BaseActivity(), AuthView {
 
         registerBtn = findViewById(R.id.registerBtn) as Button
         loginBtn = findViewById(R.id.loginBtn) as Button
+        
+        fbImageBtn = findViewById(R.id.auth_fbLogin_imageBtn) as ImageButton
+        fbLoginButton =  findViewById(R.id.auth_facebook_login_button) as LoginButton
+        
+        twitterImageBtn = findViewById(R.id.auth_twitterLogin_imgBtn) as ImageButton
+        twitterLoginButton = findViewById(R.id.auth_twitter_login_button) as TwitterLoginButton
 
+        googleSignInButton = findViewById(R.id.auth_googleSign_in_button) as SignInButton
+        
         registerLayout = findViewById(R.id.registerLayout) as LinearLayout
         loginLayout = findViewById(R.id.loginLayout) as LinearLayout
 

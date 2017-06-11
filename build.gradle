@@ -82,7 +82,7 @@ ext{
     // crashlytics
     crashlyticsVersion = "2.6.2@aar"
     crashlyticsAnswersVersion = "1.3.9@aar"
-    twitterSdkVersion = "2.0.0@aar"
+    twitterSdkVersion = "3.0.0"
     
     // TEST DEPENDENCIES
     jUnitVersion = "4.12"
