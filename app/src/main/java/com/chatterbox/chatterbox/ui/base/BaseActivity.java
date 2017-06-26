@@ -38,7 +38,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     private Unbinder unbinder;
     private ProgressDialog progressDialog;
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,11 +49,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     public ActivityComponent getActivityComponent() {
         return activityComponent;
-    }
-
-    @Override
-    public void attachBaseContext(Context newBase) {
-        //super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
     @TargetApi(Build.VERSION_CODES.M)

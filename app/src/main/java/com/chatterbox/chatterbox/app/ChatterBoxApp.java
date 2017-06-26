@@ -9,13 +9,8 @@ import com.chatterbox.chatterbox.di.components.DaggerAppComponent;
 import com.chatterbox.chatterbox.di.modules.AppModule;
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.answers.Answers;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.twitter.sdk.android.core.Twitter;
-import com.twitter.sdk.android.core.TwitterAuthConfig;
 
 import javax.inject.Inject;
-
 import cat.ereza.customactivityoncrash.CustomActivityOnCrash;
 import io.fabric.sdk.android.Fabric;
 
@@ -32,19 +27,10 @@ public class ChatterBoxApp extends Application{
     DataManager mDataManager;
 
     @Inject
-    TwitterAuthConfig authConfig;
-
-    @Inject
     Crashlytics crashlytics;
 
     @Inject
     Answers answers;
-
-    @Inject
-    FirebaseAuth firebaseAuth;
-
-    @Inject
-    FirebaseUser firebaseUser;
 
     @Override
     public void onCreate() {
@@ -54,7 +40,12 @@ public class ChatterBoxApp extends Application{
 
         mAppComponent.inject(this);
 
-        installCustomCrash();
+        // installCustomCrash();
+
+        // report to Fabric
+        Fabric.with(this, crashlytics);
+        //initialize Answers
+        Fabric.with(this, answers);
     }
 
     public AppComponent getComponent(){
@@ -84,11 +75,6 @@ public class ChatterBoxApp extends Application{
         CustomActivityOnCrash.install(this);
         CustomActivityOnCrash.setShowErrorDetails(BuildConfig.DEBUG);
         CustomActivityOnCrash.setEnableAppRestart(true);
-
-        // report to Fabric!
-        Fabric.with(this, crashlytics);
-        /*initialize Answers*/
-        Fabric.with(this, answers);
 
         // initialize AuthConfig
         //Fabric.with(this, new Twitter(authConfig));

@@ -24,40 +24,24 @@
             android:value="@string/facebook_app_id" />
 
         <!-- app introduction -->
-        <activity android:name=".ui.entry.IntroduceMe" />
-
         <activity
-            android:name=".ui.entry.splash.SplashScreen"
-            android:theme="@style/AppTheme.NoActionBar.FullScreen">
+            android:name=".ui.entry.splash.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
+        <activity android:name=".ui.entry.IntroduceMe" />
+
         <activity
             android:name=".ui.auth.AuthActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar.FullScreen"/>
-
-        <!--
-        &lt;!&ndash;splash screen&ndash;&gt;
-        <activity android:name=".introduction.SplashScreen">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
-        -->
+            android:screenOrientation="portrait"/>
 
         <!-- LOGIN SIGN UP FRAGMENTS -->
         <activity
             android:name=".ui.auth.login.LogSignActivity"
             android:configChanges="screenSize|orientation">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
         </activity>
 
         <!-- sign in activity -->

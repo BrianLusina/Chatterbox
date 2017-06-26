@@ -121,14 +121,7 @@ public class AppModule {
 
     @Provides
     @Singleton
-    FirebaseUser provideFirebaseUser(FirebaseAuth firebaseAuth) {
-        return firebaseAuth.getCurrentUser();
-    }
-
-    @Provides
-    @Singleton
     TwitterAuthConfig provideTwitterAuthConfig(){
-        // Configure Twitter SDK
         return new TwitterAuthConfig(TWITTER_CONSUMER_KEY, BuildConfig.TWITTER_SECRET);
     }
 

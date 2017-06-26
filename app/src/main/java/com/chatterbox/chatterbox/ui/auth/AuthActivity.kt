@@ -20,7 +20,6 @@ import com.twitter.sdk.android.core.Callback
 import com.twitter.sdk.android.core.TwitterSession
 import com.twitter.sdk.android.core.identity.TwitterLoginButton
 import com.twitter.sdk.android.core.TwitterException
-import android.R.attr.data
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.twitter.sdk.android.core.Result
@@ -50,9 +49,6 @@ class AuthActivity : BaseActivity(), AuthView, View.OnClickListener {
 
     @Inject
     lateinit var firebaseAuth : FirebaseAuth
-
-    @Inject
-    lateinit var mFirebaseUser : FirebaseUser
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -161,6 +157,7 @@ class AuthActivity : BaseActivity(), AuthView, View.OnClickListener {
     }
 
     override fun updateFirebaseUser(firebaseUser: FirebaseUser) {
+        var mFirebaseUser = firebaseAuth.currentUser
         mFirebaseUser = firebaseUser
     }
 

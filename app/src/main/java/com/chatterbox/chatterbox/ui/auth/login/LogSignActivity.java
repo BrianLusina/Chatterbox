@@ -37,11 +37,6 @@ public class LogSignActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        //        FacebookSdk.sdkInitialize(getApplicationContext());
-//        AppEventsLogger.activateApp(this);
-//        callbackManager = CallbackManager.Factory.create();
-
         setContentView(R.layout.userlogin_activity);
         initViews();
     }

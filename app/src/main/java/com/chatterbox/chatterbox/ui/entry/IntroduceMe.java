@@ -1,11 +1,13 @@
 package com.chatterbox.chatterbox.ui.entry;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
 import com.chatterbox.chatterbox.R;
+import com.chatterbox.chatterbox.ui.auth.AuthActivity;
 import com.github.paolorotolo.appintro.AppIntro;
 import com.github.paolorotolo.appintro.AppIntroFragment;
 
@@ -33,8 +35,6 @@ public class IntroduceMe extends AppIntro{
                 description, "Because rooms are awesome", "Because you want to be personal",getString(R.string.app_tag)
         };
 
-        Drawable[]  images = new Drawable[]{};
-
         /*1st screen*/
         addSlide(AppIntroFragment.newInstance(titles[0], descriptions[0], R.drawable.chatterbox_logo, getResources().getColor(R.color.royal_blue)));
 
@@ -53,7 +53,6 @@ public class IntroduceMe extends AppIntro{
         // Hide Skip/Done button.
         showSkipButton(true);
         setProgressButtonEnabled(true);
-        showDoneButton(true);
 
         /*animation*/
         setZoomAnimation();
@@ -62,12 +61,14 @@ public class IntroduceMe extends AppIntro{
     @Override
     public void onSkipPressed(Fragment currentFragment) {
         super.onSkipPressed(currentFragment);
+        startActivity(new Intent(this, AuthActivity.class));
         finish();
     }
 
     @Override
     public void onDonePressed(Fragment currentFragment) {
         super.onDonePressed(currentFragment);
+        startActivity(new Intent(this, AuthActivity.class));
         finish();
     }
 

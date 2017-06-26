@@ -25,11 +25,8 @@ import javax.inject.Inject
  * Created by lusinabrian on 13/08/16 at 07:47
  * Description: Handles the SplashScreen Activity, which is the first thing to open when app starts
  */
-class SplashScreen : BaseActivity(), Animation.AnimationListener, SplashView {
-
-    private val TAG = SplashScreen::class.java.simpleName
+class SplashScreen : BaseActivity(), SplashView {
     
-    private lateinit var animFadeIn: Animation
     private lateinit var appName: TextView
     private lateinit var appTag: TextView
     private lateinit var appIcon: ImageView
@@ -39,10 +36,6 @@ class SplashScreen : BaseActivity(), Animation.AnimationListener, SplashView {
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        /*request full screen*/
-        requestWindowFeature(Window.FEATURE_NO_TITLE)
-        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
 
         setContentView(R.layout.splashscreen_layout)
         
@@ -61,20 +54,6 @@ class SplashScreen : BaseActivity(), Animation.AnimationListener, SplashView {
         appTag = findViewById(R.id.apptag_splash) as TextView
 
         splashPresenter.onViewInitialized()
-
-//        //set the fonts
-//        val fontPath = "fonts/roboto_rediumitalic.ttf"
-//        val typeface = Typeface.createFromAsset(assets, fontPath)
-//
-//        appName.typeface = typeface
-//
-//        /*add animation to application tag*/
-//        appTag.animation = animFadeIn
-//
-//        //load animations
-//        animFadeIn = AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in)
-//        //add animation listener
-//        animFadeIn.setAnimationListener(this)
     }
 
     override fun openAuthActivity() {
@@ -92,17 +71,4 @@ class SplashScreen : BaseActivity(), Animation.AnimationListener, SplashView {
         super.onPause()
         finish()
     }
-
-    override fun onAnimationStart(animation: Animation) {
-
-    }
-
-    override fun onAnimationEnd(animation: Animation) {
-
-    }
-
-    override fun onAnimationRepeat(animation: Animation) {
-
-    }
-
 }

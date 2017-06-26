@@ -25,7 +25,7 @@
             android:orientation="horizontal"
             app:layout_widthPercent="85%">
 
-            <com.irinnovative.onepagesigninsignup.VerticalTextView
+            <com.chatterbox.chatterbox.ui.views.VerticalTextView
                 android:id="@+id/loginInvokerTxtView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
