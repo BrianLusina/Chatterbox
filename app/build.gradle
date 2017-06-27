@@ -58,24 +58,15 @@ android {
             testCoverageEnabled true
             applicationIdSuffix ".debug"
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+        }
+    }
 
-            // used to track the time and date this apk was released
-//            applicationVariants.all { variant ->
-//                    variant.outputs.each { output ->
-//                        def date = new Date()
-//                        def file = output.outputFile
-//                        def formattedDate = date.format("yyyyMMdd_HHmmss")
-//                        if(file != null && file.name.endsWith(".apk")){
-//                            output.outputFile = new File(
-//                                    file.parent,
-//                                    file.name.replace(
-//                                        "app-debug",
-//                                        "chatterbox-debug-v$versionName-$formattedDate"
-//                                    )
-//                            )
-//                        }
-//                    }
-//            }
+    // used to track the time and date this apk was released
+    android.applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            def date = new Date()
+            def formattedDate = date.format("yyyyMMdd_HHmmss")
+            outputFileName = "chatterbox-${variant.buildType}-${variant.name}-v${variant.versionName}-${formattedDate}.apk"
         }
     }
 
