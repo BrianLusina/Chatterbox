@@ -17,7 +17,7 @@ android {
     buildToolsVersion rootProject.buildToolsVersion
 
     defaultConfig {
-        applicationId "com.chatterbox.chatterbox"
+        applicationId "com.chatterbox"
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
         multiDexEnabled true
@@ -74,10 +74,10 @@ android {
         main{
             java.srcDirs += "src/main/kotlin"
             res.srcDirs = [
-                    "src/main/res/layouts/items",
-                    "src/main/res/layouts/activities",
-                    "src/main/res/layouts/fragments",
-                    "src/main/res/layouts/features",
+                    "src/main/res/layouts/auth_feature",
+                    "src/main/res/layouts/main_feature",
+                    "src/main/res/layouts/splash_feature",
+                    "src/main/res/layouts/chats_feature",
                     "src/main/res/layouts/components",
                     "src/main/res/layouts",
                     "src/main/res",
