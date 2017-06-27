@@ -2,9 +2,6 @@
     <string name="app_name">ChatterBox</string>
     <string name="sign_in">Sign In</string>
 
-    <string name="facebook_app_id">169819973428395</string>
-
-
     <!--Auth screen string values-->
     <string name="activity_auth_signup_txtView">Register</string>
     <string name="activity_auth_login_txt_view">Login</string>

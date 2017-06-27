@@ -4,7 +4,7 @@ apply plugin: 'kotlin-android'
 apply plugin: "io.fabric"
 
 repositories {
-    mavenCentral() // jcenter() works as well because it pulls from Maven Central
+    mavenCentral()
     flatDir {
         dirs "libs"
     }
@@ -23,8 +23,19 @@ android {
         multiDexEnabled true
         versionCode rootProject.ext.versionCode
         versionName rootProject.ext.versionName
+        resValue "string", "facebook_app_id", (project.findProperty("FacebookAppId") ?: "")
+        resValue "string", "fabric_api_key", (project.findProperty("FabricApiKey") ?: "")
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    /**
+     * The aapt tool may inflate PNG files that have already been compressed.
+     * To prevent this, you can use the cruncherEnabled flag in Gradle to disable this process for
+     * PNG files:
+     * */
+    aaptOptions {
+        cruncherEnabled = false
     }
 
     packagingOptions {
@@ -37,18 +48,40 @@ android {
         release {
             minifyEnabled true
             shrinkResources true
+            debuggable false
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
 
         debug {
             minifyEnabled false
             shrinkResources false
+            testCoverageEnabled true
+            applicationIdSuffix ".debug"
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+
+            // used to track the time and date this apk was released
+//            applicationVariants.all { variant ->
+//                    variant.outputs.each { output ->
+//                        def date = new Date()
+//                        def file = output.outputFile
+//                        def formattedDate = date.format("yyyyMMdd_HHmmss")
+//                        if(file != null && file.name.endsWith(".apk")){
+//                            output.outputFile = new File(
+//                                    file.parent,
+//                                    file.name.replace(
+//                                        "app-debug",
+//                                        "chatterbox-debug-v$versionName-$formattedDate"
+//                                    )
+//                            )
+//                        }
+//                    }
+//            }
         }
     }
 
     sourceSets {
         main{
+            java.srcDirs += "src/main/kotlin"
             res.srcDirs = [
                     "src/main/res/layouts/items",
                     "src/main/res/layouts/activities",
@@ -59,16 +92,30 @@ android {
                     "src/main/res",
             ]
         }
+
+        androidTest{
+            java.srcDirs += "src/androidTest/kotlin"
+        }
+
+        test{
+            java.srcDirs += "src/test/kotlin"
+        }
     }
 
     buildTypes.each {
         it.buildConfigField "String", "TWITTER_CONSUMER_KEY", TwitterConsumerKey
         it.buildConfigField "String", "TWITTER_SECRET", TwitterSecret
         it.buildConfigField "String", "FACEBOOK_APP_ID", FacebookAppId
+        it.buildConfigField "String", "FABRIC_API_KEY", FabricApiKey
     }
+
     dexOptions {
         javaMaxHeapSize "4g"
     }
+}
+
+configurations.all {
+    resolutionStrategy.force "com.android.support:support-annotations:$supportLibVersion"
 }
 
 dependencies {
@@ -117,12 +164,11 @@ dependencies {
     annotationProcessor "com.jakewharton:butterknife-compiler:$butterknifeVersion"
     // kapt "com.jakewharton:butterknife-compiler:$butterknifeVersion"
 
-    implementation "com.facebook.android:facebook-android-sdk:$facebookSdkVersion"
+    // Anko Commons
+    implementation "org.jetbrains.anko:anko-commons:$ankoVersion"
 
-    //Using Material Viewpager
-    implementation("com.github.florent37:materialviewpager:$materialViewPagerVersion") {
-        transitive = true
-    }
+    // Facbook
+    implementation "com.facebook.android:facebook-android-sdk:$facebookSdkVersion"
 
     //fab
     implementation "com.getbase:floatingactionbutton:$fabVersion"
@@ -131,10 +177,12 @@ dependencies {
     implementation("com.mikepenz:materialdrawer:$mikePenzDrawerVersion") {
         transitive = true
     }
+
     // about libraries
     implementation("com.mikepenz:aboutlibraries:$mikePenzAbtLibrariesVersion") {
         transitive = true
     }
+
     implementation "com.mikepenz:google-material-typeface:$mikePenzGoogleTypeface"
     implementation "com.mikepenz:fontawesome-typeface:$mikePenzFontAwesome"
     implementation "com.mikepenz:itemanimators:$mikePenzItemAnimators"
@@ -145,9 +193,12 @@ dependencies {
     implementation("com.crashlytics.sdk.android:crashlytics:$crashlyticsVersion") {
         transitive = true
     }
+
     implementation("com.crashlytics.sdk.android:answers:$crashlyticsAnswersVersion") {
         transitive = true
     }
+
+    // Twitter
     implementation("com.twitter.sdk.android:twitter:$twitterSdkVersion") {
         transitive = true
     }
@@ -157,23 +208,39 @@ dependencies {
     // glide version
     implementation "com.github.bumptech.glide:glide:$glideVersion"
 
-    // super toasts
-    implementation "com.github.johnpersano:supertoasts:$supertoastsVersion"
-
     // app intro
     implementation "com.github.paolorotolo:appintro:$appintroVersion"
 
-    // custom activity on crash
-    implementation "cat.ereza:customactivityoncrash:$customactivityoncrashVersion"
-
     // Testing dependencies
+    //-------------------------------------------------------------------------------------
 
-    // instrumented
+    // Instrumented tests
+    androidTestImplementation("com.android.support.test.espresso:espresso-contrib:$espressoContribVersion") {
+        exclude group: 'com.android.support', module: 'support-annotations'
+        exclude group: 'com.android.support', module: 'appcompat'
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude module: 'recyclerview-v7'
+    }
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$espressoVersion"
-    androidTestImplementation "com.android.support.test:runner:$testRunnerVersion"
+    androidTestImplementation "com.android.support.test.espresso:espresso-intents:$espressoVersion"
+    androidTestImplementation "org.mockito:mockito-core:$mockitoVersion"
+    androidTestAnnotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
 
-    // unit tests
+    //Unit Tests
+    testImplementation "org.mockito:mockito-core:$mockitoVersion"
     testImplementation "junit:junit:$jUnitVersion"
+    testRuntimeOnly "org.jetbrains.spek:spek-junit-platform-engine:$spekJunitEngVersion"
+    testImplementation "org.robolectric:robolectric:$robolectricVersion"
+    testImplementation "org.assertj:assertj-core:$assertJVersion"
+    testImplementation "com.jakewharton:butterknife:$butterknifeVersion"
+    testImplementation "com.squareup.okhttp3:mockwebserver:$mockWebServerVersion"
+    testImplementation "org.jetbrains.spek:spek-api:$spekVersion"
+    testImplementation "com.nhaarman:mockito-kotlin:$mockitoKotlinVersion"
+    testImplementation "org.hamcrest:hamcrest-library:$hamcrestVersion"
+
+    // Fix for https://github.com/robolectric/robolectric/issues/2566
+    testImplementation "org.khronos:opengl-api:gl1.1-android-2.1_r1"
+    testAnnotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
 }
 
 apply plugin: "com.google.gms.google-services"
