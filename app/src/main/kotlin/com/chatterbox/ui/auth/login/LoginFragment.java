@@ -31,8 +31,6 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
-import com.github.johnpersano.supertoasts.library.Style;
-import com.github.johnpersano.supertoasts.library.SuperToast;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -199,7 +197,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
     /**Sign in with Twitter*/
     private void intializeTwitterLogin(){
         twitterLoginButton.setCallback(new Callback<TwitterSession>() {
-            final SuperToast superToast = new SuperToast(getActivity());
 
             @Override
             public void success(Result<TwitterSession> result) {
@@ -221,9 +218,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
                 Log.d(LOGINFRAGMENT_TAG, "Twitter Login: failure");
                 Log.d("TwitterKit", "Login with Twitter failure", exception);
                 /*TODO: display snackbar*/
-                superToast.setText("Twitter login failure");
-                superToast.setDuration(Style.DURATION_SHORT);
-                superToast.show();
                 Crashlytics.logException(exception);
             }
         });
@@ -246,11 +240,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
                             Log.w(LOGINFRAGMENT_TAG, "signInWithCredential", task.getException());
-                            SuperToast superToast = new SuperToast(getActivity());
-                            superToast.setDuration(Style.DURATION_SHORT);
-                            superToast.setAnimations(Style.ANIMATIONS_FLY);
-                            superToast.setText("Authentication failed");
-                            superToast.show();
                         } else {
                             startActivity(new Intent(getActivity(), HomeActivity.class));
                             onDetach();
@@ -274,11 +263,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
                         /**if sign in is not successful, display message to user*/
                         if(!task.isSuccessful()){
                             Log.w(LOGINFRAGMENT_TAG, "Sign in with TwitterCredential", task.getException());
-                            SuperToast superToast = new SuperToast(getActivity());
-                            superToast.setDuration(Style.DURATION_SHORT);
-                            superToast.setAnimations(Style.ANIMATIONS_FLY);
-                            superToast.setText("Authentication failed, Please try again");
-                            superToast.show();
                         }else{
                             startActivity(new Intent(getActivity(), HomeActivity.class));
                             onDetach();
@@ -304,11 +288,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
                             Log.w(LOGINFRAGMENT_TAG, "signInWithCredential", task.getException());
-                            SuperToast superToast = new SuperToast(getActivity());
-                            superToast.setDuration(Style.DURATION_SHORT);
-                            superToast.setAnimations(Style.ANIMATIONS_FLY);
-                            superToast.setText("Authentication failed, Please try again");
-                            superToast.show();
                         }
                     }
                 });
@@ -336,11 +315,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
         if(authResult != null){
             //welcome the user
             FirebaseUser firebaseUser = authResult.getUser();
-            SuperToast superToast = new SuperToast(getActivity());
-            superToast.setDuration(Style.DURATION_SHORT);
-            superToast.setAnimations(Style.ANIMATIONS_FLY);
-            superToast.setText("Welcome," + firebaseUser.getEmail());
-            superToast.show();
 
             //go back to main activity
             startActivity(new Intent(getActivity(), MainActivity.class));
@@ -401,7 +375,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
     /*todo: submit details to FIREBASE*/
     private void submitEmailDetails() {
         if(!validateEmail() && validatePassword()){
-            final SuperToast superToast = new SuperToast(getActivity());
 
             String email = mEmail.getText().toString().trim();
             String password = passwordField.getText().toString();
@@ -414,9 +387,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
                             Log.d(LOGINFRAGMENT_TAG, "SignInWithEmail:onComplete:" + task.isSuccessful());
                             if (!task.isSuccessful()) {
                                 Log.w(LOGINFRAGMENT_TAG, "signInWithEmail:failed", task.getException());
-                                superToast.setText("Authentication failed. "+ task.getException());
-                                superToast.setDuration(Style.DURATION_SHORT);
-                                superToast.show();
                             } else {
                                 Intent intent = new Intent(getActivity(), HomeActivity.class);
                                 startActivity(intent);
@@ -433,11 +403,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Goo
         // An unresolvable error has occurred and Google APIs (including Sign-In) will not
         // be available.
         Log.d(LOGINFRAGMENT_TAG, "onConnectionFailed:" + connectionResult);
-        SuperToast superToast = new SuperToast(getActivity());
-        superToast.setDuration(Style.DURATION_SHORT);
-        superToast.setAnimations(Style.ANIMATIONS_FLY);
-        superToast.setText("Google Play Services error.");
-        superToast.show();
     }
 
     /**TEXT WATCHER, to check to user input in the edit text and autocomplete*/

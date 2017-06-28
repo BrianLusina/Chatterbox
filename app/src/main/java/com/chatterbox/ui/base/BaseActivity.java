@@ -23,6 +23,7 @@ import com.chatterbox.di.modules.ActivityModule;
 import com.chatterbox.utils.CommonUtils;
 import com.chatterbox.utils.NetworkUtils;
 
+import org.jetbrains.anko.AnkoLogger;
 import org.jetbrains.annotations.NotNull;
 
 import butterknife.Unbinder;
@@ -32,7 +33,7 @@ import butterknife.Unbinder;
  * @Notes
  */
 
-public abstract class BaseActivity extends AppCompatActivity implements BaseView, BaseFragment.Callback {
+public abstract class BaseActivity extends AppCompatActivity implements BaseView, BaseFragment.Callback, AnkoLogger {
 
     private ActivityComponent activityComponent;
     private Unbinder unbinder;

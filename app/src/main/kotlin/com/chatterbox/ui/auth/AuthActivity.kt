@@ -2,9 +2,10 @@ package com.chatterbox.ui.auth
 
 import android.content.Intent
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.widget.Button
 import butterknife.ButterKnife
-import com.chatterbox.chatterbox.R
+import com.chatterbox.R
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.view.animation.AnimationUtils
@@ -12,7 +13,12 @@ import android.support.percent.PercentRelativeLayout
 import android.view.View
 import android.widget.ImageButton
 import com.chatterbox.ui.HomeActivity
+import com.chatterbox.ui.MainActivity
 import com.chatterbox.ui.base.BaseActivity
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.login.LoginResult
 import com.facebook.login.widget.LoginButton
 import com.google.android.gms.common.SignInButton
 import com.twitter.sdk.android.core.Callback
@@ -22,8 +28,9 @@ import com.twitter.sdk.android.core.TwitterException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.twitter.sdk.android.core.Result
+import org.jetbrains.anko.find
+import org.jetbrains.anko.toast
 import javax.inject.Inject
-
 
 class AuthActivity : BaseActivity(), AuthView, View.OnClickListener {
     private var isLoginScreen = true
@@ -36,6 +43,7 @@ class AuthActivity : BaseActivity(), AuthView, View.OnClickListener {
 
     private lateinit var fbImageBtn : ImageButton
     private lateinit var fbLoginButton : LoginButton
+    private lateinit var callbackManager: CallbackManager
 
     private lateinit var twitterImageBtn : ImageButton
     private lateinit var twitterLoginButton : TwitterLoginButton
@@ -48,6 +56,17 @@ class AuthActivity : BaseActivity(), AuthView, View.OnClickListener {
 
     @Inject
     lateinit var firebaseAuth : FirebaseAuth
+    lateinit var mFirebaseUser : FirebaseUser
+
+    override fun onStart() {
+        super.onStart()
+        mFirebaseUser = firebaseAuth.currentUser!!
+        // check if the user has already signed in and log them in directly
+        // if this user is not anonymous
+        if(!mFirebaseUser.isAnonymous){
+            startActivity(Intent(this, MainActivity::class.java))
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,12 +83,13 @@ class AuthActivity : BaseActivity(), AuthView, View.OnClickListener {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        // pass request code back to activity result
+        callbackManager.onActivityResult(requestCode, resultCode, data)
 
         twitterLoginButton.onActivityResult(requestCode, resultCode, data)
     }
 
     override fun setUp() {
-
         registerInvokerTxtView = findViewById(R.id.registerInvokerTxtView) as TextView
         loginInvokerTxtView = findViewById(R.id.loginInvokerTxtView) as TextView
 
@@ -78,7 +98,8 @@ class AuthActivity : BaseActivity(), AuthView, View.OnClickListener {
         
         fbImageBtn = findViewById(R.id.auth_fbLogin_imageBtn) as ImageButton
         fbLoginButton =  findViewById(R.id.auth_facebook_login_button) as LoginButton
-        
+        callbackManager = CallbackManager.Factory.create()
+
         twitterImageBtn = findViewById(R.id.auth_twitterLogin_imgBtn) as ImageButton
         twitterLoginButton = findViewById(R.id.auth_twitter_login_button) as TwitterLoginButton
 
@@ -156,8 +177,7 @@ class AuthActivity : BaseActivity(), AuthView, View.OnClickListener {
     }
 
     override fun updateFirebaseUser(firebaseUser: FirebaseUser) {
-        var mFirebaseUser = firebaseAuth.currentUser
-        mFirebaseUser = firebaseUser
+        mFirebaseUser = firebaseAuth.currentUser!!
     }
 
     override fun onClick(v: View?) {
@@ -175,9 +195,31 @@ class AuthActivity : BaseActivity(), AuthView, View.OnClickListener {
                 }
             }
 
-            R.id.auth_fbLogin_imageBtn -> authPresenter.onFacebookLoginClick()
+            R.id.auth_fbLogin_imageBtn -> {
+                fbLoginButton.setReadPermissions("email", "public_profile")
+                fbLoginButton.registerCallback(callbackManager, object: FacebookCallback<LoginResult>{
+                    override fun onSuccess(loginResult: LoginResult?) {
+                        authPresenter.onFacebookLoginSuccess(firebaseAuth, loginResult?.accessToken)
+                    }
+
+                    override fun onError(fbException: FacebookException?) {
+                        toast("Error Logging in with facebook")
+                    }
+
+                    override fun onCancel() {
+
+                    }
+                })
+            }
         }
     }
 
+    override fun displayLoginError(errorMessage: String) {
+        // either display a snack bar or display a toast message
+        Snackbar.make(find(R.id.activity_auth), errorMessage, Snackbar.LENGTH_LONG).show()
+    }
 
+    override fun displayLoginError(errorMessageId: Int) {
+        displayLoginError(getString(errorMessageId))
+    }
 }

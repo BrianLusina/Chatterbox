@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryTrans"
     android:gravity="center"
     android:orientation="vertical"
     android:padding="48dp">
@@ -25,7 +24,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/auth_screen_email_hint"
             android:inputType="textEmailAddress"
-            android:textColor="#FFFFFF" />
+            android:textColor="@color/white" />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -40,7 +39,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/auth_screen_password_hint"
             android:inputType="textPassword"
-            android:textColor="#FFFFFF" />
+            android:textColor="@color/white" />
     </android.support.design.widget.TextInputLayout>
 
     <Button
@@ -50,6 +49,6 @@
         android:layout_marginTop="20dp"
         android:background="@null"
         android:text="@string/login_screen_btnLogin_hint"
-        android:textColor="#FFF"
+        android:textColor="@color/white"
         android:textSize="30sp" />
 </LinearLayout>

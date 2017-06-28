@@ -1,7 +1,8 @@
 package com.chatterbox.ui.auth
 
-import com.chatterbox.chatterbox.di.PerActivity
+import com.chatterbox.di.PerActivity
 import com.chatterbox.ui.base.BasePresenter
+import com.facebook.AccessToken
 import com.google.firebase.auth.FirebaseAuth
 
 import com.twitter.sdk.android.core.TwitterSession
@@ -25,7 +26,7 @@ interface AuthPresenter<V : AuthView> : BasePresenter<V> {
     /**
      * Callback for logging in with Facebook
      * */
-    fun onFacebookLoginClick() : Unit
+    fun onFacebookLoginSuccess(firebaseAuth: FirebaseAuth, fbAccessToken : AccessToken?) : Unit
 
     /**
      * Callback for logging in with Google

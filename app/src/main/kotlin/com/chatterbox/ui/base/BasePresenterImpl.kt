@@ -2,6 +2,7 @@ package com.chatterbox.ui.base
 
 import com.chatterbox.data.DataManager
 import io.reactivex.disposables.CompositeDisposable
+import org.jetbrains.anko.AnkoLogger
 import javax.inject.Inject
 
 /**
@@ -9,7 +10,7 @@ import javax.inject.Inject
  * @Notes Presenter implementation, Each implementation of a presenter layer must inherit from
  * this class
  */
-open class BasePresenterImpl<V : BaseView> @Inject constructor(val mDataManager: DataManager, val mCompositeDisposable: CompositeDisposable): BasePresenter<V>{
+open class BasePresenterImpl<V : BaseView> @Inject constructor(val mDataManager: DataManager, val mCompositeDisposable: CompositeDisposable): BasePresenter<V>, AnkoLogger{
     /**
      * Gets the base view
      * @return [BaseView]

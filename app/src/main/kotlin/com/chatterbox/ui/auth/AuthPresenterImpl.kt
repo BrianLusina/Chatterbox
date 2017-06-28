@@ -1,5 +1,6 @@
 package com.chatterbox.ui.auth
 
+import com.chatterbox.R
 import com.chatterbox.data.DataManager
 import com.chatterbox.ui.base.BasePresenterImpl
 import com.twitter.sdk.android.core.TwitterSession
@@ -7,8 +8,11 @@ import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 import com.google.firebase.auth.TwitterAuthProvider
 import com.chatterbox.data.LoggedInMode
+import com.facebook.AccessToken
+import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import org.jetbrains.anko.error
 
 
 /**
@@ -18,7 +22,10 @@ import com.google.firebase.auth.FirebaseUser
  */
 
 class AuthPresenterImpl<V : AuthView>
-@Inject constructor(mDataManager: DataManager, mCompositeDisposable: CompositeDisposable): BasePresenterImpl<V>(mDataManager, mCompositeDisposable), AuthPresenter<V>{
+
+@Inject
+constructor(mDataManager: DataManager, mCompositeDisposable: CompositeDisposable):
+        BasePresenterImpl<V>(mDataManager, mCompositeDisposable), AuthPresenter<V>{
 
     override fun onAttach(mBaseView: V) {
         super.onAttach(mBaseView)
@@ -37,7 +44,32 @@ class AuthPresenterImpl<V : AuthView>
                 firebaseUser = FirebaseUser)
     }
 
-    override fun onFacebookLoginClick() {
+    override fun onFacebookLoginSuccess(firebaseAuth: FirebaseAuth, fbAccessToken: AccessToken?) {
+        val credential = FacebookAuthProvider.getCredential(fbAccessToken!!.token)
+
+        firebaseAuth.signInWithCredential(credential)
+                .addOnCompleteListener({
+                    if(it.isSuccessful){
+                        val firebaseUser = firebaseAuth.currentUser!!
+
+                        // update the user
+                        mDataManager.updateFirebaseUser(firebaseUser)
+                        mDataManager.updateUserInfo(
+                                accessToken = fbAccessToken.token,
+                                userId = firebaseUser.uid.toLong(),
+                                loggedInMode = LoggedInMode.LOGGED_IN_MODE_FB,
+                                userName = firebaseUser.displayName,
+                                email = firebaseUser.email,
+                                profilePicPath = firebaseUser.photoUrl.toString())
+
+                        baseView.updateFirebaseUser(firebaseUser)
+                        baseView.openMainActivity()
+                    }else{
+                        error("Unsuccessful login request ${it.exception}")
+                        // display error to user
+                        baseView.displayLoginError(R.string.login_error)
+                    }
+                })
     }
 
     override fun onGoogleLoginClick() {

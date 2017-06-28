@@ -173,9 +173,6 @@ dependencies {
     implementation("com.mikepenz:aboutlibraries:$mikePenzAbtLibrariesVersion") {
         transitive = true
     }
-
-    implementation "com.mikepenz:google-material-typeface:$mikePenzGoogleTypeface"
-    implementation "com.mikepenz:fontawesome-typeface:$mikePenzFontAwesome"
     implementation "com.mikepenz:itemanimators:$mikePenzItemAnimators"
     implementation "com.mikepenz:crossfader:$mikePenzCrossFaderVersion"
     implementation "com.mikepenz:crossfadedrawerlayout:$mikePenzCrossFadedDrawer"
